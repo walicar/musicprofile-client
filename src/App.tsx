@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import AppRouter from './AppRouter';
+import { CookiesProvider } from 'react-cookie';
 
 function App() {
   return (
-    <AppRouter />
+    <CookiesProvider>
+      <AppRouter />
+    </CookiesProvider>
   );
 }
 
