@@ -9,7 +9,7 @@ const AppRouter: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage content="My Content" />}></Route>
-                <Route path="/signin" element={<LogInPage content="Log In Content" />}></Route>
+                <Route path="/login" element={<LogInPage content="Log In Content" />}></Route>
                 <Route path="/settings" element={<SettingsPage content="Settings Content" />}></Route>
             </Routes>
         </Router>
