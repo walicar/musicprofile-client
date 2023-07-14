@@ -4,7 +4,7 @@ interface Props {
   content: string;
 }
 
-const SignInPage: React.FC<Props> = ({ content }) => {
+const LogInPage: React.FC<Props> = ({ content }) => {
   return (
     <div>
       <h1>SignIn</h1>
@@ -13,4 +13,4 @@ const SignInPage: React.FC<Props> = ({ content }) => {
   );
 };
 
-export default SignInPage;
+export default LogInPage;
