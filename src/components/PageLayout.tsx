@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import NavBar from "./NavBar";
+import NavBar from "./navbar/NavBar";
 
 type Props = {
   children?: React.ReactNode

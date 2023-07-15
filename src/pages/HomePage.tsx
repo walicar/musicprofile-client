@@ -1,6 +1,6 @@
 import React from "react";
 import { useCookies } from "react-cookie";
-import LogoutButton from "../components/LogoutButton";
+import LogoutButton from "../components/buttons/LogoutButton";
 import Profile from "../components/Profile";
 import PageLayout from "../components/PageLayout";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import LoginButton from "../components/LoginButton";
+import LoginButton from "../components/buttons/LoginButton";
 import PageLayout from "../components/PageLayout";
 interface Props {
   content: string;
