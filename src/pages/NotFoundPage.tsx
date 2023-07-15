@@ -1,11 +1,16 @@
 import React from "react";
+import PageLayout from "../components/PageLayout";
 
 
 const NotFound: React.FC = () => {
   return (
-    <div>
-      <h1>Not Found</h1>
-    </div>
+    <PageLayout>
+
+      <div>
+        <h1>Not Found</h1>
+      </div>
+
+    </PageLayout>
   );
 };
 
