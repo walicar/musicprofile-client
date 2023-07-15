@@ -12,15 +12,8 @@ const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage content="My Content" />}></Route>
-      <Route
-        path="/login"
-        element={<LogInPage content="Log In Content" />}
-      ></Route>
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage}/>} />
-      <Route
-        path="/settings"
-        element={<SettingsPage content="Settings Content" />}
-      ></Route>
+      <Route path="/settings" element={<AuthenticationGuard component={SettingsPage}/>} />
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="/error" element={<NotFoundPage />} />
       <Route path="*" element={<NotFoundPage />} />
