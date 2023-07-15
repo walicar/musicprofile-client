@@ -9,10 +9,10 @@ interface Props {
 }
 
 const HomePage: React.FC<Props> = ({ content }) => {
-  const [cookies, setCookie] = useCookies(['myCookie']);
+  const [cookies, setCookie] = useCookies(["myCookie"]);
   const cookieVal = cookies.myCookie;
   const handleClick = () => {
-    setCookie('myCookie', 'benjamin');
+    setCookie("myCookie", "benjamin");
   };
   return (
     <PageLayout>

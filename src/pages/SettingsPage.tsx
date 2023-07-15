@@ -9,12 +9,11 @@ const SettingsPage: React.FC<Props> = ({ content }) => {
   return (
     <PageLayout>
       <div>
-      <h1>Welcome</h1>
-      <p>{content}</p>
-    </div>
-
+        <h1>Welcome</h1>
+        <p>{content}</p>
+      </div>
     </PageLayout>
-      );
+  );
 };
 
 export default SettingsPage;
