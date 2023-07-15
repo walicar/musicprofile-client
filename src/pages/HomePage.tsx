@@ -1,7 +1,5 @@
 import React from "react";
 import { useCookies } from "react-cookie";
-import LogoutButton from "../components/buttons/LogoutButton";
-import Profile from "../components/Profile";
 import PageLayout from "../components/PageLayout";
 
 interface Props {
@@ -14,12 +12,12 @@ const HomePage: React.FC<Props> = ({ content }) => {
   const handleClick = () => {
     setCookie("myCookie", "benjamin");
   };
+
   return (
     <PageLayout>
       <div>
         <h1>Welcome</h1>
         <p>{content}</p>
-        <Profile />
         <button onClick={handleClick}>set cookie</button>
       </div>
     </PageLayout>
