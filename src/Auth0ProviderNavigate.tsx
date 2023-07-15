@@ -6,7 +6,7 @@ const Auth0ProviderNavigate: React.FC<any> = ({ children }) => {
   const navigate = useNavigate();
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const redirectUri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
+  const redirectUri = process.env.REACT_APP_CALLBACK_URL;
 
   const onRedirectCallback = (appState: any) => {
     navigate(appState?.returnTo || window.location.pathname);
