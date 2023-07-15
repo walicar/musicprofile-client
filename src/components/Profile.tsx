@@ -14,7 +14,7 @@ const Profile: React.FC = () => {
     return (
       <div>
         <h2>{user!.name}</h2>
-        <p>{user!.email}</p>
+        <p>Hello?</p>
         <p>{isAuthenticated}</p>
       </div>
     );
