@@ -6,6 +6,7 @@ import SettingsPage from "./pages/SettingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CallbackPage from "./pages/CallbackPage";
 import ProfilePage from "./pages/ProfilePage";
+import AuthenticationGuard from "./components/AuthenticationGuard"
 
 const AppRouter: React.FC = () => {
   return (
@@ -15,13 +16,14 @@ const AppRouter: React.FC = () => {
         path="/login"
         element={<LogInPage content="Log In Content" />}
       ></Route>
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<AuthenticationGuard component={ProfilePage}/>} />
       <Route
         path="/settings"
         element={<SettingsPage content="Settings Content" />}
       ></Route>
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="/error" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

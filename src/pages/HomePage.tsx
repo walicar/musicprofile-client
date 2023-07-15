@@ -21,7 +21,6 @@ const HomePage: React.FC<Props> = ({ content }) => {
         <p>{content}</p>
         <Profile />
         <button onClick={handleClick}>set cookie</button>
-        <LogoutButton />
       </div>
     </PageLayout>
   );

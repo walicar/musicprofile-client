@@ -6,7 +6,7 @@ const CallbackPage: React.FC = () => {
   const { error } = useAuth0();
 
   if (error) {
-    return <div>Callback Error</div>;
+    return (<div>Callback Error</div>);
   }
 
   return (
