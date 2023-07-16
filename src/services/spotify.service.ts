@@ -1,5 +1,5 @@
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const redirectUri = process.env.REACT_APP_BASE_URL + "/settings";
+const redirectUri = process.env.REACT_APP_BASE_URL + "/callback/spotify";
 
 export function generateRandomString(length: number) {
   // used for code_verifier and state
