@@ -14,7 +14,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={<HomePage content="My Content" />}></Route>
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage}/>} />
       <Route path="/settings" element={<AuthenticationGuard component={SettingsPage}/>} />
-      <Route path="/callback" element={<CallbackPage />} />
+      <Route path="/callback/*" element={<CallbackPage />} />
       <Route path="/error" element={<ErrorPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

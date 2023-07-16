@@ -12,8 +12,7 @@ const NavBarPages: React.FC = () => {
         {isAuthenticated && (
           <>
             <NavBarPage path="/profile" label="Profile" />
-            <NavBarPage path="/protected" label="Protected" />
-            <NavBarPage path="/admin" label="Admin" />
+            <NavBarPage path="/settings" label="Settings" />
           </>
         )}
       </div>
