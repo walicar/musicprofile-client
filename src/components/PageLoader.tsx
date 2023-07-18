@@ -3,7 +3,7 @@ import React from "react";
 const PageLoader: React.FC = () => {
   return (
     <div>
-        <p>LOADING!</p>
+      <p>LOADING!</p>
     </div>
   );
 };
