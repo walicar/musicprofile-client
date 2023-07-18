@@ -8,7 +8,7 @@ const CallbackPage: React.FC = () => {
   return (
     <PageLayout>
       <div>Put nothing here, just need empty navbar</div>
-      <div>{callback}</div>
+      <div>{callback ? callback : <></>}</div>
     </PageLayout>
   );
 };
