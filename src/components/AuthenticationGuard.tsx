@@ -3,8 +3,8 @@ import React from "react";
 import PageLoader from "./PageLoader";
 
 type Props = {
-    component: React.ComponentType<object>;
-}
+  component: React.ComponentType<object>;
+};
 
 const AuthenticationGuard: React.FC<Props> = ({ component }) => {
   const Component = withAuthenticationRequired(component, {
