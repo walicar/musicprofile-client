@@ -18,7 +18,7 @@ const SpotifyCallback: React.FC = () => {
     const getToken = async () => {
       try {
         const token = await getAccessToken(code!, codeVerifier);
-        setCookie("spotify_accessToken", token);
+        setCookie("spotify_accessToken", token, {path: "/"});
       } catch (e) {
         console.log(e);
       }
