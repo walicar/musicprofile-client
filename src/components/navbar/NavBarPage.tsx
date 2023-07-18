@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 type Props = {
-    path: string,
-    label: any
-}
+  path: string;
+  label: any;
+};
 
 const NavBarPage: React.FC<Props> = ({ path, label }) => {
   return (

@@ -6,26 +6,29 @@ import PageLoader from "../../components/PageLoader";
 
 let didInit = false;
 const SpotifyCallback: React.FC = () => {
-    const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(['spotify_codeVerifier', 'spotify_accessToken']);
-    const [params, setParam] = useSearchParams();
-    const codeVerifier = cookies.spotify_codeVerifier;
-    const code = params.get("code");
-    useEffect(() => {
-        const getToken = async () => {
-            try {
-                const token = await getAccessToken(code!, codeVerifier);
-                setCookie("spotify_accessToken", token);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        if (!didInit) {
-            didInit = true;
-            getToken();
-        }
-    }, [code, codeVerifier, setCookie])
-    navigate("/settings");
-    return (<PageLoader />);
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies([
+    "spotify_codeVerifier",
+    "spotify_accessToken",
+  ]);
+  const [params, setParam] = useSearchParams();
+  const codeVerifier = cookies.spotify_codeVerifier;
+  const code = params.get("code");
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        const token = await getAccessToken(code!, codeVerifier);
+        setCookie("spotify_accessToken", token);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (!didInit) {
+      didInit = true;
+      getToken();
+    }
+  }, [code, codeVerifier, setCookie]);
+  navigate("/settings");
+  return <PageLoader />;
 };
 export default SpotifyCallback;
