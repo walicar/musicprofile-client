@@ -29,6 +29,6 @@ const SpotifyCallback: React.FC = () => {
     }
   }, [code, codeVerifier, setCookie]);
   navigate("/settings");
-  return <PageLoader />;
+  return <PageLoader message={"Connecting to Spotify..."} />;
 };
 export default SpotifyCallback;
