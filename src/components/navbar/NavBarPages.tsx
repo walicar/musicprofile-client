@@ -7,6 +7,7 @@ const NavBarPages: React.FC = () => {
       <NavBarPage path="/" label="Home" />
       <NavBarPage path="/dashboard" label="Dashboard" />
       <NavBarPage path="/test" label="Test" />
+      <NavBarPage path="/login" label="Login" />
     </div>
   );
 };
