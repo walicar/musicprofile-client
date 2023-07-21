@@ -30,22 +30,18 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  if (!session) {
-    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
-  } else {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage content={"this is home page content"} />}
-          />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </BrowserRouter>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage content={"this is home page content"} />}
+        />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
