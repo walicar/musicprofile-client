@@ -7,6 +7,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
+import LoginPage from "./pages/LoginPage";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -40,6 +41,7 @@ function App() {
             element={<HomePage content={"this is home page content"} />}
           />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     );
