@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 
@@ -18,7 +18,7 @@ const SignInForm: React.FC = () => {
       email: email,
       password: password
     })
-
+    console.log(error);
   };
 
   return (
