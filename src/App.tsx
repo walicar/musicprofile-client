@@ -23,9 +23,18 @@ function App() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session: any) => {
+    } = supabase.auth.onAuthStateChange((event, session: any) => {
+      // REMOVE ME
+      console.log(event)
       setSession(session);
     });
+
+    // REMOVE ME
+    if (!session) {
+        console.log("Not signed in")
+      } else {
+        console.log("signed in: ", session);
+      }
 
     return () => subscription.unsubscribe();
   }, []);
