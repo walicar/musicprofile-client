@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
+
+const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
+const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
+const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 const SignInForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
+    const {data, error}: any = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    })
+
   };
 
   return (
