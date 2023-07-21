@@ -1,15 +1,20 @@
-import React from 'react';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import DashboardPage from './pages/DashboardPage';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
-    <Routes>
-        <Route path="/" element={<HomePage content={"this is home page content"}/>} />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage content={"this is home page content"} />}
+        />
         <Route path="/dashboard" element={<DashboardPage />} />
-    </Routes>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
