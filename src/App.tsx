@@ -18,6 +18,11 @@ function App() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }: any) => {
+      if (!session) {
+        console.log("Not signed in")
+      } else {
+        console.log("signed in: ", session);
+      }
       setSession(session);
     });
 
@@ -30,11 +35,7 @@ function App() {
     });
 
     // REMOVE ME
-    if (!session) {
-        console.log("Not signed in")
-      } else {
-        console.log("signed in: ", session);
-      }
+    
 
     return () => subscription.unsubscribe();
   }, []);
