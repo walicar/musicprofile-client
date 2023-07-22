@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import NavBarPage from "./NavBarPage";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
@@ -17,8 +16,8 @@ const NavBarPages: React.FC = () => {
     <div className="nav-bar__tabs">
       <NavBarPage path="/" label="Home" />
       {check ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
+      {check ? <NavBarPage path="/settings" label="Settings" /> : <></>} 
       <NavBarPage path="/stub" label="Stub" />
-      <NavBarPage path="/login" label="Login" />
     </div>
   );
 };
