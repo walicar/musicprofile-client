@@ -14,7 +14,7 @@ const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
 const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 function App() {
-  const [session, setSession] = useState(null);
+  //const [session, setSession] = useState(null);
 
   useEffect(() => {
     /* No need to use here
@@ -33,9 +33,8 @@ function App() {
     } = supabase.auth.onAuthStateChange((event, session: any) => {
       // REMOVE ME
       console.log("auth changed");
-      console.log(event);
-      console.log(session);
-      setSession(session);
+      console.log(session ? "valid session" : "invalid session");
+      //setSession(session);
     });
 
     return () => subscription.unsubscribe();
@@ -57,15 +56,8 @@ function App() {
           }
         />
         <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/stub"
-          element={
-            <RouteGuard>
-              <StubPage />
-            </RouteGuard>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />}/>
+        <Route path="/stub" element={<StubPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
