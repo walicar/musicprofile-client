@@ -1,13 +1,12 @@
-import React from "react";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import StubPage from "./pages/StubPage";
+import RouteGuard from "./components/RouteGuard";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -17,6 +16,7 @@ function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
+    /* No need to use here
     supabase.auth.getSession().then(({ data: { session } }: any) => {
       if (!session) {
         console.log("Not signed in")
@@ -25,17 +25,17 @@ function App() {
       }
       setSession(session);
     });
+    */
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session: any) => {
       // REMOVE ME
-      console.log(event)
+      console.log("auth changed");
+      console.log(event);
+      console.log(session);
       setSession(session);
     });
-
-    // REMOVE ME
-    
 
     return () => subscription.unsubscribe();
   }, []);
@@ -47,8 +47,23 @@ function App() {
           path="/"
           element={<HomePage content={"this is home page content"} />}
         />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <RouteGuard>
+              <DashboardPage />
+            </RouteGuard>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/stub"
+          element={
+            <RouteGuard>
+              <StubPage />
+            </RouteGuard>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
