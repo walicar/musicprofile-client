@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
-import NavBarPage from "./NavBarPage"
+import React, { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import NavBarPage from "./NavBarPage";
+
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const NavBarPages: React.FC = () => {
-  /*
-  const [thing, setThing] = useState(null);
+  const [check, setCheck] = useState<any>();
   useEffect(() => {
-    const item = localStorage.getItem(`sb-${ID}-auth-token`);
+    const key = `sb-${ID}-auth-token`;
+    const item = JSON.parse(localStorage.getItem(key)!);
+    console.log("ITEM", item);
     if (item) {
-      setThing(JSON.parse(item));
+      setCheck(item);
     }
   }, []);
-  */
-  return(
+  return (
     <div className="nav-bar__tabs">
       <NavBarPage path="/" label="Home" />
-      <NavBarPage path="/dashboard" label="Dashboard" />
+      {check ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
       <NavBarPage path="/stub" label="Stub" />
       <NavBarPage path="/login" label="Login" />
     </div>
