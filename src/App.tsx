@@ -14,7 +14,7 @@ const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
 const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 function App() {
-  //const [session, setSession] = useState(null);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
     /* No need to use here
@@ -34,7 +34,8 @@ function App() {
       // REMOVE ME
       console.log("auth changed");
       console.log(session ? "valid session" : "invalid session");
-      //setSession(session);
+      setSession(session);
+      console.log(session);
     });
 
     return () => subscription.unsubscribe();
@@ -51,7 +52,7 @@ function App() {
           path="/dashboard"
           element={
             <RouteGuard>
-              <DashboardPage />
+              <DashboardPage session={session}/>
             </RouteGuard>
           }
         />
