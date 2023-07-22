@@ -7,7 +7,6 @@ const NavBarPages: React.FC = () => {
   useEffect(() => {
     const key = `sb-${ID}-auth-token`;
     const item = JSON.parse(localStorage.getItem(key)!);
-    console.log("ITEM", item);
     if (item) {
       setCheck(item);
     }
