@@ -23,7 +23,6 @@ const RouteGuard: React.FC<Props> = ({ children }) => {
     console.log("Success");
     return <>{children}</>;
   } else {
-    console.log("WHAT THE")
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 };
