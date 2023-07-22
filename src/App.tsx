@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import StubPage from "./pages/StubPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import RouteGuard from "./components/RouteGuard";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
@@ -64,6 +65,7 @@ function App() {
             </RouteGuard>
           }
         />
+        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </BrowserRouter>
   );
