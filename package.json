@@ -46,6 +46,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "supabase": "^1.77.9"
   }
 }
