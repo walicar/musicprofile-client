@@ -15,7 +15,7 @@ const NavBarPages: React.FC = () => {
     <div className="nav-bar__tabs">
       <NavBarPage path="/" label="Home" />
       {check ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
-      {check ? <NavBarPage path="/settings" label="Settings" /> : <></>} 
+      {check ? <NavBarPage path="/settings" label="Settings" /> : <></>}
       <NavBarPage path="/stub" label="Stub" />
     </div>
   );

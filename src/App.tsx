@@ -50,9 +50,7 @@ function App() {
         />
         <Route
           path="/dashboard"
-          element={
-              <DashboardPage session={session}/>
-          }
+          element={<DashboardPage session={session} />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />

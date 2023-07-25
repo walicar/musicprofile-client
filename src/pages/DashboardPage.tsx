@@ -11,7 +11,7 @@ const DashboardPage: React.FC<Prop> = ({ session }) => {
 
   useEffect(() => {
     if (!session) {
-      navigate('/login');
+      navigate("/login");
     }
   }, []);
 

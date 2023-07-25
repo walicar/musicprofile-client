@@ -4,9 +4,13 @@ const LoginButton: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <button onClick={() => {
-        navigate("/login");
-      }}>log in</button>
+      <button
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        log in
+      </button>
     </div>
   );
 };

@@ -14,9 +14,9 @@ const RouteGuard: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState([]);
   const location = useLocation();
   useEffect(() => {
-      supabase.auth.getUser().then(({ data: { user } }: any) => {
-        setUser(user);
-      });
+    supabase.auth.getUser().then(({ data: { user } }: any) => {
+      setUser(user);
+    });
   }, []);
 
   if (user) {
