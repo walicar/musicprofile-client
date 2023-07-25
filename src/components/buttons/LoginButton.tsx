@@ -1,18 +1,18 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-
+import { useNavigate } from "react-router-dom";
 const LoginButton: React.FC = () => {
-  const { loginWithRedirect } = useAuth0();
-
-  const handleLogin = async () => {
-    await loginWithRedirect({
-      appState: {
-        returnTo: "/profile",
-      },
-    });
-  };
-
-  return <button onClick={handleLogin}>Log In</button>;
+  const navigate = useNavigate();
+  return (
+    <div>
+      <button
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        log in
+      </button>
+    </div>
+  );
 };
 
 export default LoginButton;

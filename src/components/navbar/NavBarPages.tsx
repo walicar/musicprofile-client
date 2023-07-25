@@ -1,20 +1,17 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import NavBarPage from "./NavBarPage";
 
-const NavBarPages: React.FC = () => {
-  const { isAuthenticated } = useAuth0();
+type Prop = {
+  session: any;
+}
 
+const NavBarPages: React.FC<Prop> = ({ session }) => {
   return (
     <div className="nav-bar__tabs">
       <NavBarPage path="/" label="Home" />
-      <NavBarPage path="/public" label="Public" />
-      {isAuthenticated && (
-        <>
-          <NavBarPage path="/profile" label="Profile" />
-          <NavBarPage path="/settings" label="Settings" />
-        </>
-      )}
+      {session ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
+      {session ? <NavBarPage path="/settings" label="Settings" /> : <></>}
+      <NavBarPage path="/stub" label="Stub" />
     </div>
   );
 };
