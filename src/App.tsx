@@ -7,6 +7,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import StubPage from "./pages/StubPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import SettingsPage from "./pages/SettingsPage";
 import RouteGuard from "./components/RouteGuard";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
@@ -51,6 +52,10 @@ function App() {
         <Route
           path="/dashboard"
           element={<DashboardPage session={session} />}
+        />
+        <Route
+          path="/settings"
+          element={<SettingsPage session={session} />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />
