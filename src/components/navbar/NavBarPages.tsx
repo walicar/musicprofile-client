@@ -3,7 +3,7 @@ import NavBarPage from "./NavBarPage";
 
 type Prop = {
   session: any;
-}
+};
 
 const NavBarPages: React.FC<Prop> = ({ session }) => {
   return (

@@ -8,8 +8,8 @@ const NavBar: React.FC = () => {
   const [session, setSession] = useLocalStorageState(`sb-${ID}-auth-token`);
   return (
     <div>
-      <NavBarPages session={session}/>
-      <NavBarButtons session={session}/>
+      <NavBarPages session={session} />
+      <NavBarButtons session={session} />
     </div>
   );
 };
