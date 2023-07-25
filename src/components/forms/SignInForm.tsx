@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { useNavigate } from 'react-router-dom';
 
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
@@ -9,6 +10,7 @@ const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 const SignInForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +21,9 @@ const SignInForm: React.FC = () => {
       password: password
     })
     console.log(error);
+    if (!error) {
+      navigate("/dashboard")
+    }
   };
 
   return (
