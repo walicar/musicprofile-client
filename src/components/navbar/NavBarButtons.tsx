@@ -12,11 +12,11 @@ const NavBarPages: React.FC = () => {
       setCheck(item);
     }
   }, []);
-    return (
-      <div className="nav-bar__tabs">
-        {check ? <LogoutButton /> : <LoginButton /> }
-      </div>
-    );
-  };
-  
-  export default NavBarPages;
+  return (
+    <div className="nav-bar__tabs">
+      {check ? <LogoutButton /> : <LoginButton />}
+    </div>
+  );
+};
+
+export default NavBarPages;

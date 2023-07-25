@@ -1,28 +1,27 @@
-import React, { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
 const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 const SignInForm: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    const {data, error}: any = await supabase.auth.signInWithPassword({
+    console.log("Email:", email);
+    console.log("Password:", password);
+    const { data, error }: any = await supabase.auth.signInWithPassword({
       email: email,
-      password: password
-    })
+      password: password,
+    });
     console.log(error);
     if (!error) {
-      navigate("/dashboard")
+      navigate("/dashboard");
     }
   };
 
