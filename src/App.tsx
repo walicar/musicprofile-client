@@ -51,9 +51,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <RouteGuard>
               <DashboardPage session={session}/>
-            </RouteGuard>
           }
         />
         <Route path="/login" element={<LoginPage />} />
