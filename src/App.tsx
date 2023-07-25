@@ -45,14 +45,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage content={"this is home page content"} />}
-        />
-        <Route
-          path="/dashboard"
-          element={<DashboardPage session={session} />}
-        />
+        <Route path="/" element={<HomePage content={"home page"} />} />
+        <Route path="/dashboard" element={<DashboardPage session={session} />} />
         <Route path="/settings" element={<SettingsPage session={session} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />
