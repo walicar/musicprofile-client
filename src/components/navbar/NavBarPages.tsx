@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavBarPage from "./NavBarPage";
 
-const ID = process.env.REACT_APP_SUPABASE_ID;
-const NavBarPages: React.FC = () => {
-  const [check, setCheck] = useState<any>();
-  useEffect(() => {
-    const key = `sb-${ID}-auth-token`;
-    const item = JSON.parse(localStorage.getItem(key)!);
-    if (item) {
-      setCheck(item);
-    }
-  }, []);
+type Prop = {
+  session: any;
+}
+
+const NavBarPages: React.FC<Prop> = ({ session }) => {
   return (
     <div className="nav-bar__tabs">
       <NavBarPage path="/" label="Home" />
-      {check ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
-      {check ? <NavBarPage path="/settings" label="Settings" /> : <></>}
+      {session ? <NavBarPage path="/dashboard" label="Dashboard" /> : <></>}
+      {session ? <NavBarPage path="/settings" label="Settings" /> : <></>}
       <NavBarPage path="/stub" label="Stub" />
     </div>
   );
