@@ -1,14 +1,14 @@
 import React from "react";
 import PageLayout from "../components/PageLayout";
 
-const ErrorPage: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <PageLayout>
       <div>
-        <h1>Error!</h1>
+        <h1>Stub</h1>
       </div>
     </PageLayout>
   );
 };
 
-export default ErrorPage;
+export default HomePage;

@@ -1,28 +1,17 @@
-import React from "react";
-import SignupButton from "../buttons/SignupButton";
-import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogoutButton";
-import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../buttons/LoginButton";
 
-const NavBarButtons: React.FC = () => {
-  const { isAuthenticated } = useAuth0();
+type Prop = {
+  session: any;
+}
+
+const NavBarPages: React.FC<Prop> = ({session}) => {
 
   return (
-    <div>
-      {!isAuthenticated && (
-        <>
-          <SignupButton />
-          <LoginButton />
-        </>
-      )}
-      <div>We should conditonally </div>
-      {isAuthenticated && (
-        <>
-          <LogoutButton />
-        </>
-      )}
+    <div className="nav-bar__tabs">
+      {session ? <LogoutButton /> : <LoginButton />}
     </div>
   );
 };
 
-export default NavBarButtons;
+export default NavBarPages;

@@ -1,22 +1,58 @@
-import React from "react";
-import AppRouter from "./AppRouter";
-import { CookiesProvider } from "react-cookie";
-import { useAuth0 } from "@auth0/auth0-react";
-import PageLoader from "./components/PageLoader";
+import "./App.css";
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import DashboardPage from "./pages/DashboardPage";
+import LoginPage from "./pages/LoginPage";
+import StubPage from "./pages/StubPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import SettingsPage from "./pages/SettingsPage";
+import RouteGuard from "./components/RouteGuard";
+
+const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
+const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
+const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 function App() {
-  const { isLoading } = useAuth0();
-  if (isLoading) {
-    return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
-  }
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    /* No need to use here
+    supabase.auth.getSession().then(({ data: { session } }: any) => {
+      if (!session) {
+        console.log("Not signed in")
+      } else {
+        console.log("signed in: ", session);
+      }
+      setSession(session);
+    });
+    */
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session: any) => {
+      // REMOVE ME
+      console.log("auth changed");
+      console.log(session ? "valid session" : "invalid session");
+      setSession(session);
+      console.log(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
-    <CookiesProvider>
-      <AppRouter />
-    </CookiesProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage content={"home page"} />} />
+        <Route path="/dashboard" element={<DashboardPage session={session} />} />
+        <Route path="/settings" element={<SettingsPage session={session} />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/stub" element={<StubPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

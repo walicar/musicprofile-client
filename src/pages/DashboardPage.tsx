@@ -6,7 +6,7 @@ type Prop = {
   session?: any;
 };
 
-const SettingsPage: React.FC<Prop> = ({ session }) => {
+const DashboardPage: React.FC<Prop> = ({ session }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,11 +22,11 @@ const SettingsPage: React.FC<Prop> = ({ session }) => {
   return (
     <PageLayout>
       <div>
-        <h1>Settings</h1>
+        <h1>Dashboard</h1>
         <h2>Welcome {session.user.email}</h2>
       </div>
     </PageLayout>
   );
 };
 
-export default SettingsPage;
+export default DashboardPage;
