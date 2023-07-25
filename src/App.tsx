@@ -53,10 +53,7 @@ function App() {
           path="/dashboard"
           element={<DashboardPage session={session} />}
         />
-        <Route
-          path="/settings"
-          element={<SettingsPage session={session} />}
-        />
+        <Route path="/settings" element={<SettingsPage session={session} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />
         <Route path="*" element={<NotFoundPage />} />
