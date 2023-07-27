@@ -9,6 +9,7 @@ import StubPage from "./pages/StubPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SettingsPage from "./pages/SettingsPage";
 import RouteGuard from "./components/RouteGuard";
+import CallbackPage from "./pages/CallbackPage";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -53,6 +54,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage session={session} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />
+        <Route path="/callback/*" element={<CallbackPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
