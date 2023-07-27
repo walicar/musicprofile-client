@@ -8,7 +8,6 @@ import LoginPage from "./pages/LoginPage";
 import StubPage from "./components/stubs/StubPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SettingsPage from "./pages/SettingsPage";
-import RouteGuard from "./components/RouteGuard";
 import CallbackPage from "./pages/CallbackPage";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
