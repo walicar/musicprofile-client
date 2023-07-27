@@ -1,10 +1,10 @@
 import React from "react";
 
 type Prop = {
-  message?: string
-}
+  message?: string;
+};
 
-const PageLoader: React.FC<Prop> = ({message}) => {
+const PageLoader: React.FC<Prop> = ({ message }) => {
   return (
     <div>
       <p>{message ? message : "Loading..."}</p>

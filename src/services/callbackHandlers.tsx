@@ -7,7 +7,7 @@ type Handlers = {
 
 const callbackHandlers: Handlers = {
   spotify: <SpotifyCallback />,
-  lasfm: <StubComponent />
+  lasfm: <StubComponent />,
 };
 
 export default callbackHandlers;

@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 type Prop = {
-    service: any;
-}
+  service: any;
+};
 
 const SpotifyButton: React.FC<Prop> = ({ service }) => {
   const navigate = useNavigate();

@@ -12,7 +12,7 @@ const SpotifyCallback: React.FC = () => {
     "spotify-code-verifier",
   ]);
   const [accessToken, setAccessToken] = useLocalStorageState(
-    "spotify-access-token"
+    "spotify-access-token",
   );
   const [params, setParam] = useSearchParams();
   const code = params.get("code");
