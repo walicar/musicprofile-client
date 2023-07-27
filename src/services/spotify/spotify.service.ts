@@ -1,6 +1,6 @@
 const clientId = process.env.REACT_APP_SPOTIFY_ID;
 const redirectUri = process.env.REACT_APP_WEBAPP_URL + "/callback/spotify";
-const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/"
+const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/";
 
 export function generateRandomString(length: number) {
   // used for code_verifier and state
@@ -32,7 +32,7 @@ async function generateCodeChallenge(codeVerifier: string) {
 }
 
 export async function getAuthURL(codeVerifier: any) {
-  // codeVerifier is any because useLocalStorageState has :unknown type on 
+  // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
   let codeChallenge = await generateCodeChallenge(codeVerifier);
   let state = generateRandomString(16);
@@ -50,7 +50,7 @@ export async function getAuthURL(codeVerifier: any) {
 }
 
 export async function getAccessToken(code: string, codeVerifier: any) {
-  // codeVerifier is any because useLocalStorageState has :unknown type on 
+  // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
   let body = new URLSearchParams({
     grant_type: "authorization_code",
@@ -66,7 +66,7 @@ export async function getAccessToken(code: string, codeVerifier: any) {
     },
     body: body,
   });
-  if (!response.ok) throw new Error('HTTP fail: ' + response.status);
+  if (!response.ok) throw new Error("HTTP fail: " + response.status);
   const data = await response.json();
   console.log(data);
   // const response2 = await sendRefreshToken(data.refresh_token);
