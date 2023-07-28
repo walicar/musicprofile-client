@@ -14,7 +14,6 @@ const SpotifyButton: React.FC = () => {
     "spotify-access-token",
   );
 
-  console.log(cookies["spotify-code-verifier"]);
   const connect = async () => {
     const verifier = generateRandomString(128);
     setCookie("spotify-code-verifier", verifier);
