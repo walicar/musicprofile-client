@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 import { useNavigate } from "react-router-dom";
 import StubButton from "../components/stubs/StubButton";
+import useLocalStorageState from "use-local-storage-state";
+const ID = process.env.REACT_APP_SUPABASE_ID;
 
-type Prop = {
-  session?: any;
-};
-
-const DashboardPage: React.FC<Prop> = ({ session }) => {
+const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
+  const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
 
+  console.log("dashboard", session);
   useEffect(() => {
     if (!session) {
       navigate("/login");
