@@ -9,7 +9,6 @@ const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
   const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
 
-  console.log("dashboard", session);
   useEffect(() => {
     if (!session) {
       navigate("/login");
