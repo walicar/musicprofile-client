@@ -48,9 +48,9 @@ function App() {
         <Route path="/" element={<HomePage content={"home page"} />} />
         <Route
           path="/dashboard"
-          element={<DashboardPage session={session} />}
+          element={<DashboardPage />}
         />
-        <Route path="/settings" element={<SettingsPage session={session} />} />
+        <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/stub" element={<StubPage />} />
         <Route path="/callback/*" element={<CallbackPage />} />

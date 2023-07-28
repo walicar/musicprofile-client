@@ -3,12 +3,11 @@ import PageLayout from "../components/PageLayout";
 import { useNavigate } from "react-router-dom";
 import SpotifyButton from "../components/buttons/SpotifyButton";
 import LastfmButton from "../components/buttons/LastfmButton";
+import useLocalStorageState from "use-local-storage-state";
+const ID = process.env.REACT_APP_SUPABASE_ID;
 
-type Prop = {
-  session?: any;
-};
-
-const SettingsPage: React.FC<Prop> = ({ session }) => {
+const SettingsPage: React.FC = () => {
+  const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const navigate = useNavigate();
 
   useEffect(() => {
