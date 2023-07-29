@@ -1,3 +1,4 @@
+import { writeTokens } from "../tokens";
 const clientId = process.env.REACT_APP_SPOTIFY_ID;
 const redirectUri = process.env.REACT_APP_WEBAPP_URL + "/callback/spotify";
 const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/";
@@ -17,7 +18,7 @@ export function generateRandomString(length: number) {
 async function generateCodeChallenge(codeVerifier: string) {
   function base64encode(str: ArrayBuffer) {
     return btoa(
-      String.fromCharCode.apply(null, Array.from(new Uint8Array(str))),
+      String.fromCharCode.apply(null, Array.from(new Uint8Array(str)))
     )
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
@@ -49,7 +50,7 @@ export async function getAuthURL(codeVerifier: any) {
   return "https://accounts.spotify.com/authorize?" + args;
 }
 
-export async function getAccessToken(code: string, codeVerifier: any) {
+export async function getAccessToken(code: string, codeVerifier: any, id: any) {
   // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
   let body = new URLSearchParams({
@@ -59,24 +60,23 @@ export async function getAccessToken(code: string, codeVerifier: any) {
     client_id: clientId!,
     code_verifier: codeVerifier,
   });
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: body,
-  });
-  if (!response.ok) throw new Error("HTTP fail: " + response.status);
-  const data = await response.json();
-  console.log(data);
-  // const response2 = await sendRefreshToken(data.refresh_token);
-  // console.log(response2.message); // this is stub code
-  return data.access_token;
-}
-
-async function sendRefreshToken(refresh_token: string) {
-  console.log(refresh_token);
-  // TODO MUST IMPLEMENT
-  // const response = await fetch(functionUrl);
-  // return await response.json();
+  try {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body,
+    });
+    if (!response.ok) throw new Error("HTTP fail: " + response.status);
+    const data = await response.json();
+    console.log(data);
+    // const response2 = await sendRefreshToken(data.refresh_token);
+    const token = { spotify: data.refresh_token };
+    await writeTokens(id, token);
+    // console.log(response2.message); // this is stub code
+    return data.access_token;
+  } catch (e) {
+    console.log(e);
+  }
 }

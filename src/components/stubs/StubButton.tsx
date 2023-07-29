@@ -13,7 +13,8 @@ const StubButton: React.FC = () => {
   const otherClick = async () => {
     if (session) {
       const id = session.user.id;
-      writeTokens(id);
+      const token = {spotify: "hello_there"};
+      writeTokens(id, token);
     } else {
       console.log("couldn't find an ID at all...")
     }
