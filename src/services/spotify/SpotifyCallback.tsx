@@ -24,10 +24,7 @@ const SpotifyCallback: React.FC = () => {
   useEffect(() => {
     const getToken = async () => {
       try {
-        console.log("CODE:", code);
-        console.log("CODEVERIFIER", codeVerifier);
         const token = await getAccessToken(code!, codeVerifier, session.user.id);
-        console.log("TOKEN", token);
         setAccessToken(token);
       } catch (e) {
         console.log(e);
