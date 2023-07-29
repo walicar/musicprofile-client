@@ -70,7 +70,6 @@ export async function getAccessToken(code: string, codeVerifier: any, id: any) {
     });
     if (!response.ok) throw new Error("HTTP fail: " + response.status);
     const data = await response.json();
-    console.log(data);
     // const response2 = await sendRefreshToken(data.refresh_token);
     const token = { spotify: data.refresh_token };
     await writeTokens(id, token);
