@@ -33,10 +33,10 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session: any) => {
       // REMOVE ME
-      console.log("auth changed");
+      console.log(event);
       console.log(session ? "valid session" : "invalid session");
       setSession(session);
-      console.log(session);
+      // console.log(session);
     });
 
     return () => subscription.unsubscribe();
