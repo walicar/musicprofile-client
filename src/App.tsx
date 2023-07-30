@@ -1,15 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import DashboardPage from "./pages/DashboardPage";
-import LoginPage from "./pages/LoginPage";
-import StubPage from "./components/stubs/StubPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import SettingsPage from "./pages/SettingsPage";
-import CallbackPage from "./pages/CallbackPage";
 import SupabaseClientContext from "./contexts/SupabaseContext";
+import AppRouter from "./AppRouter";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -19,17 +12,6 @@ function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    /* No need to use here
-    supabase.auth.getSession().then(({ data: { session } }: any) => {
-      if (!session) {
-        console.log("Not signed in")
-      } else {
-        console.log("signed in: ", session);
-      }
-      setSession(session);
-    });
-    */
-
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session: any) => {
@@ -37,7 +19,6 @@ function App() {
       console.log(event);
       console.log(session ? "valid session" : "invalid session");
       setSession(session);
-      // console.log(session);
     });
 
     return () => subscription.unsubscribe();
@@ -45,17 +26,7 @@ function App() {
 
   return (
     <SupabaseClientContext.Provider value={supabase}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage content={"home page"} />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/stub" element={<StubPage />} />
-          <Route path="/callback/*" element={<CallbackPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </BrowserRouter>
+      <AppRouter />
     </SupabaseClientContext.Provider>
   );
 }
