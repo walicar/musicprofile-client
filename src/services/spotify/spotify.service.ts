@@ -1,4 +1,3 @@
-import { writeTokens } from "../tokens";
 const clientId = process.env.REACT_APP_SPOTIFY_ID;
 const redirectUri = process.env.REACT_APP_WEBAPP_URL + "/callback/spotify";
 const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/";
@@ -50,7 +49,7 @@ export async function getAuthURL(codeVerifier: any) {
   return "https://accounts.spotify.com/authorize?" + args;
 }
 
-export async function getAccessToken(code: string, codeVerifier: any, id: any) {
+export async function getSpotifyToken(code: string, codeVerifier: any) {
   // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
   let body = new URLSearchParams({
@@ -70,12 +69,11 @@ export async function getAccessToken(code: string, codeVerifier: any, id: any) {
     });
     if (!response.ok) throw new Error("HTTP fail: " + response.status);
     const data = await response.json();
-    // const response2 = await sendRefreshToken(data.refresh_token);
-    const token = { spotify: data.refresh_token };
-    await writeTokens(id, token);
-    // console.log(response2.message); // this is stub code
-    return data.access_token;
+    // const token = { spotify: data.refresh_token };
+    // await writeTokens(id, token);
+    return data;
   } catch (e) {
     console.log(e);
+    return e;
   }
 }
