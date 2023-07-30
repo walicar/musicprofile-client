@@ -6,7 +6,7 @@ import PageLoader from "../../components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "../../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { TokenManager } from "../TokenManager";
+import { TokenManager } from "../../database/TokenManager";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 
 let didInit = false;
