@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
-const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
-const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 
 const SignUpForm: React.FC = () => {
+  const supabase: SupabaseClient<any, "public", any>  = useSupabaseClient();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

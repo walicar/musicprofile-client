@@ -1,13 +1,11 @@
 import React from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
-const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
-const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
-const supabase = createClient(PROJECT_URL!, PUB_KEY!);
+import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
+  const supabase: SupabaseClient<any, "public", any>  = useSupabaseClient();
 
   const handleSignOut = () => {
     supabase.auth.signOut();

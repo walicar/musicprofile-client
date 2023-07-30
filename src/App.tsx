@@ -9,6 +9,7 @@ import StubPage from "./components/stubs/StubPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SettingsPage from "./pages/SettingsPage";
 import CallbackPage from "./pages/CallbackPage";
+import SupabaseClientContext from "./contexts/SupabaseContext";
 
 const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
 const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -43,20 +44,19 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage content={"home page"} />} />
-        <Route
-          path="/dashboard"
-          element={<DashboardPage />}
-        />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/stub" element={<StubPage />} />
-        <Route path="/callback/*" element={<CallbackPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <SupabaseClientContext.Provider value={supabase}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage content={"home page"} />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/stub" element={<StubPage />} />
+          <Route path="/callback/*" element={<CallbackPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </SupabaseClientContext.Provider>
   );
 }
 
