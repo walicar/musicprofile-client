@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useSupabaseClient } from "../../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-
 const SignUpForm: React.FC = () => {
-  const supabase: SupabaseClient<any, "public", any>  = useSupabaseClient();
+  const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

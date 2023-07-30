@@ -5,7 +5,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 
 const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
-  const supabase: SupabaseClient<any, "public", any>  = useSupabaseClient();
+  const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
 
   const handleSignOut = () => {
     supabase.auth.signOut();
