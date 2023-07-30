@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
-const PROJECT_URL = process.env.REACT_APP_SUPABASE_URL;
-const PUB_KEY = process.env.REACT_APP_SUPABASE_PUB;
-const supabase = createClient(PROJECT_URL!, PUB_KEY!);
+import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 const SignInForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
