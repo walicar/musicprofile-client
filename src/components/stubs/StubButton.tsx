@@ -7,12 +7,12 @@ import { TokenManager } from "../../services/TokenManager";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
   const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`
+    `sb-${ID}-auth-token`,
   );
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager(
     supabase,
-    session.user.id
+    session.user.id,
   );
 
   const click = async () => {

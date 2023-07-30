@@ -27,7 +27,7 @@ export class TokenManager {
       const { data } = await this.client
         .from("tokens")
         .select("id, spotify, lastfm");
-        console.log("getTokens", data);
+      console.log("getTokens", data);
       return data;
     } catch (e) {
       console.log(e);
