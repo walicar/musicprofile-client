@@ -1,22 +1,29 @@
 import React from "react";
-import { getTokens, writeTokens } from "../../services/tokens";
 import useLocalStorageState from "use-local-storage-state";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { TokenManager } from "../../services/TokenManager";
 
+const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
-  const [session, setSession]:any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const [session, setSession]: any = useLocalStorageState(
+    `sb-${ID}-auth-token`
+  );
+  const supabase: SupabaseClient<any> = useSupabaseClient();
+  const tokenManager: TokenManager = new TokenManager(
+    supabase,
+    session.user.id
+  );
 
   const click = async () => {
     console.log("hi");
-    getTokens();
+    await tokenManager.getTokens();
   };
+
   const otherClick = async () => {
     if (session) {
-      const id = session.user.id;
-      const token = {spotify: "hello_there"};
-      writeTokens(id, token);
-    } else {
-      console.log("couldn't find an ID at all...")
+      const token = { spotify: "hello_there" };
+      await tokenManager.writeTokens(token);
     }
   };
 
