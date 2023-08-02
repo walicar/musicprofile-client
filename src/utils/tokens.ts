@@ -1,6 +1,6 @@
 import { saveRefreshTokenSTUB, refreshHandlerSTUB } from "../components/stubs/reduxTokenStubs";
 import { Token } from "../features/tokens/tokensSlice"
-import { SUPPORTED } from "./supportedServices";
+import { SUPPORTED } from "../services/supportedServices";
 
 // TODO: figure out how to type this
 const getFromLocalStorage: any = () => {
