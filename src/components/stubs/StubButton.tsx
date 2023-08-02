@@ -50,7 +50,7 @@ const StubButton: React.FC = () => {
     store.dispatch(erase(["spotify"]));
   };
 
-  const otherDispatch = () => {
+  const dispatchValidate = () => {
     store.dispatch(validateTokens(["spotify"]));
   };
 
@@ -60,7 +60,7 @@ const StubButton: React.FC = () => {
       <button onClick={otherClick}>write tokens</button>
       <button onClick={dispatchRedux}>Redux write Spotify token</button>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
-      <button onClick={otherDispatch}>Redux dispatch async</button>
+      <button onClick={dispatchValidate}>Redux validate tokens</button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );
