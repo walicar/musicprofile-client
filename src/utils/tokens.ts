@@ -1,5 +1,20 @@
 import { saveRefreshTokenSTUB, refreshHandlerSTUB } from "../components/stubs/reduxTokenStubs";
 import { Token } from "../features/tokens/tokensSlice"
+import { SUPPORTED } from "./supportedServices";
+
+// TODO: figure out how to type this
+const getFromLocalStorage: any = () => {
+  let tokens: any = {};
+  const keys = Object.keys(localStorage);
+  for (const service of SUPPORTED) {
+    if (keys.includes(service)) {
+      const token = localStorage.getItem(service);
+      const copy = {...tokens, [service]:token};
+      tokens = copy;
+    }
+  }
+  return tokens;
+}
 
 const isExpired = (token: Token) => {
     const expire = new Date(token.created_at);
@@ -26,11 +41,11 @@ const validate = async (services: string[], state: any) => {
           expires_in: data.expires_in,
           created_at: Date(),
         };
-        const thing = { ...refreshedTokens, [service]: newToken };
-        refreshedTokens = thing;
+        const copy = { ...refreshedTokens, [service]: newToken };
+        refreshedTokens = copy;
       }
       return refreshedTokens;
     }
   };
 
-export {validate};
+export {validate, getFromLocalStorage};

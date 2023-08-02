@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { validate } from "../../utils/tokens";
+import { getFromLocalStorage, validate } from "../../utils/tokens";
 
 export type Token = {
   access_token: string;
@@ -19,11 +19,13 @@ type TokensState = {
   error: string | undefined;
 };
 
-const initialState: TokensState = {
+let initialState: TokensState = {
   tokens: {},
   status: "idle",
   error: undefined,
 };
+
+initialState.tokens = getFromLocalStorage();
 
 const tokensSlice = createSlice({
   name: "tokens",

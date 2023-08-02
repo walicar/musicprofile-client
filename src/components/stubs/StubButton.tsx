@@ -3,6 +3,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "../../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { TokenManager } from "../../database/TokenManager";
+import { getFromLocalStorage } from "../../utils/tokens";
 import store from "../../app/store";
 import {
   erase,
@@ -18,7 +19,8 @@ const StubButton: React.FC = () => {
     `sb-${ID}-auth-token`
   );
   const [stub]: any = useLocalStorageState("spotify");
-  useAppSelector(selectTokens);
+  const state = useAppSelector(selectTokens);
+  console.log("checking redux state: ", state)
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager(
     supabase,
@@ -53,6 +55,11 @@ const StubButton: React.FC = () => {
   const dispatchValidate = () => {
     store.dispatch(validateTokens(["spotify"]));
   };
+  
+  const utilTokens = () => {
+    const res = getFromLocalStorage();
+    console.log("GET FROM LOCAL STORAGE: ", res);
+  }
 
   return (
     <div>
@@ -61,6 +68,7 @@ const StubButton: React.FC = () => {
       <button onClick={dispatchRedux}>Redux write Spotify token</button>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
       <button onClick={dispatchValidate}>Redux validate tokens</button>
+      <button onClick={utilTokens}>UTIL: Get from local storage</button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );
