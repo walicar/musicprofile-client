@@ -38,15 +38,15 @@ const validate = async (services: string[], state: any) => {
     for (const service of services) {
       if (state.tokens[service] && isExpired(state.tokens[service])) {
         const data = await refreshHandlerSTUB[service]();
-        const otherCopy = {...refreshTokens, [service]: data.refresh_token};
-        refreshTokens = otherCopy;
+        const refreshTokensCopy = {...refreshTokens, [service]: data.refresh_token};
+        refreshTokens = refreshTokensCopy;
         const newToken: Token = {
           access_token: data.access_token,
           expires_in: data.expires_in,
           created_at: Date(),
         };
-        const copy = { ...refreshedTokens, [service]: newToken };
-        refreshedTokens = copy;
+        const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
+        refreshedTokens = refreshedTokensCopy;
       }
       await tokenManager.writeTokens(refreshTokens);
       return refreshedTokens;
