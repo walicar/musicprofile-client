@@ -7,8 +7,8 @@ const getFromLocalStorage: any = () => {
   let tokens: any = {};
   const keys = Object.keys(localStorage);
   for (const service of SUPPORTED) {
-    if (keys.includes(service)) {
-      const token = localStorage.getItem(service);
+    if (keys.includes(`${service}-access-token`)) {
+      const token = localStorage.getItem(`${service}-access-token`);
       const copy = {...tokens, [service]:token};
       tokens = copy;
     }
