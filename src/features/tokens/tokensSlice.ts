@@ -46,7 +46,10 @@ const tokensSlice = createSlice({
           expires_in: 1,
           created_at: Date(),
         };
-        localStorage.setItem(`${service}-access-token`, JSON.stringify(state.tokens[service]));
+        localStorage.setItem(
+          `${service}-access-token`,
+          JSON.stringify(state.tokens[service]),
+        );
         console.log(`wrote a token for ${service}`);
       });
     },
@@ -62,7 +65,10 @@ const tokensSlice = createSlice({
         state.tokens = action.payload;
         console.log("Validated thing");
         for (const service in state.tokens) {
-          localStorage.setItem(`${service}-access-token`, JSON.stringify(state.tokens[service]));
+          localStorage.setItem(
+            `${service}-access-token`,
+            JSON.stringify(state.tokens[service]),
+          );
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {
@@ -78,11 +84,10 @@ export const validateTokens = createAsyncThunk(
   async (services: string[], { getState }) => {
     // TODO: find out how to type this
     const { tokens: state }: any = getState() as TokensState;
-    const result = await validate(services, state)
+    const result = await validate(services, state);
     return result;
-  }
+  },
 );
-
 
 export const selectTokens = (state: TokensState) => state.tokens;
 
