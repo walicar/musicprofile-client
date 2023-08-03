@@ -25,7 +25,7 @@ const SpotifyCallback: React.FC = () => {
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];
   const supabase: SupabaseClient<any> = useSupabaseClient();
-  const tokenManager = new TokenManager(supabase, session.user.id);
+  const tokenManager = new TokenManager();
 
   useEffect(() => {
     const getToken = async () => {

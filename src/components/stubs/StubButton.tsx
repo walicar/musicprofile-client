@@ -22,15 +22,18 @@ const StubButton: React.FC = () => {
   const state = useAppSelector(selectTokens);
   console.log("checking redux state: ", state)
   const supabase: SupabaseClient<any> = useSupabaseClient();
-  const tokenManager: TokenManager = new TokenManager(
-    supabase,
-    session.user.id
-  );
+  const tokenManager: TokenManager = new TokenManager();
 
   useEffect(() => {
     console.log("stub changed");
     console.log("state changed", state);
   }, [stub, state]);
+  const oldFetch = async () => {
+    const { data } = await supabase
+    .from("tokens")
+    .select("id, spotify, lastfm");
+    console.log(data);
+  }
 
   const click = async () => {
     console.log("hi");
@@ -40,7 +43,7 @@ const StubButton: React.FC = () => {
   const otherClick = async () => {
     if (session) {
       // write the tokens to DB
-      const mything = { spotify: "hello_there" };
+      const mything = { spotify: "check_test_different" };
       await tokenManager.writeTokens(mything);
     }
   };
@@ -65,6 +68,7 @@ const StubButton: React.FC = () => {
 
   return (
     <div>
+      <button onClick={oldFetch}>Old Fetch to DB</button>
       <button onClick={click}>send fetch TO DATABASE!!!!!!!!!</button>
       <button onClick={otherClick}>write tokens TO DATABASE!!!!!!!!!!</button>
       <br></br>
