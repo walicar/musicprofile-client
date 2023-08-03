@@ -34,18 +34,19 @@ const tokensSlice = createSlice({
     erase: (state, action: PayloadAction<string[]>) => {
       action.payload.forEach((service) => {
         state.tokens[service] = emptyToken;
-        localStorage.removeItem(service);
+        localStorage.removeItem(`${service}-access-token`);
         console.log("erase from tokens slice");
       });
     },
     stubWrite: (state, action: PayloadAction<string[]>) => {
+      // ignore this, is formatted wrong, this is just a stub
       action.payload.forEach((service) => {
         state.tokens[service] = {
           access_token: "fart",
           expires_in: 1,
           created_at: Date(),
         };
-        localStorage.setItem(service, JSON.stringify(state.tokens[service]));
+        localStorage.setItem(`${service}-access-token`, JSON.stringify(state.tokens[service]));
         console.log(`wrote a token for ${service}`);
       });
     },
@@ -60,8 +61,8 @@ const tokensSlice = createSlice({
         state.status = "validated";
         state.tokens = action.payload;
         console.log("Validated thing");
-        for (const key in state.tokens) {
-          localStorage.setItem(key, JSON.stringify(state.tokens[key]));
+        for (const service in state.tokens) {
+          localStorage.setItem(`${service}-access-token`, JSON.stringify(state.tokens[service]));
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {

@@ -18,7 +18,7 @@ const StubButton: React.FC = () => {
   const [session, setSession]: any = useLocalStorageState(
     `sb-${ID}-auth-token`
   );
-  const [stub]: any = useLocalStorageState("spotify");
+  const [stub]: any = useLocalStorageState("spotify-access-token");
   const state = useAppSelector(selectTokens);
   console.log("checking redux state: ", state)
   const supabase: SupabaseClient<any> = useSupabaseClient();
