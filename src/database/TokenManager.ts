@@ -26,7 +26,6 @@ export class TokenManager {
       const response: any = await axios.patch(requestUrl, tokens, {
         headers: headers,
       });
-      console.log("just wanna check what response has", response);
       console.log("wroteTokens: ", response.data);
       return response.data;
     } catch (e) {
@@ -45,7 +44,6 @@ export class TokenManager {
     };
     try {
       const response: any = await axios.get(requestUrl, { headers: headers });
-      console.log("wroteTokens: ", response.data);
       if (!response.ok) {
         return response;
       }
