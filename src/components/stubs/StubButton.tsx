@@ -16,11 +16,11 @@ import { useAppSelector } from "../../app/hooks";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
   const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`
+    `sb-${ID}-auth-token`,
   );
   const [stub]: any = useLocalStorageState("spotify-access-token");
   const state = useAppSelector(selectTokens);
-  console.log("checking redux state: ", state)
+  console.log("checking redux state: ", state);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
 
@@ -30,10 +30,10 @@ const StubButton: React.FC = () => {
   }, [stub, state]);
   const oldFetch = async () => {
     const { data } = await supabase
-    .from("tokens")
-    .select("id, spotify, lastfm");
+      .from("tokens")
+      .select("id, spotify, lastfm");
     console.log(data);
-  }
+  };
 
   const click = async () => {
     console.log("hi");
@@ -54,17 +54,17 @@ const StubButton: React.FC = () => {
 
   const dispatchRemove = () => {
     store.dispatch(erase(["spotify"]));
-    console.log("did I erase the state",)
+    console.log("did I erase the state");
   };
 
   const dispatchValidate = () => {
     store.dispatch(validateTokens(["spotify"]));
   };
-  
+
   const utilTokens = () => {
     const res = getFromLocalStorage();
     console.log("GET FROM LOCAL STORAGE: ", res);
-  }
+  };
 
   return (
     <div>
