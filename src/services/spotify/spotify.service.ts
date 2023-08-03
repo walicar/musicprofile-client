@@ -69,9 +69,10 @@ export async function getSpotifyToken(code: string, codeVerifier: any) {
     });
     if (!response.ok) throw new Error("HTTP fail: " + response.status);
     const data = await response.json();
-    // const token = { spotify: data.refresh_token };
-    // await writeTokens(id, token);
-    return data;
+    console.log("From getSpotifyToken", data);
+    const createdAt = Date();
+    const newData = {...data, created_at: createdAt};
+    return newData;
   } catch (e) {
     console.log(e);
     return e;

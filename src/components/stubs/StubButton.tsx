@@ -29,7 +29,8 @@ const StubButton: React.FC = () => {
 
   useEffect(() => {
     console.log("stub changed");
-  }, [stub]);
+    console.log("state changed", state);
+  }, [stub, state]);
 
   const click = async () => {
     console.log("hi");
@@ -50,6 +51,7 @@ const StubButton: React.FC = () => {
 
   const dispatchRemove = () => {
     store.dispatch(erase(["spotify"]));
+    console.log("did I erase the state",)
   };
 
   const dispatchValidate = () => {
@@ -63,8 +65,10 @@ const StubButton: React.FC = () => {
 
   return (
     <div>
-      <button onClick={click}>send fetch</button>
-      <button onClick={otherClick}>write tokens</button>
+      <button onClick={click}>send fetch TO DATABASE!!!!!!!!!</button>
+      <button onClick={otherClick}>write tokens TO DATABASE!!!!!!!!!!</button>
+      <br></br>
+      <br></br>
       <button onClick={dispatchRedux}>Redux write Spotify token</button>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
       <button onClick={dispatchValidate}>Redux validate tokens</button>
