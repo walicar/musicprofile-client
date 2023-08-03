@@ -33,9 +33,9 @@ const tokensSlice = createSlice({
   reducers: {
     erase: (state, action: PayloadAction<string[]>) => {
       action.payload.forEach((service) => {
-        state.tokens[service] = emptyToken;
+        delete state.tokens[service];
         localStorage.removeItem(`${service}-access-token`);
-        console.log("erase from tokens slice");
+        console.log(`erase ${service} from tokens slice`);
       });
     },
     stubWrite: (state, action: PayloadAction<string[]>) => {
@@ -79,7 +79,6 @@ export const validateTokens = createAsyncThunk(
     // TODO: find out how to type this
     const { tokens: state }: any = getState() as TokensState;
     const result = await validate(services, state)
-    console.log("Tokens we validated", result);
     return result;
   }
 );

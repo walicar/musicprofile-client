@@ -16,10 +16,10 @@ const SpotifyCallback: React.FC = () => {
     "spotify-code-verifier",
   ]);
   const [accessToken, setAccessToken] = useLocalStorageState(
-    "spotify-access-token",
+    "spotify-access-token"
   );
   const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
+    `sb-${ID}-auth-token`
   );
   const [params, setParam] = useSearchParams();
   const code = params.get("code");
@@ -32,7 +32,11 @@ const SpotifyCallback: React.FC = () => {
       try {
         const data = await getSpotifyToken(code!, codeVerifier);
         tokenManager.writeTokens({ spotify: data.refresh_token });
-        setAccessToken(data.access_token);
+        setAccessToken({
+          access_token: data.access_token,
+          expires_in: data.expires_in,
+          created_at: data.created_at,
+        });
       } catch (e) {
         console.log(e);
       }
