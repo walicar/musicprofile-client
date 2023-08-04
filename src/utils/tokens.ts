@@ -40,7 +40,7 @@ const validate = async (services: string[], token_collection: Tokens) => {
   let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
   if (token_collection != undefined) {
     for (const service of services) {
-      if (token_collection[service] && !isExpired(token_collection[service])) {
+      if (token_collection[service] && isExpired(token_collection[service])) {
         const data = await refreshHandlers[service](curRefreshTokens[service]);
         const newRefreshTokensCopy = {
           ...newRefreshTokens,
