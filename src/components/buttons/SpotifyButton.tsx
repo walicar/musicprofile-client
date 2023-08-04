@@ -16,13 +16,12 @@ const SpotifyButton: React.FC = () => {
 
   const connect = async () => {
     const verifier = generateRandomString(128);
-    setCookie("spotify-code-verifier", verifier);
+    setCookie("spotify-code-verifier", verifier, {path: "/"});
     const URL = await getAuthURL(verifier);
     window.location.replace(URL);
   };
 
   const disconnect = () => {
-    removeCookie("spotify-code-verifier", { path: "/" });
     removeItem();
   };
 
