@@ -4,16 +4,18 @@ import {
   generateRandomString,
   getAuthURL,
 } from "../../services/spotify/spotify.service";
+import store from "../../app/store";
+import { erase } from "../../features/tokens/tokensSlice";
 import useLocalStorageState from "use-local-storage-state";
 
 const SpotifyButton: React.FC = () => {
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [cookies, setCookie] = useCookies([
     "spotify-code-verifier",
   ]);
-  const [accessToken, setAccessToken, { removeItem }] = useLocalStorageState(
+  const [accessToken] = useLocalStorageState(
     "spotify-access-token",
   );
-
+    
   const connect = async () => {
     const verifier = generateRandomString(128);
     setCookie("spotify-code-verifier", verifier, {path: "/"});
@@ -22,7 +24,8 @@ const SpotifyButton: React.FC = () => {
   };
 
   const disconnect = () => {
-    removeItem();
+    store.dispatch(erase(["spotify"]));
+    //removeItem();
   };
 
   return (

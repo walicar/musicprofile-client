@@ -4,9 +4,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { getSpotifyToken } from "./spotify.service";
 import PageLoader from "../../components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
-import { SupabaseClient } from "@supabase/supabase-js";
 import { TokenManager } from "../../database/TokenManager";
+import store from "../../app/store";
+import { write } from "../../features/tokens/tokensSlice";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 
 let didInit = false;
@@ -24,7 +24,6 @@ const SpotifyCallback: React.FC = () => {
   const [params, setParam] = useSearchParams();
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];
-  const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager = new TokenManager();
 
   useEffect(() => {
@@ -32,11 +31,20 @@ const SpotifyCallback: React.FC = () => {
       try {
         const data = await getSpotifyToken(code!, codeVerifier);
         tokenManager.writeTokens({ spotify: data.refresh_token });
+        // dispatach save token to redux instead of access token
+        const token = {
+          access_token: data.access_token,
+          expires_in: data.expires_in,
+          created_at: data.created_at,
+        }
+        store.dispatch(write({spotify: token}))
+        /*
         setAccessToken({
           access_token: data.access_token,
           expires_in: data.expires_in,
           created_at: data.created_at,
         });
+        */
       } catch (e) {
         console.log(e);
       }
