@@ -4,10 +4,13 @@ import { generateRandomString, getAuthURL } from "./spotify.service";
 import store from "../../app/store";
 import { erase } from "../../features/tokens/tokensSlice";
 import useLocalStorageState from "use-local-storage-state";
+import { selectTokens } from "../../features/tokens/tokensSlice";
+import { useAppSelector } from "../../app/hooks";
 
 const SpotifyButton: React.FC = () => {
   const [cookies, setCookie] = useCookies(["spotify-code-verifier"]);
   const [accessToken] = useLocalStorageState("spotify-access-token");
+  useAppSelector(selectTokens);
 
   const connect = async () => {
     const verifier = generateRandomString(128);
