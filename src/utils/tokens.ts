@@ -1,6 +1,6 @@
-import { Token } from "../features/tokens/tokensSlice";
+import { Token, Tokens, TokensState } from "../features/tokens/tokensSlice";
 import { SUPPORTED } from "../services/supportedServices";
-import { TokenManager } from "../database/TokenManager";
+import { TokenManager, TokenEntries } from "../database/TokenManager";
 import { refreshHandlers } from "../services/refreshHandlers";
 
 // TODO: figure out how to type this
@@ -32,31 +32,34 @@ const isExpired = (token: Token) => {
 // - update access_token in Redux
 // might need to fix this function, bit large.
 // FIX THE NAMES!
-const validate = async (services: string[], state: any) => {
+const validate = async (services: string[], token_collection: Tokens) => {
   const tokenManager = new TokenManager();
   // TODO: find out how to type this
-  let refreshedTokens: any = {};
-  let refreshTokens: any = {};
-  let curRefreshTokens: any = tokenManager.getTokens();
-  for (const service of services) {
-    if (state.tokens[service] && isExpired(state.tokens[service])) {
-      const data = await refreshHandlers[service](curRefreshTokens[service]);
-      const refreshTokensCopy = {
-        ...refreshTokens,
-        [service]: data.refresh_token,
-      };
-      refreshTokens = refreshTokensCopy;
-      const newToken: Token = {
-        access_token: data.access_token,
-        expires_in: data.expires_in,
-        created_at: Date(),
-      };
-      const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
-      refreshedTokens = refreshedTokensCopy;
+  let refreshedTokens: Tokens = {};
+  let newRefreshTokens: TokenEntries = {};
+  let curRefreshTokens: {[key:string]:any} = await tokenManager.getTokens();
+  if (token_collection != undefined) {
+    for (const service of services) {
+      if (token_collection[service] && !isExpired(token_collection[service])) {
+        const data = await refreshHandlers[service](curRefreshTokens[service]);
+        const newRefreshTokensCopy = {
+          ...newRefreshTokens,
+          [service]: data.refresh_token,
+        };
+        newRefreshTokens = newRefreshTokensCopy;
+        const newToken: Token = {
+          access_token: data.access_token,
+          expires_in: data.expires_in,
+          created_at: Date(),
+        };
+        const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
+        refreshedTokens = refreshedTokensCopy;
+      }
     }
+    await tokenManager.writeTokens(newRefreshTokens);
+    return refreshedTokens;
   }
-  await tokenManager.writeTokens(refreshTokens);
-  return refreshedTokens;
+  return {};
 };
 
 export { validate, getFromLocalStorage };

@@ -8,15 +8,16 @@ import store from "../../app/store";
 import {
   erase,
   validateTokens,
-  selectTokens,
+  selectTokenCollection,
 } from "../../features/tokens/tokensSlice";
 import { useAppSelector } from "../../app/hooks";
+import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [stub]: any = useLocalStorageState("spotify-access-token");
-  const state = useAppSelector(selectTokens);
+  const state = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
 
@@ -33,7 +34,9 @@ const StubButton: React.FC = () => {
 
   const testRefreshToken = async () => {
     const refreshTokens = await tokenManager.getTokens();
-    console.log("Getting refresh Tokens", refreshTokens);
+    console.log("Getting spotify refresh token", refreshTokens["spotify"]);
+    const result = await refreshSpotifyToken(refreshTokens["spotify"]);
+    console.log(result);
   };
 
   const click = async () => {
