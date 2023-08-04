@@ -3,7 +3,7 @@ const ID = process.env.REACT_APP_SUPABASE_ID;
 const API = process.env.REACT_APP_SUPABASE_URL;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
 
-export type TokenEntries = { [key:string]:string }
+export type TokenEntries = { [key: string]: string };
 export class TokenManager {
   session: any;
   constructor() {

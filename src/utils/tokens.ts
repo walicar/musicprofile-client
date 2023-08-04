@@ -30,11 +30,8 @@ const isExpired = (token: Token) => {
 // - get a refreshed token
 // - store the refresh_token in DB
 // - update access_token in Redux
-// might need to fix this function, bit large.
-// FIX THE NAMES!
 const validate = async (services: string[], token_collection: Tokens) => {
   const tokenManager = new TokenManager();
-  // TODO: find out how to type this
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
   let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
