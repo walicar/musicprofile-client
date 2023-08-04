@@ -2,6 +2,8 @@ import axios from "axios";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const API = process.env.REACT_APP_SUPABASE_URL;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
+
+export type TokenEntries = { [key:string]:string }
 export class TokenManager {
   session: any;
   constructor() {
@@ -10,7 +12,7 @@ export class TokenManager {
       throw Error("Trying create token manager without beign signed in");
     this.session = JSON.parse(session);
   }
-  async writeTokens(tokens: any) {
+  async writeTokens(tokens: TokenEntries) {
     // info should be in the form of { service_name: "token" }
     // e.x { spotify: "123456" }
     const apiUrl = API + "/rest/v1/tokens";
