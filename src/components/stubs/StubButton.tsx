@@ -15,12 +15,11 @@ import { useAppSelector } from "../../app/hooks";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
-  const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
+  const [session]: any = useLocalStorageState(
+    `sb-${ID}-auth-token`
   );
   const [stub]: any = useLocalStorageState("spotify-access-token");
   const state = useAppSelector(selectTokens);
-  console.log("checking redux state: ", state);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
 
@@ -33,6 +32,11 @@ const StubButton: React.FC = () => {
       .from("tokens")
       .select("id, spotify, lastfm");
     console.log(data);
+  };
+
+  const testRefreshToken = async () => {
+    const refreshTokens = await tokenManager.getTokens();
+    console.log("Getting refresh Tokens", refreshTokens);
   };
 
   const click = async () => {
@@ -71,6 +75,9 @@ const StubButton: React.FC = () => {
       <button onClick={oldFetch}>Old Fetch to DB</button>
       <button onClick={click}>send fetch TO DATABASE!!!!!!!!!</button>
       <button onClick={otherClick}>write tokens TO DATABASE!!!!!!!!!!</button>
+      <button onClick={testRefreshToken}>
+        simulate refreshing tokens get r_token from db then send to spotify api
+      </button>
       <br></br>
       <br></br>
       <button onClick={dispatchRedux}>Redux write Spotify token</button>

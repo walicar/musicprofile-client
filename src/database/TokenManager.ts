@@ -44,10 +44,7 @@ export class TokenManager {
     };
     try {
       const response: any = await axios.get(requestUrl, { headers: headers });
-      if (!response.ok) {
-        return response;
-      }
-      return response.data;
+      return response.data[0];
     } catch (e) {
       return e;
     }
