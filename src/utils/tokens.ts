@@ -1,10 +1,7 @@
-import {
-  saveRefreshTokenSTUB,
-  refreshHandlerSTUB,
-} from "../components/stubs/reduxTokenStubs";
 import { Token } from "../features/tokens/tokensSlice";
 import { SUPPORTED } from "../services/supportedServices";
 import { TokenManager } from "../database/TokenManager";
+import { refreshHandlers } from "../services/refreshHandlers";
 
 // TODO: figure out how to type this
 const getFromLocalStorage: any = () => {
@@ -33,14 +30,17 @@ const isExpired = (token: Token) => {
 // - get a refreshed token
 // - store the refresh_token in DB
 // - update access_token in Redux
+// might need to fix this function, bit large.
+// FIX THE NAMES!
 const validate = async (services: string[], state: any) => {
   const tokenManager = new TokenManager();
   // TODO: find out how to type this
   let refreshedTokens: any = {};
   let refreshTokens: any = {};
+  let curRefreshTokens: any = tokenManager.getTokens();
   for (const service of services) {
     if (state.tokens[service] && isExpired(state.tokens[service])) {
-      const data = await refreshHandlerSTUB[service]();
+      const data = await refreshHandlers[service](curRefreshTokens[service]);
       const refreshTokensCopy = {
         ...refreshTokens,
         [service]: data.refresh_token,
@@ -54,9 +54,9 @@ const validate = async (services: string[], state: any) => {
       const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
       refreshedTokens = refreshedTokensCopy;
     }
-    await tokenManager.writeTokens(refreshTokens);
-    return refreshedTokens;
   }
+  await tokenManager.writeTokens(refreshTokens);
+  return refreshedTokens;
 };
 
 export { validate, getFromLocalStorage };

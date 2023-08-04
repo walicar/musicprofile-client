@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getFromLocalStorage, validate } from "../../utils/tokens";
+/**
+ * TokenSlice is the only place where you can write to localStorage,
+ * getting from localStorage is fine elsewhere.
+ */
 
 export type Token = {
   access_token: string;
@@ -37,6 +41,26 @@ const tokensSlice = createSlice({
         localStorage.removeItem(`${service}-access-token`);
         console.log(`erase ${service} from tokens slice`);
       });
+    },
+    write: (state, action: PayloadAction<any>) => {
+      // assuming payload looks like
+      // {
+      //   spotify: { 
+      //      access_token: 'thing', 
+      //      expires_in: "thing", 
+      //      created_at: "thing"
+      //      }
+      // }
+      // this is why you type!
+      console.log("did i write?");
+      const tokens = action.payload;
+      for (const service in tokens) {
+        state.tokens[service] = tokens[service];
+        localStorage.setItem(
+          `${service}-access-token`,
+          JSON.stringify(tokens[service]),
+        );
+      }
     },
     stubWrite: (state, action: PayloadAction<string[]>) => {
       // ignore this, is formatted wrong, this is just a stub
@@ -91,6 +115,6 @@ export const validateTokens = createAsyncThunk(
 
 export const selectTokens = (state: TokensState) => state.tokens;
 
-export const { erase, stubWrite } = tokensSlice.actions;
+export const { erase, write, stubWrite } = tokensSlice.actions;
 
 export default tokensSlice.reducer;
