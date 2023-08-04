@@ -15,9 +15,7 @@ import { useAppSelector } from "../../app/hooks";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const StubButton: React.FC = () => {
-  const [session]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`
-  );
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [stub]: any = useLocalStorageState("spotify-access-token");
   const state = useAppSelector(selectTokens);
   const supabase: SupabaseClient<any> = useSupabaseClient();

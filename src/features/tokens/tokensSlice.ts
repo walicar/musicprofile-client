@@ -45,9 +45,9 @@ const tokensSlice = createSlice({
     write: (state, action: PayloadAction<any>) => {
       // assuming payload looks like
       // {
-      //   spotify: { 
-      //      access_token: 'thing', 
-      //      expires_in: "thing", 
+      //   spotify: {
+      //      access_token: 'thing',
+      //      expires_in: "thing",
       //      created_at: "thing"
       //      }
       // }
