@@ -85,12 +85,16 @@ export async function refreshSpotifyToken(refreshToken: any) {
   const body = {
     grant_type: "refresh_token",
     refresh_token: refreshToken,
-    client_id: clientId
-  }
+    client_id: clientId,
+  };
   const headers = {
-    "Content-Type": "application/x-www-form-urlencoded"
-  }
-  const response = await axios.post("https://accounts.spotify.com/api/token", body, {headers: headers});
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  const response = await axios.post(
+    "https://accounts.spotify.com/api/token",
+    body,
+    { headers: headers },
+  );
   // return token
   return response.data;
 }
