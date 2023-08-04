@@ -7,7 +7,6 @@ import { getFromLocalStorage } from "../../utils/tokens";
 import store from "../../app/store";
 import {
   erase,
-  stubWrite,
   validateTokens,
   selectTokens,
 } from "../../features/tokens/tokensSlice";
@@ -50,10 +49,6 @@ const StubButton: React.FC = () => {
     }
   };
 
-  const dispatchRedux = () => {
-    store.dispatch(stubWrite(["spotify"]));
-  };
-
   const dispatchRemove = () => {
     store.dispatch(erase(["spotify"]));
     console.log("did I erase the state");
@@ -78,7 +73,6 @@ const StubButton: React.FC = () => {
       </button>
       <br></br>
       <br></br>
-      <button onClick={dispatchRedux}>Redux write Spotify token</button>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
       <button onClick={dispatchValidate}>Redux validate tokens</button>
       <button onClick={utilTokens}>UTIL: Get from local storage</button>

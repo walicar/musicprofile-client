@@ -38,13 +38,6 @@ const SpotifyCallback: React.FC = () => {
           created_at: data.created_at,
         };
         store.dispatch(write({ spotify: token }));
-        /*
-        setAccessToken({
-          access_token: data.access_token,
-          expires_in: data.expires_in,
-          created_at: data.created_at,
-        });
-        */
       } catch (e) {
         console.log(e);
       }

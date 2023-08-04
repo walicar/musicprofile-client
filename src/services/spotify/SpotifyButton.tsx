@@ -18,7 +18,6 @@ const SpotifyButton: React.FC = () => {
 
   const disconnect = () => {
     store.dispatch(erase(["spotify"]));
-    //removeItem();
   };
 
   return (
