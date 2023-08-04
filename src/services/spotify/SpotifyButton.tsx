@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { generateRandomString, getAuthURL } from "./spotify.service";
 import store from "../../app/store";
@@ -12,7 +12,7 @@ const SpotifyButton: React.FC = () => {
   const [accessToken] = useLocalStorageState("spotify-access-token");
   const state = useAppSelector(selectTokenCollection);
   useEffect(() => {
-    console.log("Did state change??", state)
+    console.log("Did state change??", state);
   }, [state]);
 
   const connect = async () => {

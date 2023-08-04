@@ -27,18 +27,18 @@ let initialState: TokensState = {
   error: undefined,
 };
 
-initialState.token_collection= getFromLocalStorage();
+initialState.token_collection = getFromLocalStorage();
 
 const tokensSlice = createSlice({
   name: "tokens",
   initialState,
   reducers: {
     erase: (state, action: PayloadAction<string[]>) => {
-        action.payload.forEach((service) => {
-          delete state.token_collection![service];
-          localStorage.removeItem(`${service}-access-token`);
-          console.log(`erase ${service} from tokens slice`);
-        });
+      action.payload.forEach((service) => {
+        delete state.token_collection![service];
+        localStorage.removeItem(`${service}-access-token`);
+        console.log(`erase ${service} from tokens slice`);
+      });
     },
     write: (state, action: PayloadAction<Tokens>) => {
       // assuming payload looks like
@@ -51,14 +51,14 @@ const tokensSlice = createSlice({
       // }
       const tokens = action.payload;
       console.log("did i write", tokens);
-        for (const service in tokens) {
-          state.token_collection[service] = tokens[service];
-          localStorage.setItem(
-            `${service}-access-token`,
-            JSON.stringify(tokens[service])
-          );
-          console.log(`write ${service} into tokens slice`);
-        }
+      for (const service in tokens) {
+        state.token_collection[service] = tokens[service];
+        localStorage.setItem(
+          `${service}-access-token`,
+          JSON.stringify(tokens[service]),
+        );
+        console.log(`write ${service} into tokens slice`);
+      }
     },
   },
   extraReducers: (builder) => {
@@ -69,14 +69,14 @@ const tokensSlice = createSlice({
       })
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
-        console.log("validated")
+        console.log("validated");
         state.token_collection = action.payload;
         for (const service in state.token_collection) {
           localStorage.setItem(
             `${service}-access-token`,
-            JSON.stringify(state.token_collection[service])
+            JSON.stringify(state.token_collection[service]),
           );
-          console.log(`vaidation changed ${service}`)
+          console.log(`vaidation changed ${service}`);
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {
@@ -95,10 +95,11 @@ export const validateTokens = createAsyncThunk(
     console.log(tokens);
     const result = await validate(services, tokens.token_collection);
     return result;
-  }
+  },
 );
 
-export const selectTokenCollection = (state: any) => state.tokens.token_collection;
+export const selectTokenCollection = (state: any) =>
+  state.tokens.token_collection;
 
 export const { erase, write } = tokensSlice.actions;
 
