@@ -26,7 +26,7 @@ export class TokenManager {
       const response: any = await axios.patch(requestUrl, tokens, {
         headers: headers,
       });
-      console.log("wroteTokens: ", response.data);
+      console.log("Wrote tokens to DB");
       return response.data;
     } catch (e) {
       return e;

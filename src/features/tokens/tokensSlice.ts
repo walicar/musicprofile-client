@@ -60,22 +60,8 @@ const tokensSlice = createSlice({
           `${service}-access-token`,
           JSON.stringify(tokens[service]),
         );
+        console.log(`write ${service} into tokens slice`);
       }
-    },
-    stubWrite: (state, action: PayloadAction<string[]>) => {
-      // ignore this, is formatted wrong, this is just a stub
-      action.payload.forEach((service) => {
-        state.tokens[service] = {
-          access_token: "fart",
-          expires_in: 1,
-          created_at: Date(),
-        };
-        localStorage.setItem(
-          `${service}-access-token`,
-          JSON.stringify(state.tokens[service]),
-        );
-        console.log(`wrote a token for ${service}`);
-      });
     },
   },
   extraReducers: (builder) => {
@@ -115,6 +101,6 @@ export const validateTokens = createAsyncThunk(
 
 export const selectTokens = (state: TokensState) => state.tokens;
 
-export const { erase, write, stubWrite } = tokensSlice.actions;
+export const { erase, write } = tokensSlice.actions;
 
 export default tokensSlice.reducer;
