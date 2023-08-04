@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import {
   generateRandomString,
   getAuthURL,
-} from "../../services/spotify/spotify.service";
+} from "./spotify.service";
 import store from "../../app/store";
 import { erase } from "../../features/tokens/tokensSlice";
 import useLocalStorageState from "use-local-storage-state";
