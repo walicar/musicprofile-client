@@ -37,7 +37,7 @@ const validate = async (services: string[], token_collection: Tokens) => {
   // TODO: find out how to type this
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
-  let curRefreshTokens: {[key:string]:any} = await tokenManager.getTokens();
+  let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
   if (token_collection != undefined) {
     for (const service of services) {
       if (token_collection[service] && !isExpired(token_collection[service])) {
