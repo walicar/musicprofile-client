@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 import { useNavigate } from "react-router-dom";
-import SpotifyButton from "../components/buttons/SpotifyButton";
+import SpotifyButton from "../services/spotify/SpotifyButton";
 import LastfmButton from "../components/buttons/LastfmButton";
 import useLocalStorageState from "use-local-storage-state";
 const ID = process.env.REACT_APP_SUPABASE_ID;
