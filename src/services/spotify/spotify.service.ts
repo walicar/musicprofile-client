@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const clientId = process.env.REACT_APP_SPOTIFY_ID;
 const redirectUri = process.env.REACT_APP_WEBAPP_URL + "/callback/spotify";
 const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/";
@@ -69,11 +71,30 @@ export async function getSpotifyToken(code: string, codeVerifier: any) {
     });
     if (!response.ok) throw new Error("HTTP fail: " + response.status);
     const data = await response.json();
-    // const token = { spotify: data.refresh_token };
-    // await writeTokens(id, token);
-    return data;
+    console.log("From getSpotifyToken", data);
+    const createdAt = Date();
+    const newData = { ...data, created_at: createdAt };
+    return newData;
   } catch (e) {
     console.log(e);
     return e;
   }
+}
+
+export async function refreshSpotifyToken(refreshToken: any) {
+  const body = {
+    grant_type: "refresh_token",
+    refresh_token: refreshToken,
+    client_id: clientId,
+  };
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  const response = await axios.post(
+    "https://accounts.spotify.com/api/token",
+    body,
+    { headers: headers },
+  );
+  // return token
+  return response.data;
 }
