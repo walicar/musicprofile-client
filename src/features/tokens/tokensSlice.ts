@@ -70,6 +70,11 @@ const tokensSlice = createSlice({
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
         console.log("validated");
+        console.log(action.payload);
+        if (!action.payload.length) {
+          console.log("payload length == 0");
+          return;
+        };
         state.token_collection = action.payload;
         for (const service in state.token_collection) {
           localStorage.setItem(

@@ -1,4 +1,3 @@
-import axios from "axios";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const API = process.env.REACT_APP_SUPABASE_URL;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -12,27 +11,27 @@ export class TokenManager {
       throw Error("Trying create token manager without beign signed in");
     this.session = JSON.parse(session);
   }
+
   async writeTokens(tokens: TokenEntries) {
     // info should be in the form of { service_name: "token" }
-    // e.x { spotify: "123456" }
+    // e.x { spotify: "123456" } 
     const apiUrl = API + "/rest/v1/tokens";
     const queryParams = `id=eq.${this.session.user.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
     const headers = {
       Authorization: `Bearer ${this.session.access_token}`,
-      apiKey: API_KEY,
+      'Content-Type': 'application/json',
+      apiKey: API_KEY!,
       "content-profile": "public",
       prefer: "return=representation",
     };
-    try {
-      const response: any = await axios.patch(requestUrl, tokens, {
-        headers: headers,
-      });
-      console.log("Wrote tokens to DB");
-      return response.data;
-    } catch (e) {
-      return e;
-    }
+    const response = await fetch(requestUrl, {
+      method: "PATCH",
+      body: JSON.stringify(tokens),
+      headers: headers
+    })
+    const data = await response.json()
+    return data;
   }
 
   async getTokens() {
@@ -41,12 +40,13 @@ export class TokenManager {
     const requestUrl = `${apiUrl}?${queryParams}`;
     const headers = {
       Authorization: `Bearer ${this.session.access_token}`,
-      apiKey: API_KEY,
+      apiKey: API_KEY!,
       "content-type": "application/json",
     };
     try {
-      const response: any = await axios.get(requestUrl, { headers: headers });
-      return response.data[0];
+      const response: any = await fetch(requestUrl, { method: "GET", headers: headers });
+      const data = await response.json();
+      return data[0];
     } catch (e) {
       return e;
     }
