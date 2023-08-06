@@ -1,8 +1,5 @@
-import axios from "axios";
-
 const clientId = process.env.REACT_APP_SPOTIFY_ID;
 const redirectUri = process.env.REACT_APP_WEBAPP_URL + "/callback/spotify";
-const functionUrl = process.env.REACT_APP_SUPABASE_URL + "/functions/v1/";
 
 export function generateRandomString(length: number) {
   // used for code_verifier and state
@@ -82,19 +79,18 @@ export async function getSpotifyToken(code: string, codeVerifier: any) {
 }
 
 export async function refreshSpotifyToken(refreshToken: any) {
-  const body = {
+  const body = new URLSearchParams({
     grant_type: "refresh_token",
     refresh_token: refreshToken,
-    client_id: clientId,
-  };
-  const headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-  };
-  const response = await axios.post(
-    "https://accounts.spotify.com/api/token",
-    body,
-    { headers: headers },
-  );
-  // return token
-  return response.data;
+    client_id: clientId!
+  });
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: body
+  })
+  const data = await response.json();
+  return data;
 }
