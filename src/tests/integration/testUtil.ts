@@ -1,20 +1,26 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, act, waitFor} from "@testing-library/react";
 
-const signInUser = () => {
-    const logInButton = screen.getByText('log in');
-    fireEvent.click(logInButton);
-    const emailInput = screen.getByLabelText("Email:");
-    const passwordInput = screen.getByLabelText("Password:");
-    const signInButton = screen.getByRole('button', {name: "Sign In"});
+const signInUser = async (app: any) => {
+  const { getByLabelText, findByRole } = app;
+  const logInButton = await findByRole("button", {name: "log in"});
+  fireEvent.click(logInButton);
+  const emailInput = getByLabelText("Email:");
+  const passwordInput = getByLabelText("Password:");
+  const signInButton = await findByRole("button", { name: "Sign In" });
 
-    fireEvent.change(emailInput, {target: {value: 'will@alicar.me'}});
-    fireEvent.change(passwordInput, {target: {value: 'Password11'}});
-    fireEvent.click(signInButton);
-}
+  fireEvent.change(emailInput, { target: { value: "will@alicar.me" } });
+  fireEvent.change(passwordInput, { target: { value: "Password11" } });
+  fireEvent.click(signInButton);
+  const dashboard = await findByRole("heading", {
+    name: /Dashboard/i,
+  });
+};
 
-const signOutUser = () => {
-    const logOutButton = screen.getByText(/log out/i);
-    fireEvent.click(logOutButton);
-}
+const signOutUser = async (app: any) => {
+  const { findByRole } = app
+  const logOutButton = await findByRole("button", {name: "log out"});
+  fireEvent.click(logOutButton);
+  const home = await findByRole("heading", {name: /Home/i});
+};
 
-export {signInUser, signOutUser}
+export { signInUser, signOutUser };
