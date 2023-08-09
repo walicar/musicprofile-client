@@ -7,8 +7,8 @@ const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
 
-  const handleSignOut = () => {
-    supabase.auth.signOut();
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
     navigate("/");
   };
 
