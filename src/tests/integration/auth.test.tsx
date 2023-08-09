@@ -1,5 +1,5 @@
-import App from "../../src/App";
-import store from "../../src/app/store";
+import App from "../../App";
+import store from "../../app/store";
 import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
 import { signInUser, signOutUser} from "./testUtil";
@@ -34,8 +34,10 @@ describe("authentication integration: log in", () => {
     expect(userSession).toBeTruthy();
   });
   test("logging out deletes the user session", async () => {
+    /*
     signOutUser();
     const home = await screen.findByRole("heading", {name: /Home/i});
-    
+    */
+   expect(false).toBeTruthy();
   })
 });
