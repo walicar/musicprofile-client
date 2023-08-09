@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "src/App.test.tsx", "__tests__/integration", "__tests__/unit/NavBar.test.tsx"]
 }

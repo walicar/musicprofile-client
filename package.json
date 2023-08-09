@@ -26,7 +26,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npx supabase start && react-scripts test",
+    "test:integration": "npm run test:integration:parallel && npm run test:integration:sequential",
+    "test:integration:parallel": "react-scripts test --config=__tests__/integration/jest.config.js",
+    "test:integration:sequential": "react-scripts test --config=__tests__/integration/jest.config.js --runInBand",
+    "test:unit": "react-scripts test --config=__tests__/unit/jest.config.js",
     "eject": "react-scripts eject",
     "dev": "npx nodemon"
   },
@@ -52,6 +56,7 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "react-scripts": "5.0.1",
-    "supabase": "^1.77.9"
+    "supabase": "^1.77.9",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
   }
 }
