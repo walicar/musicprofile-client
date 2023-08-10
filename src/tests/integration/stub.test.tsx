@@ -3,7 +3,7 @@ import NavBar from "../../components/navbar/NavBar";
 import { BrowserRouter } from "react-router-dom";
 
 /**
- * just a placeholder to act as a sequential test
+ * just a placeholder to act as a parallel test
  */
 
 
