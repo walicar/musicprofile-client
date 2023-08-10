@@ -10,10 +10,12 @@ import { useAppSelector } from "../../app/hooks";
 const SpotifyButton: React.FC = () => {
   const [cookies, setCookie] = useCookies(["spotify-code-verifier"]);
   const [accessToken] = useLocalStorageState("spotify-access-token");
+  /*
   const state = useAppSelector(selectTokenCollection);
   useEffect(() => {
     console.log("Did state change??", state);
   }, [state]);
+  */
 
   const connect = async () => {
     const verifier = generateRandomString(128);
