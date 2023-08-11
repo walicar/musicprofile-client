@@ -8,12 +8,21 @@ import * as useLocalStorageStateModule from "use-local-storage-state";
  * Run this test: npm test src/tests/unit/spotify.test.tsx
  *
  * Goal:
- * - test components
- * - and util service functions
+ * - test component individually
  *
  * Targets:
- * -
- *
+ * - SpotifyButton
+ * 
+ * Notes:
+ * since the spotify files are so intertwined, automated
+ *   testing via playwright will paint a better picture on
+ *   the state of project.
+ * 
+ * So spotify services might be actually tested in playwright
+ * we might want to rename this to serviceButton.test.tsx 
+ * later, because we can abstract all the service buttons
+ * and put the setup logic in a hashmap, i.e. 
+ * `serviceButton["spotify"]()`
  */
 
 describe("testing spotify button", () => {
