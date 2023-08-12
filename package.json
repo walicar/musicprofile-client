@@ -13,7 +13,6 @@
     "@types/node": "^16.18.38",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -27,8 +26,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "npx supabase start && react-scripts test --testPathIgnorePatterns src/tests/automated",
+    "test:integration": "node src/tests/integration/_script.js",
+    "test:integration:parallel": "node src/tests/integration/_script.js -p",
+    "test:integration:sequential": "node src/tests/integration/_script.js -s",
+    "test:unit": "node src/tests/unit/_script.js",
+    "test:automated": "npx playwright test",
+    "eject": "npm test eject",
     "dev": "npx nodemon"
   },
   "eslintConfig": {
@@ -50,6 +54,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@playwright/test": "^1.37.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "react-scripts": "5.0.1",
