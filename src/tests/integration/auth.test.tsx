@@ -16,6 +16,19 @@ const ID = process.env.REACT_APP_SUPABASE_ID;
  * Testcases:
  * - TODO
  * - logout from any other page routes you back to /home page
+ * 
+ * Notes:
+ * these are mostly just testing implementation and nt how it is used
+ * WILL need to refactor, although, this file may be good
+ * when we need to actually test how things are rendered
+ * when we start designing the UI.
+ * 
+ * So you might want to delete the tests for usersession,
+ * but leave in the ones that test redirect
+ * 
+ * Remember, test what the user would expect, not the underlying
+ * mechanism
+ *
  */
 
 describe("authentication integration: log in and log out", () => {
