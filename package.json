@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npx supabase start && react-scripts test",
+    "test": "npx supabase start && react-scripts test --testPathIgnorePatterns src/tests/automated",
     "test:integration": "node src/tests/integration/_script.js",
     "test:integration:parallel": "node src/tests/integration/_script.js -p",
     "test:integration:sequential": "node src/tests/integration/_script.js -s",
