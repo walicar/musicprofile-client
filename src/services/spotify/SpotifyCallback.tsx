@@ -49,7 +49,7 @@ const SpotifyCallback: React.FC = () => {
       removeCookie("spotify-code-verifier", { path: "/" });
       navigate("/dashboard");
     }
-  }, [code, codeVerifier, setAccessToken, removeCookie]);
+  }, [code, codeVerifier, setAccessToken, removeCookie, session]);
   return <PageLoader message={"Connecting to Spotify..."} />;
 };
 export default SpotifyCallback;

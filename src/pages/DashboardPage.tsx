@@ -15,7 +15,7 @@ const DashboardPage: React.FC = () => {
     if (!session) {
       navigate("/login");
     }
-  }, []);
+  }, [session]);
 
   if (!session) {
     return <></>;
