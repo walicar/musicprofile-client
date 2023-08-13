@@ -34,11 +34,20 @@ const validate = async (services: string[], token_collection: Tokens) => {
   const tokenManager = new TokenManager();
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
-  let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
+  // might want to refactor this into, getToken("service");
+  let curRefreshTokens: TokenEntries = await tokenManager.getTokens(); 
   if (token_collection != undefined) {
     for (const service of services) {
-      if (token_collection[service] && isExpired(token_collection[service])) {
+      const token: any = token_collection[service]; // gotta fix this
+      if (!token) break;
+      if (token_collection[service] && isExpired(JSON.parse(token))) {
+        console.log("what is the refreshtoken im tryinh to put in, ", curRefreshTokens[service]);
         const data = await refreshHandlers[service](curRefreshTokens[service]);
+        console.log("here is the refresh thing I got", data)
+        if (data.error) {
+          console.log("Error received from tokens");
+          break;
+        }
         const newRefreshTokensCopy = {
           ...newRefreshTokens,
           [service]: data.refresh_token,
@@ -51,12 +60,16 @@ const validate = async (services: string[], token_collection: Tokens) => {
         };
         const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
         refreshedTokens = refreshedTokensCopy;
+        console.log("did some copies");
       }
     }
     await tokenManager.writeTokens(newRefreshTokens);
+    console.log("my refreshedTokens: ", refreshedTokens)
     return refreshedTokens;
+  } else {
+    console.log("returning an empty object")
+    return {};
   }
-  return {};
 };
 
 export { validate, getFromLocalStorage };

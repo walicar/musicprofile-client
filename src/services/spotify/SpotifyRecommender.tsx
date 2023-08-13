@@ -17,43 +17,49 @@ const SpotifyRecommender: React.FC = () => {
   const [token]: any = useLocalStorageState("spotify-access-token");
   useAppSelector(selectTokenCollection);
   const tokenStatus = useAppSelector((state) => state.tokens.status);
+  // const tokenStatus = 'validated'
   const { status, error, data }: any = useQuery(
     "spotifyRecommendData",
     async () => {
       console.log("does this happen");
-      // store.dispatch(validateTokens(["spotify"]));
-      if (!didInit) {
-        // if (!didInit && token && tokenStatus === 'validated') {
-        const url =
-          "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
-        const headers = {
-          Authorization: `Bearer ${token.access_token}`,
-        };
-        console.log("trying to fetch");
-        const res = await fetch(url, { method: "GET", headers: headers });
-        const data = await res.json();
-        console.log("what is my data", data);
-        return data;
-      }
-      return {id:1, tracks: ["stub"]}
-    }, 
-    {enabled: !!token }
+      // removed
+      // if (!didInit && token && tokenStatus === 'validated') {
+      const url =
+        "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
+      const headers = {
+        Authorization: `Bearer ${token.access_token}`,
+      };
+      console.log("trying to fetch");
+      const res = await fetch(url, { method: "GET", headers: headers });
+      const data = await res.json();
+      console.log("what is my data", data);
+      return data;
+    },
+    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
   );
 
   // useEffect(() => {console.log("DID THIS GET UPDATED", token)}, [data, token]);
 
-  /*
   useEffect(() => {
-    if (tokenStatus === 'validated') {
+    if (!didInit && tokenStatus === "idle") {
+      console.log("token is idle, i'm going to validate");
+      store.dispatch(validateTokens(["spotify"]));
+      didInit = true;
+    }
+
+    if (tokenStatus === "validated") {
       console.log("I validated");
     }
-  }, [tokenStatus])
-  */
+  }, [tokenStatus]);
+
   if (!token) {
     return <div>Disconnected from Spotify</div>;
   }
-   
-  
+
+  if (error || data?.error) {
+    return <div>Error: {data.error.message} </div>;
+  }
+
   if (status === "loading") {
     return <div>Loading Items...</div>;
   } else if (status === "success") {
@@ -66,7 +72,7 @@ const SpotifyRecommender: React.FC = () => {
       </>
     );
   } else {
-    return <div>Error: {error}</div>
+    return <div>Unknown Error</div>;
   }
 };
 

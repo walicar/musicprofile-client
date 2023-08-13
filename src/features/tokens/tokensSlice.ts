@@ -70,10 +70,18 @@ const tokensSlice = createSlice({
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
         console.log("validated");
-        if (!action.payload.length) {
-          console.log("payload length == 0");
+        console.log("what is in here?", action.payload)
+        if (!action.payload) {
+          console.log("payload empty");
           return;
         };
+        /*
+        const newTokenCollection = Object.keys(action.payload).reduce((result: any, key: any) => {
+          result[key] = action.payload[key].access_token
+          return result
+        }, {});
+        console.log("newTokenCollection", newTokenCollection)
+        */
         state.token_collection = action.payload;
         for (const service in state.token_collection) {
           localStorage.setItem(
@@ -98,6 +106,7 @@ export const validateTokens = createAsyncThunk(
     const { tokens }: any = getState();
     console.log(tokens);
     const result = await validate(services, tokens.token_collection);
+    console.log("Returning this result:", result)
     return result;
   },
 );
