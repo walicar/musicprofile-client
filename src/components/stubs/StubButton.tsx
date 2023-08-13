@@ -20,7 +20,6 @@ const StubButton: React.FC = () => {
   const state = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
-
   useEffect(() => {
     console.log("stub changed");
     console.log("state changed", state);
