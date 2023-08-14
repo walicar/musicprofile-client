@@ -6,9 +6,8 @@ import { BrowserRouter } from "react-router-dom";
  * just a placeholder to act as a parallel test
  */
 
-
 describe("placeholder", () => {
-    test("true test", () => {
-        expect(true).toBeTruthy();
-    })
-})
+  test("true test", () => {
+    expect(true).toBeTruthy();
+  });
+});

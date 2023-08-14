@@ -14,13 +14,13 @@ export class TokenManager {
 
   async writeTokens(tokens: TokenEntries) {
     // info should be in the form of { service_name: "token" }
-    // e.x { spotify: "123456" } 
+    // e.x { spotify: "123456" }
     const apiUrl = API + "/rest/v1/tokens";
     const queryParams = `id=eq.${this.session.user.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
     const headers = {
       Authorization: `Bearer ${this.session.access_token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       apiKey: API_KEY!,
       "content-profile": "public",
       prefer: "return=representation",
@@ -28,9 +28,9 @@ export class TokenManager {
     const response = await fetch(requestUrl, {
       method: "PATCH",
       body: JSON.stringify(tokens),
-      headers: headers
-    })
-    const data = await response.json()
+      headers: headers,
+    });
+    const data = await response.json();
     return data;
   }
 
@@ -44,7 +44,10 @@ export class TokenManager {
       "content-type": "application/json",
     };
     try {
-      const response: any = await fetch(requestUrl, { method: "GET", headers: headers });
+      const response: any = await fetch(requestUrl, {
+        method: "GET",
+        headers: headers,
+      });
       const data = await response.json();
       return data[0];
     } catch (e) {

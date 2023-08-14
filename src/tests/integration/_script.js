@@ -21,7 +21,7 @@ const parallelRun = () => {
 
 const allRun = () => {
   const command = `npm test --watchAll=false ${testsSequential.join(
-    " "
+    " ",
   )} ${testsParallel.join()}`;
   childProcess.execSync(command, {
     stdio: "inherit",
@@ -30,7 +30,7 @@ const allRun = () => {
 
 const help = () => {
   console.log(
-    "--------------------------------------\nINTEGRATION TESTS - flags available:\n--------------------------------------\n'-s' for sequential run\n'-p' for parallel run\n'-a' for all run, is the default command\n'-h' for help menu"
+    "--------------------------------------\nINTEGRATION TESTS - flags available:\n--------------------------------------\n'-s' for sequential run\n'-p' for parallel run\n'-a' for all run, is the default command\n'-h' for help menu",
   );
 };
 
