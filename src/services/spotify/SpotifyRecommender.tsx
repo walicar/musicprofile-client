@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import store from "../../app/store";
 import {
@@ -8,22 +8,16 @@ import {
 import { useAppSelector } from "../../app/hooks";
 import { useQuery } from "react-query";
 
-const data = ["fart"];
-let status = "farted";
-//
 let didInit = false; // maybe we don't need cuz of react query
 
 const SpotifyRecommender: React.FC = () => {
   const [token]: any = useLocalStorageState("spotify-access-token");
   useAppSelector(selectTokenCollection);
   const tokenStatus = useAppSelector((state) => state.tokens.status);
-  // const tokenStatus = 'validated'
   const { status, error, data }: any = useQuery(
     "spotifyRecommendData",
     async () => {
       console.log("does this happen");
-      // removed
-      // if (!didInit && token && tokenStatus === 'validated') {
       const url =
         "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
       const headers = {
@@ -37,8 +31,6 @@ const SpotifyRecommender: React.FC = () => {
     },
     { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
   );
-
-  // useEffect(() => {console.log("DID THIS GET UPDATED", token)}, [data, token]);
 
   useEffect(() => {
     if (!didInit && tokenStatus === "idle") {
