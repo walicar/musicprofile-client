@@ -17,19 +17,16 @@ const SpotifyRecommender: React.FC = () => {
   const { status, error, data }: any = useQuery(
     "spotifyRecommendData",
     async () => {
-      console.log("does this happen");
       const url =
         "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
       const headers = {
         Authorization: `Bearer ${token.access_token}`,
       };
-      console.log("trying to fetch");
       const res = await fetch(url, { method: "GET", headers: headers });
       const data = await res.json();
-      console.log("what is my data", data);
       return data;
     },
-    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false },
+    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
   );
 
   useEffect(() => {
@@ -57,9 +54,11 @@ const SpotifyRecommender: React.FC = () => {
   } else if (status === "success") {
     return (
       <>
-        {/* {data.tracks.forEach((item: any) => {
-          // console.log(item);
-        })} */}
+        <ul>
+          {data.tracks.map((item: any) => (
+            <li key={item.id}>{item.name} by {item.artists[0].name}</li>
+          ))}
+        </ul>
         <div>{data.tracks.length} items in total!</div>
       </>
     );
