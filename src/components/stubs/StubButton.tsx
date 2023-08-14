@@ -14,6 +14,8 @@ import { useAppSelector } from "../../app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
+const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
+
 const StubButton: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [stub]: any = useLocalStorageState("spotify-access-token");
@@ -65,6 +67,38 @@ const StubButton: React.FC = () => {
     console.log("GET FROM LOCAL STORAGE: ", res);
   };
 
+  const gqlFetch = async () => {
+    console.log("mysession", session)
+    const endpoint = "http://localhost:54321/graphql/v1"
+    const headers = {
+      Authorization: `Bearer ${session.access_token}`,
+      apiKey: API_KEY!,
+      "content-type": "application/json",
+    };
+    const gql = {
+      query: `query {
+        topitemsCollection(filter: {id: {eq: "0f954489-f67e-43a2-83bc-ba35ad4f92ff"}}) {
+          edges {
+            node {
+              id
+              songs
+              genres
+              artists
+            }
+          }
+        }
+      }`
+    }
+    const opt = {
+      "method": "POST",
+      "headers": headers,
+      "body": JSON.stringify(gql)
+    }
+    fetch(endpoint, opt)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
+
   return (
     <div>
       <button onClick={oldFetch}>Old Fetch to DB</button>
@@ -78,6 +112,9 @@ const StubButton: React.FC = () => {
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
       <button onClick={dispatchValidate}>Redux validate tokens</button>
       <button onClick={utilTokens}>UTIL: Get from local storage</button>
+      <br></br>
+      <br></br>
+      <button onClick={gqlFetch}>gql fetch</button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );
