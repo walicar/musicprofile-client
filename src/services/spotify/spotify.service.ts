@@ -82,15 +82,15 @@ export async function refreshSpotifyToken(refreshToken: any) {
   const body = new URLSearchParams({
     grant_type: "refresh_token",
     refresh_token: refreshToken,
-    client_id: clientId!
+    client_id: clientId!,
   });
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: body
-  })
+    body: body,
+  });
   const data = await response.json();
   return data;
 }

@@ -1,8 +1,8 @@
-import { fireEvent, act, waitFor} from "@testing-library/react";
+import { fireEvent, act, waitFor } from "@testing-library/react";
 
 const signInUser = async (app: any) => {
   const { getByLabelText, findByRole } = app;
-  const logInButton = await findByRole("button", {name: "log in"});
+  const logInButton = await findByRole("button", { name: "log in" });
   fireEvent.click(logInButton);
   const emailInput = getByLabelText("Email:");
   const passwordInput = getByLabelText("Password:");
@@ -17,10 +17,10 @@ const signInUser = async (app: any) => {
 };
 
 const signOutUser = async (app: any) => {
-  const { findByRole } = app
-  const logOutButton = await findByRole("button", {name: "log out"});
+  const { findByRole } = app;
+  const logOutButton = await findByRole("button", { name: "log out" });
   fireEvent.click(logOutButton);
-  const home = await findByRole("heading", {name: /Home/i});
+  const home = await findByRole("heading", { name: /Home/i });
 };
 
 export { signInUser, signOutUser };

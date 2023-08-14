@@ -29,7 +29,7 @@ const SpotifyRecommender: React.FC = () => {
       console.log("what is my data", data);
       return data;
     },
-    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
+    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false },
   );
 
   useEffect(() => {

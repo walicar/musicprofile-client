@@ -70,11 +70,11 @@ const tokensSlice = createSlice({
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
         console.log("validated");
-        console.log("what is in here?", action.payload)
+        console.log("what is in here?", action.payload);
         if (!action.payload) {
           console.log("payload empty");
           return;
-        };
+        }
         /*
         const newTokenCollection = Object.keys(action.payload).reduce((result: any, key: any) => {
           result[key] = action.payload[key].access_token
@@ -106,7 +106,7 @@ export const validateTokens = createAsyncThunk(
     const { tokens }: any = getState();
     console.log(tokens);
     const result = await validate(services, tokens.token_collection);
-    console.log("Returning this result:", result)
+    console.log("Returning this result:", result);
     return result;
   },
 );

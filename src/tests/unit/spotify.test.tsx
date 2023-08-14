@@ -12,16 +12,16 @@ import * as useLocalStorageStateModule from "use-local-storage-state";
  *
  * Targets:
  * - SpotifyButton
- * 
+ *
  * Notes:
  * since the spotify files are so intertwined, automated
  *   testing via playwright will paint a better picture on
  *   the state of project.
- * 
+ *
  * So spotify services might be actually tested in playwright
- * we might want to rename this to serviceButton.test.tsx 
+ * we might want to rename this to serviceButton.test.tsx
  * later, because we can abstract all the service buttons
- * and put the setup logic in a hashmap, i.e. 
+ * and put the setup logic in a hashmap, i.e.
  * `serviceButton["spotify"]()`
  */
 
@@ -36,8 +36,8 @@ describe("testing spotify button", () => {
   });
 
   test("show 'disconnect' button where there is a spotify access-token", async () => {
-    const token = "my-fake-token"
-    const mock = jest.spyOn(useLocalStorageStateModule, 'default')
+    const token = "my-fake-token";
+    const mock = jest.spyOn(useLocalStorageStateModule, "default");
     mock.mockReturnValue([token, jest.fn() as any, jest.fn() as any]);
     render(<SpotifyButton />);
     const buttonName = "disconnect from spotify";

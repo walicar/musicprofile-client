@@ -35,15 +35,18 @@ const validate = async (services: string[], token_collection: Tokens) => {
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
   // might want to refactor this into, getToken("service");
-  let curRefreshTokens: TokenEntries = await tokenManager.getTokens(); 
+  let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
   if (token_collection != undefined) {
     for (const service of services) {
       const token: any = token_collection[service]; // gotta fix this
       if (!token) break;
       if (token_collection[service] && isExpired(JSON.parse(token))) {
-        console.log("what is the refreshtoken im tryinh to put in, ", curRefreshTokens[service]);
+        console.log(
+          "what is the refreshtoken im tryinh to put in, ",
+          curRefreshTokens[service],
+        );
         const data = await refreshHandlers[service](curRefreshTokens[service]);
-        console.log("here is the refresh thing I got", data)
+        console.log("here is the refresh thing I got", data);
         if (data.error) {
           console.log("Error received from tokens");
           break;
@@ -64,10 +67,10 @@ const validate = async (services: string[], token_collection: Tokens) => {
       }
     }
     await tokenManager.writeTokens(newRefreshTokens);
-    console.log("my refreshedTokens: ", refreshedTokens)
+    console.log("my refreshedTokens: ", refreshedTokens);
     return refreshedTokens;
   } else {
-    console.log("returning an empty object")
+    console.log("returning an empty object");
     return {};
   }
 };
