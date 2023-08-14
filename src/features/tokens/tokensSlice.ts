@@ -71,7 +71,7 @@ const tokensSlice = createSlice({
         state.status = "validated";
         console.log("validated");
         console.log("what is in here?", action.payload);
-        if (!action.payload) {
+        if (!action.payload || Object.keys(action.payload).length == 0) {
           console.log("payload empty");
           return;
         }
@@ -104,9 +104,7 @@ export const validateTokens = createAsyncThunk(
   async (services: string[], { getState }) => {
     // TODO: find out how to type this
     const { tokens }: any = getState();
-    console.log(tokens);
     const result = await validate(services, tokens.token_collection);
-    console.log("Returning this result:", result);
     return result;
   },
 );
