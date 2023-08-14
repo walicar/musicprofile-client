@@ -12,6 +12,7 @@ import {
 } from "../../features/tokens/tokensSlice";
 import { useAppSelector } from "../../app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
+import { TopItemsManager } from "../../database/TopItems/TopItemsManager";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
@@ -22,6 +23,8 @@ const StubButton: React.FC = () => {
   const state = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
+  const topItemsManager: TopItemsManager = new TopItemsManager();
+
   useEffect(() => {
     console.log("stub changed");
     console.log("state changed", state);
@@ -99,6 +102,11 @@ const StubButton: React.FC = () => {
       .then((data) => console.log(data));
   }
 
+  const topItemsManagerTest = async () => {
+    const data = await topItemsManager.getTopItems("songs genres artists")
+    console.log("from topitems maanager", data);
+  }
+
   return (
     <div>
       <button onClick={oldFetch}>Old Fetch to DB</button>
@@ -115,6 +123,7 @@ const StubButton: React.FC = () => {
       <br></br>
       <br></br>
       <button onClick={gqlFetch}>gql fetch</button>
+      <button onClick={topItemsManagerTest}>topitemsmanager test</button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );
