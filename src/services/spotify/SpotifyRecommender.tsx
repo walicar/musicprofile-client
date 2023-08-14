@@ -7,6 +7,7 @@ import {
 } from "../../features/tokens/tokensSlice";
 import { useAppSelector } from "../../app/hooks";
 import { useQuery } from "react-query";
+import Loading from "../../components/Loading";
 
 let didInit = false; // maybe we don't need cuz of react query
 
@@ -50,7 +51,7 @@ const SpotifyRecommender: React.FC = () => {
   }
 
   if (status === "loading") {
-    return <div>Loading Items...</div>;
+    return <Loading />;
   } else if (status === "success") {
     return (
       <>
