@@ -27,7 +27,7 @@ const DashboardPage: React.FC = () => {
       <div>
         <h1>Dashboard</h1>
         <h2>Welcome {session.user.email}</h2>
-        <StubButton />
+        {/* <StubButton /> */}
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
       </div>
