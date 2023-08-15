@@ -12,7 +12,7 @@ import {
 } from "../../features/tokens/tokensSlice";
 import { useAppSelector } from "../../app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
-import { TopItemsManager } from "../../database/TopItems/TopItemsManager";
+import TopItemsManager from "../../database/TopItems/TopItemsManager";
 
 const ID = process.env.REACT_APP_SUPABASE_ID;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
