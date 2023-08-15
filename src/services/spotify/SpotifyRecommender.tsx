@@ -8,6 +8,7 @@ import {
 import { useAppSelector } from "../../app/hooks";
 import { useQuery } from "react-query";
 import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 let didInit = false; // maybe we don't need cuz of react query
 
@@ -47,7 +48,7 @@ const SpotifyRecommender: React.FC = () => {
   }
 
   if (error || data?.error) {
-    return <div>Error: {data.error.message} </div>;
+    return <Error message={data.error.message} />;
   }
 
   if (status === "loading") {
@@ -64,7 +65,7 @@ const SpotifyRecommender: React.FC = () => {
       </>
     );
   } else {
-    return <div>Unknown Error</div>;
+    return <Error />;
   }
 };
 
