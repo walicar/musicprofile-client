@@ -5,6 +5,7 @@ import TopItemsManager from "./TopItemsManager";
 import { useQuery } from "react-query";
 import Loading from "../../components/Loading";
 import List from "../../components/List";
+import Error from "../../components/Error";
 
 let didInit = false;
 const TopItemsContainer: React.FC = () => {
@@ -43,9 +44,9 @@ const TopItemsContainer: React.FC = () => {
   }
 
   if (error) {
-    return <div>An error: {error}</div>
+    return <Error message={error} />
   } else {
-    return <div>Unknown Error has happened</div>
+    return <Error />
   }
 };
 
