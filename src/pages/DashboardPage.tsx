@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import StubButton from "../components/stubs/StubButton";
 import useLocalStorageState from "use-local-storage-state";
 import SpotifyRecommender from "../services/spotify/SpotifyRecommender";
+import TopItemsContainer from "../database/TopItems/TopItemsContainer";
 const ID = process.env.REACT_APP_SUPABASE_ID;
 
 const DashboardPage: React.FC = () => {
@@ -30,6 +31,7 @@ const DashboardPage: React.FC = () => {
         <StubButton />
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
+        <TopItemsContainer />
       </div>
     </PageLayout>
   );

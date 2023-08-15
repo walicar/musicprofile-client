@@ -2,7 +2,7 @@ const ID = process.env.REACT_APP_SUPABASE_ID;
 const API = process.env.REACT_APP_SUPABASE_URL;
 const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
 
-export class TopItemsManager {
+export default class TopItemsManager {
   session: any
   constructor() {
     const session = localStorage.getItem(`sb-${ID}-auth-token`);
