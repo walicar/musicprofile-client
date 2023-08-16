@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SpotifyButton from "../services/spotify/SpotifyButton";
 import LastfmButton from "../components/buttons/LastfmButton";
 import useLocalStorageState from "use-local-storage-state";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
   const [session, setSession]: any = useLocalStorageState(

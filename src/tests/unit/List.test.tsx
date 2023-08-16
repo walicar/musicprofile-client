@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import List from "../../components/List";
 
 describe("Testing List component", () => {
-
   test("when items are an array of strings, string[]", async () => {
     const myItems = ["Bob", "Charlie", "Alice"];
     render(<List items={myItems} title={"string"} />);
@@ -24,7 +23,7 @@ describe("Testing List component", () => {
       { name: "Razor", artist: "Bettie" },
     ];
     render(<List items={myItems} title={"songs"} />);
-    
+
     const item1 = await screen.findByText("Dance Now by James");
     const item2 = await screen.findByText("Kick Off by Jarvis");
     const item3 = await screen.findByText("Razor by Bettie");

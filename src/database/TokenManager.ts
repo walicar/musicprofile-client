@@ -1,6 +1,6 @@
-const ID = process.env.REACT_APP_SUPABASE_ID;
-const API = process.env.REACT_APP_SUPABASE_URL;
-const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
+const ID = import.meta.env.VITE_SUPABASE_ID;
+const API = import.meta.env.VITE_SUPABASE_URL;
+const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 
 export type TokenEntries = { [key: string]: string };
 export class TokenManager {
@@ -15,6 +15,7 @@ export class TokenManager {
   async writeTokens(tokens: TokenEntries) {
     // info should be in the form of { service_name: "token" }
     // e.x { spotify: "123456" }
+    console.log("Writing tokens");
     const apiUrl = API + "/rest/v1/tokens";
     const queryParams = `id=eq.${this.session.user.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
@@ -31,6 +32,7 @@ export class TokenManager {
       headers: headers,
     });
     const data = await response.json();
+    console.log("write OK?", data);
     return data;
   }
 
