@@ -5,11 +5,11 @@ import StubButton from "../components/stubs/StubButton";
 import useLocalStorageState from "use-local-storage-state";
 import SpotifyRecommender from "../services/spotify/SpotifyRecommender";
 import TopItemsContainer from "../database/TopItems/TopItemsContainer";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
-  const [session, setSession]: any = useLocalStorageState(
+  const [session]: any = useLocalStorageState(
     `sb-${ID}-auth-token`,
   );
 

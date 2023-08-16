@@ -28,7 +28,7 @@ const SpotifyRecommender: React.FC = () => {
       const data = await res.json();
       return data;
     },
-    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
+    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false },
   );
 
   useEffect(() => {
@@ -58,7 +58,9 @@ const SpotifyRecommender: React.FC = () => {
       <>
         <ul>
           {data.tracks.map((item: any) => (
-            <li key={item.id}>{item.name} by {item.artists[0].name}</li>
+            <li key={item.id}>
+              {item.name} by {item.artists[0].name}
+            </li>
           ))}
         </ul>
         <div>{data.tracks.length} items in total!</div>

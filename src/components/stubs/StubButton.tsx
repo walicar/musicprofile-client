@@ -14,8 +14,8 @@ import { useAppSelector } from "../../app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
 import TopItemsManager from "../../database/TopItems/TopItemsManager";
 
-const ID = process.env.REACT_APP_SUPABASE_ID;
-const API_KEY = process.env.REACT_APP_SUPABASE_PUB;
+const ID = import.meta.env.VITE_SUPABASE_ID;
+const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 
 const StubButton: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
@@ -71,8 +71,8 @@ const StubButton: React.FC = () => {
   };
 
   const gqlFetch = async () => {
-    console.log("mysession", session)
-    const endpoint = "http://localhost:54321/graphql/v1"
+    console.log("mysession", session);
+    const endpoint = "http://localhost:54321/graphql/v1";
     const headers = {
       Authorization: `Bearer ${session.access_token}`,
       apiKey: API_KEY!,
@@ -90,22 +90,22 @@ const StubButton: React.FC = () => {
             }
           }
         }
-      }`
-    }
+      }`,
+    };
     const opt = {
-      "method": "POST",
-      "headers": headers,
-      "body": JSON.stringify(gql)
-    }
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(gql),
+    };
     fetch(endpoint, opt)
       .then((res) => res.json())
       .then((data) => console.log(data));
-  }
+  };
 
   const topItemsManagerTest = async () => {
-    const data = await topItemsManager.getTopItems("songs genres artists")
+    const data = await topItemsManager.getTopItems("songs genres artists");
     console.log("from topitems maanager", data);
-  }
+  };
 
   return (
     <div>

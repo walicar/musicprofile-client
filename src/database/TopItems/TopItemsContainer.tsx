@@ -7,7 +7,6 @@ import Loading from "../../components/Loading";
 import List from "../../components/List";
 import Error from "../../components/Error";
 
-let didInit = false;
 const TopItemsContainer: React.FC = () => {
   // const supabase: SupabaseClient<any> = useSupabaseClient();
   const topItemsManager: TopItemsManager = new TopItemsManager();
@@ -17,7 +16,7 @@ const TopItemsContainer: React.FC = () => {
     async () => {
       return await topItemsManager.getTopItems("songs artists genres");
     },
-    { refetchOnMount: false }
+    { refetchOnMount: false },
   );
 
   if (status === "loading") {
@@ -29,24 +28,24 @@ const TopItemsContainer: React.FC = () => {
   }
 
   if (status === "success") {
-    const node = data.data.topitemsCollection.edges[0].node;
+    const node = data.node;
     return (
       <>
         <h2>Your Top Items!</h2>
         <h3>songs</h3>
-        <List items={node.songs} title={"songs"}/>
+        <List items={node.songs} title={"songs"} />
         <h3>artists</h3>
-        <List items={node.artists} title={"artists"}/>
+        <List items={node.artists} title={"artists"} />
         <h3>genres</h3>
-        <List items={node.genres} title={"genres"}/>
+        <List items={node.genres} title={"genres"} />
       </>
     );
   }
 
   if (error) {
-    return <Error message={error} />
+    return <Error message={error} />;
   } else {
-    return <Error />
+    return <Error />;
   }
 };
 
