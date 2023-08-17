@@ -1,5 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import { describe, test } from "vitest";
 import List from "../../components/List";
 
 describe("Testing List component", () => {

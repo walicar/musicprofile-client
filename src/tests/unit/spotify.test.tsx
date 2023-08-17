@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import SpotifyButton from "../../services/spotify/SpotifyButton";
 import * as useLocalStorageStateModule from "use-local-storage-state";
+import store from "../../app/store";
+import { describe, test, vi } from "vitest";
+import { Provider } from "react-redux";
 
 /**
  * Test items in src/services/spotify
@@ -27,7 +30,11 @@ import * as useLocalStorageStateModule from "use-local-storage-state";
 
 describe("testing spotify button", () => {
   test("show 'connect' button when there is no spotify access-token", async () => {
-    render(<SpotifyButton />);
+    render(
+      <Provider store={store}>
+        <SpotifyButton />
+      </Provider>
+    );
     const buttonName = "connect to spotify";
     const connectButton = await screen.findByRole("button", {
       name: buttonName,
@@ -37,14 +44,24 @@ describe("testing spotify button", () => {
 
   test("show 'disconnect' button where there is a spotify access-token", async () => {
     const token = "my-fake-token";
+    /*
     const mock = jest.spyOn(useLocalStorageStateModule, "default");
     mock.mockReturnValue([token, jest.fn() as any, jest.fn() as any]);
-    render(<SpotifyButton />);
+    */
+    const spy = vi.spyOn(useLocalStorageStateModule, "default");
+    spy.mockReturnValue([token, vi.fn() as any, vi.fn() as any])
+
+    render(
+      <Provider store={store}>
+        <SpotifyButton />
+      </Provider>
+    );
+
     const buttonName = "disconnect from spotify";
     const disconnectButton = await screen.findByRole("button", {
       name: buttonName,
     });
     expect(disconnectButton).toContainHTML(buttonName);
-    mock.mockRestore();
+    spy.mockRestore();
   });
 });
