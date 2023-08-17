@@ -12,16 +12,16 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 let didInit = false;
 const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [cookies, _setCookie, removeCookie] = useCookies([
     "spotify-code-verifier",
   ]);
-  const [accessToken, setAccessToken] = useLocalStorageState(
+  const [_accessToken, setAccessToken] = useLocalStorageState(
     "spotify-access-token",
   );
-  const [session, setSession]: any = useLocalStorageState(
+  const [session]: any = useLocalStorageState(
     `sb-${ID}-auth-token`,
   );
-  const [params, setParam] = useSearchParams();
+  const [params] = useSearchParams();
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];
   const tokenManager = new TokenManager();

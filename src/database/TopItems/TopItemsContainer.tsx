@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
-import { SupabaseClient } from "@supabase/supabase-js";
+import React from "react";
 import TopItemsManager from "./TopItemsManager";
 import { useQuery } from "react-query";
 import Loading from "../../components/Loading";
