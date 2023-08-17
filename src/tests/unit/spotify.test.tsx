@@ -33,7 +33,7 @@ describe("testing spotify button", () => {
     render(
       <Provider store={store}>
         <SpotifyButton />
-      </Provider>
+      </Provider>,
     );
     const buttonName = "connect to spotify";
     const connectButton = await screen.findByRole("button", {
@@ -43,13 +43,17 @@ describe("testing spotify button", () => {
   });
 
   test("show 'disconnect' button where there is a spotify access-token", async () => {
-   const spotifyToken = {access_token: "mock", expires_in: 3600, created_at: "some date"}
-   store.dispatch(write({spotify: spotifyToken}))
+    const spotifyToken = {
+      access_token: "mock",
+      expires_in: 3600,
+      created_at: "some date",
+    };
+    store.dispatch(write({ spotify: spotifyToken }));
 
     render(
       <Provider store={store}>
         <SpotifyButton />
-      </Provider>
+      </Provider>,
     );
 
     const buttonName = "disconnect from spotify";

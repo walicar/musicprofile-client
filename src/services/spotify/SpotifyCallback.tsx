@@ -18,9 +18,7 @@ const SpotifyCallback: React.FC = () => {
   const [_accessToken, setAccessToken] = useLocalStorageState(
     "spotify-access-token",
   );
-  const [session]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
-  );
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [params] = useSearchParams();
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];

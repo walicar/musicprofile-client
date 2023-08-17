@@ -9,9 +9,7 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
-  const [session]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
-  );
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
 
   useEffect(() => {
     if (!session) {
