@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import SpotifyButton from "../../services/spotify/SpotifyButton";
-import * as useLocalStorageStateModule from "use-local-storage-state";
 import store from "../../app/store";
-import { describe, test, vi } from "vitest";
+import { write, erase } from "../../features/tokens/tokensSlice";
+import { describe, test } from "vitest";
 import { Provider } from "react-redux";
 
 /**
@@ -43,13 +43,8 @@ describe("testing spotify button", () => {
   });
 
   test("show 'disconnect' button where there is a spotify access-token", async () => {
-    const token = "my-fake-token";
-    /*
-    const mock = jest.spyOn(useLocalStorageStateModule, "default");
-    mock.mockReturnValue([token, jest.fn() as any, jest.fn() as any]);
-    */
-    const spy = vi.spyOn(useLocalStorageStateModule, "default");
-    spy.mockReturnValue([token, vi.fn() as any, vi.fn() as any])
+   const spotifyToken = {access_token: "mock", expires_in: 3600, created_at: "some date"}
+   store.dispatch(write({spotify: spotifyToken}))
 
     render(
       <Provider store={store}>
@@ -62,6 +57,6 @@ describe("testing spotify button", () => {
       name: buttonName,
     });
     expect(disconnectButton).toContainHTML(buttonName);
-    spy.mockRestore();
+    store.dispatch(erase(["spotify"]));
   });
 });
