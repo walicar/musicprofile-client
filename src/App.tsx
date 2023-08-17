@@ -11,19 +11,6 @@ const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 const queryClient = new QueryClient();
 
 function App() {
-  /*
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session: any) => {
-      console.log(event);
-      console.log(session ? "valid session" : "invalid session");
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [setSession, session]);
-  */
 
   return (
     <SupabaseClientContext.Provider value={supabase}>
