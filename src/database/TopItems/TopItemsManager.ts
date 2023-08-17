@@ -42,7 +42,7 @@ export default class TopItemsManager {
     const response = await fetch(URL, opt);
     const { data } = await response.json();
     if (data.topitemsCollection.edges.length === 0) {
-      return {error: "No Records"}
+      return { error: "No Records" };
     } else {
       return data.topitemsCollection.edges[0];
     }

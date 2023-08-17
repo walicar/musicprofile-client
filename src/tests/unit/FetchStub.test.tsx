@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import {vi, describe, beforeEach} from "vitest";
+import { vi, describe, beforeEach } from "vitest";
 import StubComponent from "../../components/stubs/StubComponent";
 
 /**

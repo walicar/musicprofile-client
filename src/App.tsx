@@ -11,7 +11,6 @@ const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 const queryClient = new QueryClient();
 
 function App() {
-
   return (
     <SupabaseClientContext.Provider value={supabase}>
       <QueryClientProvider client={queryClient}>

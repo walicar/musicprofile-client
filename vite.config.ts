@@ -7,9 +7,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/tests/setup.ts'],
-    exclude: ['./src/tests/integration', './src/tests/unit'],
+    environment: "jsdom",
+    setupFiles: ["./src/tests/setup.ts"],
+    exclude: ["./src/tests/integration", "./src/tests/unit"],
   },
   server: {
     port: 3000,

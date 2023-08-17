@@ -7,9 +7,7 @@ import useLocalStorageState from "use-local-storage-state";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
-  const [session]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
-  );
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const navigate = useNavigate();
 
   useEffect(() => {
