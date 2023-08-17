@@ -3,7 +3,7 @@ import store from "../../app/store";
 import { Provider } from "react-redux";
 import { render, screen, act } from "@testing-library/react";
 import { signInUser, signOutUser } from "./testUtil";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 /**
  * Targets:

@@ -63,7 +63,7 @@ const tokensSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(validateTokens.pending, (state, action) => {
+      .addCase(validateTokens.pending, (state, _action) => {
         state.status = "validating";
         console.log("validating");
       })
@@ -94,7 +94,7 @@ const tokensSlice = createSlice({
       .addCase(validateTokens.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-        console.log("failure");
+        console.log("failure, ", state.error);
       });
   },
 });

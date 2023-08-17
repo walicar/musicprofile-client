@@ -19,9 +19,11 @@ const List: React.FC<Prop> = ({ items, title }) => {
     // is there a better way to do this
     return (
       <ol>
-        {
-        items.map((item: any, index: number) => (<li key={`${title}_${index}`}>{item.name} by {item.artist}</li>))
-        }
+        {items.map((item: any, index: number) => (
+          <li key={`${title}_${index}`}>
+            {item.name} by {item.artist}
+          </li>
+        ))}
       </ol>
     );
   }

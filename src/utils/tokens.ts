@@ -1,4 +1,4 @@
-import { Token, Tokens, TokensState } from "../features/tokens/tokensSlice";
+import { Token, Tokens } from "../features/tokens/tokensSlice";
 import { SUPPORTED } from "../services/supportedServices";
 import { TokenManager, TokenEntries } from "../database/TokenManager";
 import { refreshHandlers } from "../services/refreshHandlers";

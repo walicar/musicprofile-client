@@ -2,10 +2,10 @@ import React from "react";
 import NavBarPages from "./NavBarPages";
 import NavBarButtons from "./NavBarButtons";
 import useLocalStorageState from "use-local-storage-state";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const NavBar: React.FC = () => {
-  const [session, setSession] = useLocalStorageState(`sb-${ID}-auth-token`);
+  const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
   return (
     <div>
       <NavBarPages session={session} />
