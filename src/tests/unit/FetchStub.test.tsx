@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import {vi, describe, beforeEach} from "vitest";
 import StubComponent from "../../components/stubs/StubComponent";
 
 /**
@@ -17,11 +18,11 @@ describe("MyComponent", () => {
   );
 
   beforeEach(() => {
-    jest.spyOn(global, "fetch").mockResolvedValue(mockResponse);
+    vi.spyOn(global, "fetch").mockResolvedValue(mockResponse);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   test("renders data from API", async () => {

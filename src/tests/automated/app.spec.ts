@@ -25,21 +25,6 @@ test.describe("connect to a third party service", () => {
     ).toBeVisible();
   });
 
-  /*
-    test("connect to spotify, get access token", async ({page}) => {
-        const spotifyButtonName = 'connect to spotify'
-        await page.goto('http://localhost:3000');
-        signIn(page);
-        await page.getByRole('link', {name: 'Settings'}).click();
-        // await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
-        await page.getByRole('button', {name: spotifyButtonName}).click();
-        await page.waitForLoadState('networkidle');
-        const content = await page.content();
-        console.log(content);
-        await expect(page.getByText('Agree')).toHaveText('Agree');
-    })
-    */
-
   // BLOCKED
   test("check spotify recommend component", () => {
     // develop spotify recommend
