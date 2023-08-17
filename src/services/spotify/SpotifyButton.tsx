@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useCookies } from "react-cookie";
 import { generateRandomString, getAuthURL } from "./spotify.service";
 import store from "../../app/store";
@@ -8,7 +8,7 @@ import { selectTokenCollection } from "../../features/tokens/tokensSlice";
 import { useAppSelector } from "../../app/hooks";
 
 const SpotifyButton: React.FC = () => {
-  const [cookies, setCookie] = useCookies(["spotify-code-verifier"]);
+  const [_cookies, setCookie] = useCookies(["spotify-code-verifier"]);
   const [accessToken] = useLocalStorageState("spotify-access-token");
   useAppSelector(selectTokenCollection);
 

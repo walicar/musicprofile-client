@@ -10,17 +10,17 @@ var testsSequential = [
 var testsParallel = ["src/tests/integration/stub.test.tsx"];
 
 const sequentialRun = () => {
-  const command = `npm test ${testsSequential.join(" ")} --runInBand`;
+  const command = `npx vitest ${testsSequential.join(" ")} --runInBand`;
   childProcess.execSync(command, { stdio: "inherit" });
 };
 
 const parallelRun = () => {
-  const command = `npm test ${testsParallel.join(" ")}`;
+  const command = `npx vitest ${testsParallel.join(" ")}`;
   childProcess.execSync(command, { stdio: "inherit" });
 };
 
 const allRun = () => {
-  const command = `npm test --watchAll=false ${testsSequential.join(
+  const command = `npx vitest --watchAll=false ${testsSequential.join(
     " ",
   )} ${testsParallel.join()}`;
   childProcess.execSync(command, {

@@ -7,21 +7,19 @@ import useLocalStorageState from "use-local-storage-state";
 import { TokenManager } from "../../database/TokenManager";
 import store from "../../app/store";
 import { write } from "../../features/tokens/tokensSlice";
-const ID = process.env.REACT_APP_SUPABASE_ID;
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 let didInit = false;
 const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [cookies, _setCookie, removeCookie] = useCookies([
     "spotify-code-verifier",
   ]);
-  const [accessToken, setAccessToken] = useLocalStorageState(
+  const [_accessToken, setAccessToken] = useLocalStorageState(
     "spotify-access-token",
   );
-  const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`,
-  );
-  const [params, setParam] = useSearchParams();
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const [params] = useSearchParams();
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];
   const tokenManager = new TokenManager();
@@ -30,7 +28,7 @@ const SpotifyCallback: React.FC = () => {
     const getToken = async () => {
       try {
         const data = await getSpotifyToken(code!, codeVerifier);
-        tokenManager.writeTokens({ spotify: data.refresh_token });
+        await tokenManager.writeTokens({ spotify: data.refresh_token });
         // dispatach save token to redux instead of access token
         const token = {
           access_token: data.access_token,
