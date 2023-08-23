@@ -68,10 +68,11 @@ const validate = async (services: string[], token_collection: Tokens) => {
   }
 };
 
-const tokenToService = (tokenCollection: Tokens): ServiceTokens => {
+const tokenToService = (tokenCollection: any): ServiceTokens => {
   let serviceTokens = {};
   for (const service in tokenCollection) {
-    serviceTokens = {...serviceTokens, [service]: tokenCollection[service].access_token};
+    const token = JSON.parse(tokenCollection[service]);
+    serviceTokens = {...serviceTokens, [service]: token.access_token};
   }
   return serviceTokens;
 }
