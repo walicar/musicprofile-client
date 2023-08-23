@@ -68,4 +68,12 @@ const validate = async (services: string[], token_collection: Tokens) => {
   }
 };
 
-export { validate, getFromLocalStorage };
+const tokenToService = (tokenCollection: Tokens): ServiceTokens => {
+  let serviceTokens = {};
+  for (const service in tokenCollection) {
+    serviceTokens = {...serviceTokens, [service]: tokenCollection[service].access_token};
+  }
+  return serviceTokens;
+}
+
+export { validate, getFromLocalStorage, tokenToService };
