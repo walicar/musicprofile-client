@@ -1,4 +1,4 @@
 type ServiceTokens = {
     spotify?: string,
-    lastfm?: string,
+    lastfm?: string
 }
