@@ -3,7 +3,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "../../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { TokenManager } from "../../database/TokenManager";
-import { getFromLocalStorage } from "../../utils/tokens";
+import { getFromLocalStorage, tokenToService } from "../../utils/tokens";
 import store from "../../app/store";
 import {
   erase,
@@ -13,6 +13,7 @@ import {
 import { useAppSelector } from "../../app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
 import TopItemsManager from "../../database/TopItems/TopItemsManager";
+import ServerWrapper from "../../server/serverWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
@@ -20,15 +21,26 @@ const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 const StubButton: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [stub]: any = useLocalStorageState("spotify-access-token");
-  const state = useAppSelector(selectTokenCollection);
+  const tokenCollection = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const tokenManager: TokenManager = new TokenManager();
   const topItemsManager: TopItemsManager = new TopItemsManager();
+  const server: ServerWrapper = new ServerWrapper(
+    session.access_token,
+    session.user.id
+  );
 
   useEffect(() => {
-    console.log("stub changed");
-    console.log("state changed", state);
-  }, [stub, state]);
+    console.log("state changed", tokenCollection);
+  }, [stub, tokenCollection]);
+  
+  const postUpdate = async () => {
+    // dispatch(validate())
+    const serviceTokens = tokenToService(tokenCollection);
+    const data = await server.postUpdate(serviceTokens);
+    console.log(data);
+  }
+
   const oldFetch = async () => {
     const { data } = await supabase
       .from("tokens")
