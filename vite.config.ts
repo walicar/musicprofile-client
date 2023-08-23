@@ -9,7 +9,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/tests/setup.ts"],
-    exclude: ["./src/tests/integration", "./src/tests/unit"],
+    exclude: ["./src/tests/integration"],
   },
   server: {
     port: 3000,
