@@ -56,7 +56,7 @@ const tokensSlice = createSlice({
         state.token_collection[service] = tokens[service];
         localStorage.setItem(
           `${service}-access-token`,
-          JSON.stringify(tokens[service]),
+          JSON.stringify(tokens[service])
         );
         console.log(`write ${service} into tokens slice`);
       }
@@ -70,9 +70,8 @@ const tokensSlice = createSlice({
       })
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
-        console.log("validated");
-        console.log("what is in here?", action.payload);
-        if (!action.payload || Object.keys(action.payload).length == 0) {
+        console.log("validated", action.payload);
+        if (!action.payload || isEmpty(action.payload)) {
           console.log("payload empty");
           return;
         }
@@ -80,15 +79,12 @@ const tokensSlice = createSlice({
         for (const service in state.token_collection) {
           localStorage.setItem(
             `${service}-access-token`,
-            JSON.stringify(state.token_collection[service]),
+            JSON.stringify(state.token_collection[service])
           );
           console.log(`vaidation changed ${service}`);
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {
-        console.log("tokenSlice, FAILURE occured.");
-        console.log("payload", action.payload);
-        console.log("action", action);
         state.status = "failed";
         state.error = action.error.message;
         console.log("failure, ", state.error);
@@ -98,25 +94,19 @@ const tokensSlice = createSlice({
 
 export const validateTokens = createAsyncThunk(
   "tokens/validateTokens",
-  async (
-    input: {
-      services: string[];
-      opt: any;
-    },
-    { getState },
-  ) => {
+  async (payload: ValidatePayload, { getState }) => {
     // TODO: find out how to type this
     const { tokens }: any = getState();
     if (isEmpty(tokens.tokenCollection)) {
       return {};
     }
     const result = await validate(
-      input.services,
+      payload.services,
       tokens.token_collection,
-      input.opt,
+      payload.session
     );
     return result;
-  },
+  }
 );
 
 export const selectTokenCollection = (state: any) =>
