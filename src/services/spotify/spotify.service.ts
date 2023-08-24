@@ -1,5 +1,5 @@
 const clientId = import.meta.env.VITE_SPOTIFY_ID;
-const redirectUri = import.meta.env.VITE_WEBAPP_URL + "/callback/spotify";
+const redirectUri = import.meta.env.VITE_CLIENT_URL + "/callback/spotify";
 
 export function generateRandomString(length: number) {
   // used for code_verifier and state

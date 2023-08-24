@@ -1,4 +1,4 @@
-import { refreshSpotifyToken } from "./spotify/spotify.service";
+import { refreshSpotifyToken } from "@spotify/spotify.service";
 
 export const refreshHandlers: any = {
   spotify: async (refreshToken: any) => {

@@ -1,4 +1,5 @@
 import React from "react";
+import statusIcons from "@utils/statusIcons";
 
 type Prop = {
   // items: string[] | { [key: string]: any }[]
@@ -19,9 +20,10 @@ const List: React.FC<Prop> = ({ items, title }) => {
     // is there a better way to do this
     return (
       <ol>
-        {items.map((item: any, index: number) => (
+        {items.map((item: TopItemEntry, index: number) => (
           <li key={`${title}_${index}`}>
-            {item.name} by {item.artist}
+            {item.name} {item.artist ? `by ${item.artist} ` : ""}===
+            {item.status ? " " + statusIcons[item.status] : ""}
           </li>
         ))}
       </ol>

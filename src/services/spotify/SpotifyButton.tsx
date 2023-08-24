@@ -1,11 +1,13 @@
 import React from "react";
 import { useCookies } from "react-cookie";
 import { generateRandomString, getAuthURL } from "./spotify.service";
-import store from "../../app/store";
-import { erase } from "../../features/tokens/tokensSlice";
 import useLocalStorageState from "use-local-storage-state";
-import { selectTokenCollection } from "../../features/tokens/tokensSlice";
-import { useAppSelector } from "../../app/hooks";
+import {
+  store,
+  selectTokenCollection,
+  useAppSelector,
+  erase,
+} from "@redux/tokens";
 
 const SpotifyButton: React.FC = () => {
   const [_cookies, setCookie] = useCookies(["spotify-code-verifier"]);

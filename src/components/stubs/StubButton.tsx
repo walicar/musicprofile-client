@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { useSupabaseClient } from "@contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { TokenManager } from "../../database/TokenManager";
-import { getFromLocalStorage } from "../../utils/tokens";
-import store from "../../app/store";
-import {
-  erase,
-  validateTokens,
-  selectTokenCollection,
-} from "../../features/tokens/tokensSlice";
-import { useAppSelector } from "../../app/hooks";
-import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
-import TopItemsManager from "../../database/TopItems/TopItemsManager";
+import { TokenManager } from "@database/TokenManager";
+import { getFromLocalStorage, tokenToService } from "@utils/tokens";
+import store from "@redux/store";
+import { erase, selectTokenCollection } from "@tokens/tokensSlice";
+import { useAppSelector } from "@redux/hooks";
+import { refreshSpotifyToken } from "@spotify/spotify.service";
+import ServerWrapper from "@server/serverWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
@@ -20,15 +16,30 @@ const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 const StubButton: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [stub]: any = useLocalStorageState("spotify-access-token");
-  const state = useAppSelector(selectTokenCollection);
+  const tokenCollection = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
-  const tokenManager: TokenManager = new TokenManager();
-  const topItemsManager: TopItemsManager = new TopItemsManager();
+  const tokenManager: TokenManager = new TokenManager(
+    session.access_token,
+    session.user.id
+  );
+  const server: ServerWrapper = new ServerWrapper(
+    session.access_token,
+    session.user.id
+  );
 
   useEffect(() => {
-    console.log("stub changed");
-    console.log("state changed", state);
-  }, [stub, state]);
+    console.log("state changed", tokenCollection);
+  }, [stub, tokenCollection]);
+
+  const postUpdate = async () => {
+    // dispatch(validate())
+    console.log(tokenCollection);
+    const serviceTokens = tokenToService(tokenCollection);
+    console.log("Service", serviceTokens);
+    const data = await server.postUpdate(serviceTokens);
+    console.log(data);
+  };
+
   const oldFetch = async () => {
     const { data } = await supabase
       .from("tokens")
@@ -59,10 +70,6 @@ const StubButton: React.FC = () => {
   const dispatchRemove = () => {
     store.dispatch(erase(["spotify"]));
     console.log("did I erase the state");
-  };
-
-  const dispatchValidate = () => {
-    store.dispatch(validateTokens(["spotify"]));
   };
 
   const utilTokens = () => {
@@ -102,11 +109,6 @@ const StubButton: React.FC = () => {
       .then((data) => console.log(data));
   };
 
-  const topItemsManagerTest = async () => {
-    const data = await topItemsManager.getTopItems("songs genres artists");
-    console.log("from topitems maanager", data);
-  };
-
   return (
     <div>
       <button onClick={oldFetch}>Old Fetch to DB</button>
@@ -118,12 +120,15 @@ const StubButton: React.FC = () => {
       <br></br>
       <br></br>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
-      <button onClick={dispatchValidate}>Redux validate tokens</button>
       <button onClick={utilTokens}>UTIL: Get from local storage</button>
       <br></br>
       <br></br>
       <button onClick={gqlFetch}>gql fetch</button>
-      <button onClick={topItemsManagerTest}>topitemsmanager test</button>
+      <br></br>
+      <br></br>
+      <button onClick={postUpdate}>
+        This will simulate talking to backend
+      </button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );
