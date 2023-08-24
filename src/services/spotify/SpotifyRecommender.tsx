@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import store from "@redux/store";
-import { selectTokenCollection, validateTokens } from "@tokens/tokensSlice";
-import { useAppSelector } from "@redux/hooks";
+import {
+  selectTokenCollection,
+  validateTokens,
+  useAppSelector,
+} from "@redux/tokens";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
@@ -40,41 +43,31 @@ const SpotifyRecommender: React.FC = () => {
   );
 
   useEffect(() => {
+    const validatePayload = {
+      services: ["spotify"],
+      opt: {
+        accessToken: session.access_token,
+        id: session.user.id,
+      },
+    };
+
     if (!initalized && tokenStatus === "idle") {
-      console.log("token is idle, i'm going to validate");
-      store.dispatch(
-        validateTokens({
-          services: ["spotify"],
-          opt: {
-            accessToken: session.access_token,
-            id: session.user.id,
-          },
-        })
-      );
+      store.dispatch(validateTokens(validatePayload));
       initalized = true;
     }
 
     if (
       tokenStatus === "validated" &&
-      errorMessage == "The access token expired"
+      errorMessage === "The access token expired"
     ) {
-      console.log("error check called: ", errorMessage);
       setErrorMessage("");
-      store.dispatch(
-        validateTokens({
-          services: ["spotify"],
-          opt: {
-            accessToken: session.access_token,
-            id: session.user.id,
-          },
-        })
-      );
+      store.dispatch(validateTokens(validatePayload));
     }
 
     if (tokenStatus === "validated") {
       console.log("SpotifyRecommender: validated");
     }
-  }, [initalized, tokenStatus, errorMessage]);
+  }, [tokenStatus, errorMessage]);
 
   if (!token) {
     return <div>Disconnected from Spotify</div>;

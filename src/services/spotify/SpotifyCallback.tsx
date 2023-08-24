@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useSearchParams } from "react-router-dom";
 import { getSpotifyToken } from "./spotify.service";
-import { selectTokenCollection } from "../../redux/features/tokens/tokensSlice";
-import PageLoader from "../../components/PageLoader";
+import { selectTokenCollection } from "@tokens/tokensSlice";
+import PageLoader from "@components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
-import { TokenManager } from "../../wrappers/database/TokenManager";
-import store from "../../redux/app/store";
-import { write } from "../../redux/features/tokens/tokensSlice";
-import { useAppSelector } from "../../redux/app/hooks";
+import { TokenManager } from "@database/TokenManager";
+import {store, write, useAppSelector} from "@redux/tokens"
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -18,7 +16,7 @@ const SpotifyCallback: React.FC = () => {
     "spotify-code-verifier",
   ]);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const tokenCollection = useAppSelector(selectTokenCollection);
+  useAppSelector(selectTokenCollection);
   const [params] = useSearchParams();
   const code = params.get("code");
   const codeVerifier = cookies["spotify-code-verifier"];
@@ -47,7 +45,7 @@ const SpotifyCallback: React.FC = () => {
       initalized = true;
       getToken();
     }
-  }, [initalized, code, codeVerifier, removeCookie, tokenCollection]);
+  }, [code, codeVerifier]);
   return <PageLoader message={"Connecting to Spotify..."} />;
 };
 export default SpotifyCallback;
