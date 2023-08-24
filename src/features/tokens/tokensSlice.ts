@@ -75,13 +75,6 @@ const tokensSlice = createSlice({
           console.log("payload empty");
           return;
         }
-        /*
-        const newTokenCollection = Object.keys(action.payload).reduce((result: any, key: any) => {
-          result[key] = action.payload[key].access_token
-          return result
-        }, {});
-        console.log("newTokenCollection", newTokenCollection)
-        */
         state.token_collection = action.payload;
         for (const service in state.token_collection) {
           localStorage.setItem(
@@ -92,6 +85,9 @@ const tokensSlice = createSlice({
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {
+        console.log("tokenSlice, FAILURE occured.")
+        console.log("payload", action.payload);
+        console.log("action", action)
         state.status = "failed";
         state.error = action.error.message;
         console.log("failure, ", state.error);
