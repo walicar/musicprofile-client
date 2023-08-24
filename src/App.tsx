@@ -1,7 +1,7 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createClient } from "@supabase/supabase-js";
-import SupabaseClientContext from "./contexts/SupabaseContext";
+import SupabaseClientContext from "@contexts/SupabaseContext";
 import AppRouter from "./AppRouter";
 
 const PROJECT_URL = import.meta.env.VITE_SUPABASE_URL;

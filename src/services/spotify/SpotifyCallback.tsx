@@ -5,7 +5,7 @@ import { getSpotifyToken } from "./spotify.service";
 import { selectTokenCollection } from "../../redux/features/tokens/tokensSlice";
 import PageLoader from "../../components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
-import { TokenManager } from "../../database/TokenManager";
+import { TokenManager } from "../../wrappers/database/TokenManager";
 import store from "../../redux/app/store";
 import { write } from "../../redux/features/tokens/tokensSlice";
 import { useAppSelector } from "../../redux/app/hooks";

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import store from "../../redux/app/store";
-import {
-  selectTokenCollection,
-  validateTokens,
-} from "../../redux/features/tokens/tokensSlice";
-import { useAppSelector } from "../../redux/app/hooks";
+import store from "@redux/store";
+import { selectTokenCollection, validateTokens } from "@tokens/tokensSlice";
+import { useAppSelector } from "@redux/hooks";
 import { useQuery } from "react-query";
-import Loading from "../../components/Loading";
-import Error from "../../components/Error";
-import { isEmpty } from "../../utils/util";
+import Loading from "@components/Loading";
+import Error from "@components/Error";
+import { isEmpty } from "@utils/util";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 let initalized = false;
@@ -39,7 +36,7 @@ const SpotifyRecommender: React.FC = () => {
     {
       enabled: !isEmpty(tokenCollection) && tokenStatus === "idle",
       refetchOnMount: false,
-    },
+    }
   );
 
   useEffect(() => {
@@ -52,7 +49,7 @@ const SpotifyRecommender: React.FC = () => {
             accessToken: session.access_token,
             id: session.user.id,
           },
-        }),
+        })
       );
       initalized = true;
     }
@@ -70,7 +67,7 @@ const SpotifyRecommender: React.FC = () => {
             accessToken: session.access_token,
             id: session.user.id,
           },
-        }),
+        })
       );
     }
 

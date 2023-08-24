@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import PageLayout from "../components/PageLayout";
+import PageLayout from "../PageLayout";
 import { useNavigate } from "react-router-dom";
-import StubButton from "../components/stubs/StubButton";
+import StubButton from "../stubs/StubButton";
 import useLocalStorageState from "use-local-storage-state";
-import SpotifyRecommender from "../services/spotify/SpotifyRecommender";
-import TopItemsContainer from "../database/TopItems/TopItemsContainer";
+import SpotifyRecommender from "@spotify/SpotifyRecommender";
+import TopItemsContainer from "@database/TopItemsContainer";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const DashboardPage: React.FC = () => {
