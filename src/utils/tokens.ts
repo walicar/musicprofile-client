@@ -33,10 +33,10 @@ const isExpired = (token: Token) => {
 const validate = async (
   services: string[],
   token_collection: Tokens,
-  opt: any,
+  session: any
 ) => {
-  const accessToken = opt.accessToken;
-  const id = opt.id;
+  const accessToken = session.accessToken;
+  const id = session.id;
   const tokenManager = new TokenManager(accessToken, id);
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
