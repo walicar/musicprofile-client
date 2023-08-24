@@ -30,8 +30,10 @@ const isExpired = (token: Token) => {
 // - get a refreshed token
 // - store the refresh_token in DB
 // - update access_token in Redux
-const validate = async (services: string[], token_collection: Tokens) => {
-  const tokenManager = new TokenManager();
+const validate = async (services: string[], token_collection: Tokens, opt: any) => {
+  const accessToken = opt.accessToken;
+  const id = opt.id;
+  const tokenManager = new TokenManager(accessToken, id);
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
   // might want to refactor this into, getToken("service");
@@ -39,12 +41,10 @@ const validate = async (services: string[], token_collection: Tokens) => {
   if (token_collection != undefined) {
     for (const service of services) {
       const token: any = token_collection[service]; // gotta fix this
-      console.log("might be of interest when tokenSlice is in error state: ", token);
       if (!token) break;
       if (token_collection[service] && isExpired(JSON.parse(token))) {
         const data = await refreshHandlers[service](curRefreshTokens[service]);
         if (data.error) {
-          console.log("Error received from tokens");
           break;
         }
         const newRefreshTokensCopy = {
@@ -59,7 +59,6 @@ const validate = async (services: string[], token_collection: Tokens) => {
         };
         const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
         refreshedTokens = refreshedTokensCopy;
-        console.log("did some copies");
       }
     }
     await tokenManager.writeTokens(newRefreshTokens);
