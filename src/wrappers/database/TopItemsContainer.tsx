@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TopItemsWrapper from "./TopItemsWrapper";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import List from "@components/List";
 import Error from "@components/Error";
 import useLocalStorageState from "use-local-storage-state";
-const ID = import.meta.env.VITE_SUPABASE_ID
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 type Prop = {
-    type: string
-}
+  type: string;
+};
+
+let initialized = false;
 const TopItemsContainer: React.FC<Prop> = ({ type }) => {
-  // const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const db = new TopItemsWrapper(session.access_token, session.user.id);
-  // need to useEffect to subscribe to updates, check devlog
   const { status, error, data }: any = useQuery(
     `${type}_topitems`,
     async () => {
       return await db.getTopItems(type, ["songs", "artists", "genres"]);
     },
-    { refetchOnMount: false },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
   );
+
+  useEffect(() => {
+    const handleUpdate = async () => {
+      console.log("Handlign Update");
+      const lastUpdated = await db.getLastUpdated(type);
+      const updateAt = new Date(lastUpdated);
+      updateAt.setDate(updateAt.getDate() + 1);
+      if (updateAt < new Date()) {
+        console.log("send update here");
+      }
+    };
+    if (!initialized) {
+      handleUpdate();
+      initialized = true;
+    }
+  }, []);
 
   if (status === "loading") {
     return (
@@ -32,7 +48,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   }
 
   if (status === "success") {
-    const {songs, artists, genres } = data;
+    const { songs, artists, genres } = data;
     return (
       <>
         <h2>Your {type} Top Items!</h2>
