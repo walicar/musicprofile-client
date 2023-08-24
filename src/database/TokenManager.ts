@@ -1,15 +1,13 @@
-const ID = import.meta.env.VITE_SUPABASE_ID;
 const API = import.meta.env.VITE_SUPABASE_URL;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 
 export type TokenEntries = { [key: string]: string };
 export class TokenManager {
-  session: any;
-  constructor() {
-    const session = localStorage.getItem(`sb-${ID}-auth-token`);
-    if (!session)
-      throw Error("Trying create token manager without beign signed in");
-    this.session = JSON.parse(session);
+  accessToken: string;
+  id: string;
+  constructor(_accessToken: string, _id: string) {
+    this.accessToken = _accessToken;
+    this.id = _id;
   }
 
   async writeTokens(tokens: TokenEntries) {
@@ -17,10 +15,10 @@ export class TokenManager {
     // e.x { spotify: "123456" }
     console.log("Writing tokens");
     const apiUrl = API + "/rest/v1/tokens";
-    const queryParams = `id=eq.${this.session.user.id}&select=*`;
+    const queryParams = `id=eq.${this.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
     const headers = {
-      Authorization: `Bearer ${this.session.access_token}`,
+      Authorization: `Bearer ${this.accessToken}`,
       "Content-Type": "application/json",
       apiKey: API_KEY!,
       "content-profile": "public",
@@ -38,10 +36,10 @@ export class TokenManager {
 
   async getTokens() {
     const apiUrl = API + "/rest/v1/tokens";
-    const queryParams = `id=eq.${this.session.user.id}&select=*`;
+    const queryParams = `id=eq.${this.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
     const headers = {
-      Authorization: `Bearer ${this.session.access_token}`,
+      Authorization: `Bearer ${this.accessToken}`,
       apiKey: API_KEY!,
       "content-type": "application/json",
     };

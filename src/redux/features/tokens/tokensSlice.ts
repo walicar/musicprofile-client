@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getFromLocalStorage, validate } from "../../../utils/tokens";
+import { isEmpty } from "../../../utils/util";
 /**
  * TokenSlice is the only place where you can write to localStorage,
  * getting from localStorage is fine elsewhere.
@@ -97,10 +98,16 @@ const tokensSlice = createSlice({
 
 export const validateTokens = createAsyncThunk(
   "tokens/validateTokens",
-  async (services: string[], { getState }) => {
+  async (input: {
+    services: string[]
+    opt: any
+  }, { getState }) => {
     // TODO: find out how to type this
     const { tokens }: any = getState();
-    const result = await validate(services, tokens.token_collection);
+    if (isEmpty(tokens.tokenCollection))  {
+      return {}
+    };
+    const result = await validate(input.services, tokens.token_collection, input.opt);
     return result;
   },
 );
