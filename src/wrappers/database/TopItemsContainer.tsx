@@ -1,18 +1,24 @@
 import React from "react";
-import TopItemsManager from "./TopItemsManager";
+import TopItemsWrapper from "./TopItemsWrapper";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import List from "@components/List";
 import Error from "@components/Error";
+import useLocalStorageState from "use-local-storage-state";
+const ID = import.meta.env.VITE_SUPABASE_ID
 
-const TopItemsContainer: React.FC = () => {
+type Prop = {
+    type: string
+}
+const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   // const supabase: SupabaseClient<any> = useSupabaseClient();
-  const topItemsManager: TopItemsManager = new TopItemsManager();
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const db = new TopItemsWrapper(session.access_token, session.user.id);
   // need to useEffect to subscribe to updates, check devlog
   const { status, error, data }: any = useQuery(
-    "topItems",
+    `${type}_topitems`,
     async () => {
-      return await topItemsManager.getTopItems("songs artists genres");
+      return await db.getTopItems(type, ["songs", "artists", "genres"]);
     },
     { refetchOnMount: false },
   );
@@ -26,16 +32,16 @@ const TopItemsContainer: React.FC = () => {
   }
 
   if (status === "success") {
-    const node = data.node;
+    const {songs, artists, genres } = data;
     return (
       <>
-        <h2>Your Top Items!</h2>
+        <h2>Your {type} Top Items!</h2>
         <h3>songs</h3>
-        <List items={node.songs} title={"songs"} />
+        <List items={songs} title={"songs"} />
         <h3>artists</h3>
-        <List items={node.artists} title={"artists"} />
+        <List items={artists} title={"artists"} />
         <h3>genres</h3>
-        <List items={node.genres} title={"genres"} />
+        <List items={genres} title={"genres"} />
       </>
     );
   }
