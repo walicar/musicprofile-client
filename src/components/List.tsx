@@ -21,7 +21,7 @@ const List: React.FC<Prop> = ({ items, title }) => {
       <ol>
         {items.map((item: any, index: number) => (
           <li key={`${title}_${index}`}>
-            {item.name} by {item.artist}
+            {item.name} {item.artist ? `by ${item.artist}` : ""}
           </li>
         ))}
       </ol>

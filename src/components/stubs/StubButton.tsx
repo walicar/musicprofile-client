@@ -8,7 +8,6 @@ import store from "@redux/store";
 import { erase, selectTokenCollection } from "@tokens/tokensSlice";
 import { useAppSelector } from "@redux/hooks";
 import { refreshSpotifyToken } from "@spotify/spotify.service";
-import TopItemsManager from "@database/TopItemsManager";
 import ServerWrapper from "@server/serverWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
@@ -23,7 +22,6 @@ const StubButton: React.FC = () => {
     session.access_token,
     session.user.id
   );
-  const topItemsManager: TopItemsManager = new TopItemsManager();
   const server: ServerWrapper = new ServerWrapper(
     session.access_token,
     session.user.id
@@ -111,11 +109,6 @@ const StubButton: React.FC = () => {
       .then((data) => console.log(data));
   };
 
-  const topItemsManagerTest = async () => {
-    const data = await topItemsManager.getTopItems("songs genres artists");
-    console.log("from topitems maanager", data);
-  };
-
   return (
     <div>
       <button onClick={oldFetch}>Old Fetch to DB</button>
@@ -131,7 +124,6 @@ const StubButton: React.FC = () => {
       <br></br>
       <br></br>
       <button onClick={gqlFetch}>gql fetch</button>
-      <button onClick={topItemsManagerTest}>topitemsmanager test</button>
       <br></br>
       <br></br>
       <button onClick={postUpdate}>
