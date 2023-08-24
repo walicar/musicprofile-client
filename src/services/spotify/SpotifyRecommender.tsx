@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import store from "@redux/store";
-import {
-  selectTokenCollection,
-  validateTokens,
-  useAppSelector,
-} from "@redux/tokens";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
 import { isEmpty } from "@utils/util";
 const ID = import.meta.env.VITE_SUPABASE_ID;
+import {
+  selectTokenCollection,
+  validateTokens,
+  useAppSelector,
+} from "@redux/tokens";
 
 let initalized = false;
 const SpotifyRecommender: React.FC = () => {
