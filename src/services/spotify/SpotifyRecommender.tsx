@@ -45,7 +45,7 @@ const SpotifyRecommender: React.FC = () => {
   useEffect(() => {
     const validatePayload = {
       services: ["spotify"],
-      opt: {
+      session: {
         accessToken: session.access_token,
         id: session.user.id,
       },
