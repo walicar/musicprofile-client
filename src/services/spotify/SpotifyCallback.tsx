@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useSearchParams } from "react-router-dom";
 import { getSpotifyToken } from "./spotify.service";
-import { selectTokenCollection } from "@tokens/tokensSlice";
 import PageLoader from "@components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
 import { TokenManager } from "@database/TokenManager";
-import {store, write, useAppSelector} from "@redux/tokens"
+import {
+  store,
+  write,
+  useAppSelector,
+  selectTokenCollection,
+} from "@redux/tokens";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
