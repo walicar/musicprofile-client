@@ -36,7 +36,9 @@ const StubButton: React.FC = () => {
   
   const postUpdate = async () => {
     // dispatch(validate())
+    console.log(tokenCollection);
     const serviceTokens = tokenToService(tokenCollection);
+    console.log("Service", serviceTokens);
     const data = await server.postUpdate(serviceTokens);
     console.log(data);
   }
@@ -136,6 +138,9 @@ const StubButton: React.FC = () => {
       <br></br>
       <button onClick={gqlFetch}>gql fetch</button>
       <button onClick={topItemsManagerTest}>topitemsmanager test</button>
+      <br></br>
+      <br></br>
+      <button onClick={postUpdate}>This will simulate talking to backend</button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );

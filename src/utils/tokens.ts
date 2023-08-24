@@ -39,6 +39,7 @@ const validate = async (services: string[], token_collection: Tokens) => {
   if (token_collection != undefined) {
     for (const service of services) {
       const token: any = token_collection[service]; // gotta fix this
+      console.log("might be of interest when tokenSlice is in error state: ", token);
       if (!token) break;
       if (token_collection[service] && isExpired(JSON.parse(token))) {
         const data = await refreshHandlers[service](curRefreshTokens[service]);
