@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import store from "../../app/store";
+import store from "../../redux/app/store";
 import {
   selectTokenCollection,
   validateTokens,
-} from "../../features/tokens/tokensSlice";
-import { useAppSelector } from "../../app/hooks";
+} from "../../redux/features/tokens/tokensSlice";
+import { useAppSelector } from "../../redux/app/hooks";
 import { useQuery } from "react-query";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";

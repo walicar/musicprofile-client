@@ -4,13 +4,13 @@ import { useSupabaseClient } from "../../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { TokenManager } from "../../database/TokenManager";
 import { getFromLocalStorage, tokenToService } from "../../utils/tokens";
-import store from "../../app/store";
+import store from "../../redux/app/store";
 import {
   erase,
   validateTokens,
   selectTokenCollection,
-} from "../../features/tokens/tokensSlice";
-import { useAppSelector } from "../../app/hooks";
+} from "../../redux/features/tokens/tokensSlice";
+import { useAppSelector } from "../../redux/app/hooks";
 import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
 import TopItemsManager from "../../database/TopItems/TopItemsManager";
 import ServerWrapper from "../../server/serverWrapper";

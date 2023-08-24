@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { getFromLocalStorage, validate } from "../../utils/tokens";
+import { getFromLocalStorage, validate } from "../../../utils/tokens";
 /**
  * TokenSlice is the only place where you can write to localStorage,
  * getting from localStorage is fine elsewhere.

@@ -5,8 +5,8 @@ import { getSpotifyToken } from "./spotify.service";
 import PageLoader from "../../components/PageLoader";
 import useLocalStorageState from "use-local-storage-state";
 import { TokenManager } from "../../database/TokenManager";
-import store from "../../app/store";
-import { write } from "../../features/tokens/tokensSlice";
+import store from "../../redux/app/store";
+import { write } from "../../redux/features/tokens/tokensSlice";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 let didInit = false;
