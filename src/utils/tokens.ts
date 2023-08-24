@@ -1,7 +1,7 @@
-import { Token, Tokens } from "../features/tokens/tokensSlice";
-import { SUPPORTED } from "../services/supportedServices";
-import { TokenManager, TokenEntries } from "../database/TokenManager";
-import { refreshHandlers } from "../services/refreshHandlers";
+import { Token, Tokens } from "@tokens/tokensSlice";
+import { SUPPORTED } from "@services/supportedServices";
+import { TokenManager, TokenEntries } from "@database/TokenManager";
+import { refreshHandlers } from "@services/refreshHandlers";
 
 // TODO: figure out how to type this
 const getFromLocalStorage: any = () => {
@@ -30,8 +30,14 @@ const isExpired = (token: Token) => {
 // - get a refreshed token
 // - store the refresh_token in DB
 // - update access_token in Redux
-const validate = async (services: string[], token_collection: Tokens) => {
-  const tokenManager = new TokenManager();
+const validate = async (
+  services: string[],
+  token_collection: Tokens,
+  session: any
+) => {
+  const accessToken = session.accessToken;
+  const id = session.id;
+  const tokenManager = new TokenManager(accessToken, id);
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
   // might want to refactor this into, getToken("service");
@@ -43,7 +49,6 @@ const validate = async (services: string[], token_collection: Tokens) => {
       if (token_collection[service] && isExpired(JSON.parse(token))) {
         const data = await refreshHandlers[service](curRefreshTokens[service]);
         if (data.error) {
-          console.log("Error received from tokens");
           break;
         }
         const newRefreshTokensCopy = {
@@ -58,7 +63,6 @@ const validate = async (services: string[], token_collection: Tokens) => {
         };
         const refreshedTokensCopy = { ...refreshedTokens, [service]: newToken };
         refreshedTokens = refreshedTokensCopy;
-        console.log("did some copies");
       }
     }
     await tokenManager.writeTokens(newRefreshTokens);
@@ -68,4 +72,13 @@ const validate = async (services: string[], token_collection: Tokens) => {
   }
 };
 
-export { validate, getFromLocalStorage };
+const tokenToService = (tokenCollection: any): ServiceTokens => {
+  let serviceTokens = {};
+  for (const service in tokenCollection) {
+    const token = JSON.parse(tokenCollection[service]);
+    serviceTokens = { ...serviceTokens, [service]: token.access_token };
+  }
+  return serviceTokens;
+};
+
+export { validate, getFromLocalStorage, tokenToService };

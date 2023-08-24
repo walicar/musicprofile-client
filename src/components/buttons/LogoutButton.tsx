@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { useSupabaseClient } from "@contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 const LogoutButton: React.FC = () => {

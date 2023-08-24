@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { getFromLocalStorage, validate } from "../../utils/tokens";
+import { getFromLocalStorage, validate } from "@utils/tokens";
+import { isEmpty } from "@utils/util";
 /**
  * TokenSlice is the only place where you can write to localStorage,
  * getting from localStorage is fine elsewhere.
@@ -55,7 +56,7 @@ const tokensSlice = createSlice({
         state.token_collection[service] = tokens[service];
         localStorage.setItem(
           `${service}-access-token`,
-          JSON.stringify(tokens[service]),
+          JSON.stringify(tokens[service])
         );
         console.log(`write ${service} into tokens slice`);
       }
@@ -69,24 +70,16 @@ const tokensSlice = createSlice({
       })
       .addCase(validateTokens.fulfilled, (state, action) => {
         state.status = "validated";
-        console.log("validated");
-        console.log("what is in here?", action.payload);
-        if (!action.payload || Object.keys(action.payload).length == 0) {
+        console.log("validated", action.payload);
+        if (!action.payload || isEmpty(action.payload)) {
           console.log("payload empty");
           return;
         }
-        /*
-        const newTokenCollection = Object.keys(action.payload).reduce((result: any, key: any) => {
-          result[key] = action.payload[key].access_token
-          return result
-        }, {});
-        console.log("newTokenCollection", newTokenCollection)
-        */
         state.token_collection = action.payload;
         for (const service in state.token_collection) {
           localStorage.setItem(
             `${service}-access-token`,
-            JSON.stringify(state.token_collection[service]),
+            JSON.stringify(state.token_collection[service])
           );
           console.log(`vaidation changed ${service}`);
         }
@@ -101,12 +94,19 @@ const tokensSlice = createSlice({
 
 export const validateTokens = createAsyncThunk(
   "tokens/validateTokens",
-  async (services: string[], { getState }) => {
+  async (payload: ValidatePayload, { getState }) => {
     // TODO: find out how to type this
     const { tokens }: any = getState();
-    const result = await validate(services, tokens.token_collection);
+    if (isEmpty(tokens.tokenCollection)) {
+      return {};
+    }
+    const result = await validate(
+      payload.services,
+      tokens.token_collection,
+      payload.session
+    );
     return result;
-  },
+  }
 );
 
 export const selectTokenCollection = (state: any) =>

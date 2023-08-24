@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { useSupabaseClient } from "../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 const SignUpForm: React.FC = () => {
