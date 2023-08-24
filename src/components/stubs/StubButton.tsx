@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import { useSupabaseClient } from "../../contexts/SupabaseContext";
+import { useSupabaseClient } from "@contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { TokenManager } from "../../database/TokenManager";
-import { getFromLocalStorage, tokenToService } from "../../utils/tokens";
-import store from "../../redux/app/store";
-import {
-  erase,
-  validateTokens,
-  selectTokenCollection,
-} from "../../redux/features/tokens/tokensSlice";
-import { useAppSelector } from "../../redux/app/hooks";
-import { refreshSpotifyToken } from "../../services/spotify/spotify.service";
-import TopItemsManager from "../../database/TopItems/TopItemsManager";
-import ServerWrapper from "../../server/serverWrapper";
+import { TokenManager } from "@database/TokenManager";
+import { getFromLocalStorage, tokenToService } from "@utils/tokens";
+import store from "@redux/store";
+import { erase, selectTokenCollection } from "@tokens/tokensSlice";
+import { useAppSelector } from "@redux/hooks";
+import { refreshSpotifyToken } from "@spotify/spotify.service";
+import TopItemsManager from "@database/TopItemsManager";
+import ServerWrapper from "@server/serverWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
@@ -23,11 +19,14 @@ const StubButton: React.FC = () => {
   const [stub]: any = useLocalStorageState("spotify-access-token");
   const tokenCollection = useAppSelector(selectTokenCollection);
   const supabase: SupabaseClient<any> = useSupabaseClient();
-  const tokenManager: TokenManager = new TokenManager();
+  const tokenManager: TokenManager = new TokenManager(
+    session.access_token,
+    session.user.id
+  );
   const topItemsManager: TopItemsManager = new TopItemsManager();
   const server: ServerWrapper = new ServerWrapper(
     session.access_token,
-    session.user.id,
+    session.user.id
   );
 
   useEffect(() => {
@@ -73,10 +72,6 @@ const StubButton: React.FC = () => {
   const dispatchRemove = () => {
     store.dispatch(erase(["spotify"]));
     console.log("did I erase the state");
-  };
-
-  const dispatchValidate = () => {
-    store.dispatch(validateTokens(["spotify"]));
   };
 
   const utilTokens = () => {
@@ -132,7 +127,6 @@ const StubButton: React.FC = () => {
       <br></br>
       <br></br>
       <button onClick={dispatchRemove}>Redux Remove Spotify token</button>
-      <button onClick={dispatchValidate}>Redux validate tokens</button>
       <button onClick={utilTokens}>UTIL: Get from local storage</button>
       <br></br>
       <br></br>

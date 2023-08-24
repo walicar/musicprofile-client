@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PageLayout from "../components/PageLayout";
-import SignInForm from "../components/forms/SignInForm";
-import SignUpForm from "../components/forms/SignUpForm";
+import PageLayout from "../PageLayout";
+import SignInForm from "../forms/SignInForm";
+import SignUpForm from "../forms/SignUpForm";
 import { useLocation } from "react-router-dom";
 
 const LoginPage: React.FC = () => {

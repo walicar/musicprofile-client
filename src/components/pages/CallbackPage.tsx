@@ -1,6 +1,6 @@
 import React from "react";
-import PageLayout from "../components/PageLayout";
-import callbackHandlers from "../services/callbackHandlers";
+import PageLayout from "../PageLayout";
+import callbackHandlers from "@services/callbackHandlers";
 
 const CallbackPage: React.FC = () => {
   const service = window.location.pathname.split("/")[2];

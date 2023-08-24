@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import PageLayout from "../components/PageLayout";
+import PageLayout from "../PageLayout";
 import { useNavigate } from "react-router-dom";
-import SpotifyButton from "../services/spotify/SpotifyButton";
-import LastfmButton from "../components/buttons/LastfmButton";
+import SpotifyButton from "@spotify/SpotifyButton";
+import LastfmButton from "@lastfm/LastfmButton";
 import useLocalStorageState from "use-local-storage-state";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 

@@ -13,6 +13,20 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "@redux/*": ["src/redux/app/*"],
+      "@tokens/*": ["src/redux/features/tokens/*"],
+      "@components/*": ["src/components/*"],
+      "@contexts/*": ["src/components/contexts/*"],
+      "@database/*": ["src/wrappers/database/*"],
+      "@pages/*": ["src/components/pages/*"],
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
+      "@spotify/*": ["src/services/spotify/*"],
+      "@lastfm/*": ["src/services/lastfm/*"],
+      "@server/*": ["src/wrappers/server/*"],
+    },
 
     /* Linting */
     "strict": true,

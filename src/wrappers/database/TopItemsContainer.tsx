@@ -1,9 +1,9 @@
 import React from "react";
 import TopItemsManager from "./TopItemsManager";
 import { useQuery } from "react-query";
-import Loading from "../../components/Loading";
-import List from "../../components/List";
-import Error from "../../components/Error";
+import Loading from "@components/Loading";
+import List from "@components/List";
+import Error from "@components/Error";
 
 const TopItemsContainer: React.FC = () => {
   // const supabase: SupabaseClient<any> = useSupabaseClient();

@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import DashboardPage from "./pages/DashboardPage";
-import LoginPage from "./pages/LoginPage";
+import HomePage from "./components/pages/HomePage";
+import DashboardPage from "./components/pages/DashboardPage";
+import LoginPage from "./components/pages/LoginPage";
 import StubPage from "./components/stubs/StubPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import SettingsPage from "./pages/SettingsPage";
-import CallbackPage from "./pages/CallbackPage";
+import NotFoundPage from "./components/pages/NotFoundPage";
+import SettingsPage from "./components/pages/SettingsPage";
+import CallbackPage from "./components/pages/CallbackPage";
 
 function AppRouter() {
   return (
