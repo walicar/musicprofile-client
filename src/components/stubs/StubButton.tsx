@@ -27,13 +27,13 @@ const StubButton: React.FC = () => {
   const topItemsManager: TopItemsManager = new TopItemsManager();
   const server: ServerWrapper = new ServerWrapper(
     session.access_token,
-    session.user.id
+    session.user.id,
   );
 
   useEffect(() => {
     console.log("state changed", tokenCollection);
   }, [stub, tokenCollection]);
-  
+
   const postUpdate = async () => {
     // dispatch(validate())
     console.log(tokenCollection);
@@ -41,7 +41,7 @@ const StubButton: React.FC = () => {
     console.log("Service", serviceTokens);
     const data = await server.postUpdate(serviceTokens);
     console.log(data);
-  }
+  };
 
   const oldFetch = async () => {
     const { data } = await supabase
@@ -140,7 +140,9 @@ const StubButton: React.FC = () => {
       <button onClick={topItemsManagerTest}>topitemsmanager test</button>
       <br></br>
       <br></br>
-      <button onClick={postUpdate}>This will simulate talking to backend</button>
+      <button onClick={postUpdate}>
+        This will simulate talking to backend
+      </button>
       {stub ? <p>I see the stub!</p> : <p>I don't see the stub</p>}
     </div>
   );

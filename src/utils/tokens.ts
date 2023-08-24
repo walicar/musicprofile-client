@@ -30,7 +30,11 @@ const isExpired = (token: Token) => {
 // - get a refreshed token
 // - store the refresh_token in DB
 // - update access_token in Redux
-const validate = async (services: string[], token_collection: Tokens, opt: any) => {
+const validate = async (
+  services: string[],
+  token_collection: Tokens,
+  opt: any,
+) => {
   const accessToken = opt.accessToken;
   const id = opt.id;
   const tokenManager = new TokenManager(accessToken, id);
@@ -72,9 +76,9 @@ const tokenToService = (tokenCollection: any): ServiceTokens => {
   let serviceTokens = {};
   for (const service in tokenCollection) {
     const token = JSON.parse(tokenCollection[service]);
-    serviceTokens = {...serviceTokens, [service]: token.access_token};
+    serviceTokens = { ...serviceTokens, [service]: token.access_token };
   }
   return serviceTokens;
-}
+};
 
 export { validate, getFromLocalStorage, tokenToService };

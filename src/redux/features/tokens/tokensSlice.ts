@@ -86,9 +86,9 @@ const tokensSlice = createSlice({
         }
       })
       .addCase(validateTokens.rejected, (state, action) => {
-        console.log("tokenSlice, FAILURE occured.")
+        console.log("tokenSlice, FAILURE occured.");
         console.log("payload", action.payload);
-        console.log("action", action)
+        console.log("action", action);
         state.status = "failed";
         state.error = action.error.message;
         console.log("failure, ", state.error);
@@ -98,16 +98,23 @@ const tokensSlice = createSlice({
 
 export const validateTokens = createAsyncThunk(
   "tokens/validateTokens",
-  async (input: {
-    services: string[]
-    opt: any
-  }, { getState }) => {
+  async (
+    input: {
+      services: string[];
+      opt: any;
+    },
+    { getState },
+  ) => {
     // TODO: find out how to type this
     const { tokens }: any = getState();
-    if (isEmpty(tokens.tokenCollection))  {
-      return {}
-    };
-    const result = await validate(input.services, tokens.token_collection, input.opt);
+    if (isEmpty(tokens.tokenCollection)) {
+      return {};
+    }
+    const result = await validate(
+      input.services,
+      tokens.token_collection,
+      input.opt,
+    );
     return result;
   },
 );

@@ -18,13 +18,13 @@ export default class ServerWrapper {
       Authorization: this.accessToken,
       "Content-Type": "application/json",
     };
-    const body = { tokens: {...serviceTokens}, id: this.id };
+    const body = { tokens: { ...serviceTokens }, id: this.id };
     const opt = {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
     };
-    const res = await fetch(URL!+"/update", opt);
+    const res = await fetch(URL! + "/update", opt);
     if (!res.ok) return { error: res.statusText };
     const data = await res.json();
     return data;

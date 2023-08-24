@@ -15,40 +15,45 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 let initalized = false;
 const SpotifyRecommender: React.FC = () => {
   const [token]: any = useLocalStorageState("spotify-access-token");
-  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`)
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const tokenCollection = useAppSelector(selectTokenCollection);
   const tokenStatus = useAppSelector((state) => state.tokens.status);
   const [errorMessage, setErrorMessage] = useState("");
   const { status, error, data, refetch } = useQuery(
     "spotifyRecommendData",
     async () => {
-        const { access_token } = JSON.parse(tokenCollection.spotify);
-        const url =
-          "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
-        const headers = {
-          Authorization: `Bearer ${access_token}`,
-        };
-        const res = await fetch(url, { method: "GET", headers: headers });
-        const data = await res.json();
-        if (res.status === 401) {
-          console.log("yo was this set");
-          setErrorMessage(data.error.message);
-        }
-        return data;
+      const { access_token } = JSON.parse(tokenCollection.spotify);
+      const url =
+        "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
+      const headers = {
+        Authorization: `Bearer ${access_token}`,
+      };
+      const res = await fetch(url, { method: "GET", headers: headers });
+      const data = await res.json();
+      if (res.status === 401) {
+        console.log("yo was this set");
+        setErrorMessage(data.error.message);
+      }
+      return data;
     },
     {
       enabled: !isEmpty(tokenCollection) && tokenStatus === "idle",
       refetchOnMount: false,
-    }
+    },
   );
 
   useEffect(() => {
     if (!initalized && tokenStatus === "idle") {
       console.log("token is idle, i'm going to validate");
-      store.dispatch(validateTokens({services: ["spotify"], opt: {
-        accessToken: session.access_token,
-        id: session.user.id
-      }}));
+      store.dispatch(
+        validateTokens({
+          services: ["spotify"],
+          opt: {
+            accessToken: session.access_token,
+            id: session.user.id,
+          },
+        }),
+      );
       initalized = true;
     }
 
@@ -58,10 +63,15 @@ const SpotifyRecommender: React.FC = () => {
     ) {
       console.log("error check called: ", errorMessage);
       setErrorMessage("");
-      store.dispatch(validateTokens({services: ["spotify"], opt: {
-        accessToken: session.access_token,
-        id: session.user.id
-      }}));
+      store.dispatch(
+        validateTokens({
+          services: ["spotify"],
+          opt: {
+            accessToken: session.access_token,
+            id: session.user.id,
+          },
+        }),
+      );
     }
 
     if (tokenStatus === "validated") {
