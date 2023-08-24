@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import store from "../../app/store";
 import {
@@ -16,7 +16,8 @@ const SpotifyRecommender: React.FC = () => {
   const [token]: any = useLocalStorageState("spotify-access-token");
   useAppSelector(selectTokenCollection);
   const tokenStatus = useAppSelector((state) => state.tokens.status);
-  const { status, error, data }: any = useQuery(
+  const [errorMessage, setErrorMessage] = useState("");
+  const { status, error, data, refetch } = useQuery(
     "spotifyRecommendData",
     async () => {
       const url =
@@ -26,9 +27,13 @@ const SpotifyRecommender: React.FC = () => {
       };
       const res = await fetch(url, { method: "GET", headers: headers });
       const data = await res.json();
+      if (res.status === 401) {
+        console.log("yo was this set")
+        setErrorMessage(data.error.message);
+      }
       return data;
     },
-    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false },
+    { enabled: !!token && tokenStatus === "validated", refetchOnMount: false }
   );
 
   useEffect(() => {
@@ -38,10 +43,16 @@ const SpotifyRecommender: React.FC = () => {
       didInit = true;
     }
 
-    if (tokenStatus === "validated") {
-      console.log("I validated");
+    if (tokenStatus === "validated" && errorMessage == "The access token expired") {
+      console.log("error check called: ", errorMessage);
+      setErrorMessage("");
+      store.dispatch(validateTokens(["spotify"]));
     }
-  }, [tokenStatus]);
+
+    if (tokenStatus === "validated") {
+      console.log("SpotifyRecommender: validated");
+    }
+  }, [tokenStatus, errorMessage]);
 
   if (!token) {
     return <div>Disconnected from Spotify</div>;
@@ -64,6 +75,7 @@ const SpotifyRecommender: React.FC = () => {
           ))}
         </ul>
         <div>{data.tracks.length} items in total!</div>
+        <button onClick={refetch as any}>Refresh!</button>
       </>
     );
   } else {
