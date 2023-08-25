@@ -14,22 +14,26 @@ const SpotifyRecommender: React.FC = () => {
     return <div>Disconnected from Spotify</div>;
   }
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const topitems = new TopItemsWrapper(session.access_token, session.user.id);
-  const { status, data: spotifyData, error: spotifyError }: any = useQuery(
-    "spotify_topitems",
+  const {
+    status,
+    data: spotifyData,
+    error: spotifyError,
+  }: any = useQuery(
+    ["spotify_topitems", session],
     async () => {
-      return await topitems.getTopItems("spotify", [
-        "songs",
-        "artists",
-      ]);
+      const topitems = new TopItemsWrapper(
+        session.access_token,
+        session.user.id
+      );
+      return await topitems.getTopItems("spotify", ["songs", "artists", "genres"]);
     },
-    { refetchOnMount: false, refetchOnWindowFocus: false }
+    { refetchOnMount: true, refetchOnWindowFocus: false }
   );
   if (spotifyError) {
     return <div>Could not connect to DB</div>;
   }
   let url = undefined;
-  if (status === 'success') {
+  if (status === "success") {
     url = getSpotifyRecommendationUrl(spotifyData);
   }
   const serviceParams = makeServiceParams(
@@ -38,7 +42,10 @@ const SpotifyRecommender: React.FC = () => {
     { auth_token: session.access_token, id: session.user.id },
     "spotify"
   );
-  const serviceOptions = { refetchOnWindowFocus: false, enabled: !!spotifyData};
+  const serviceOptions = {
+    refetchOnWindowFocus: false,
+    enabled: !!spotifyData,
+  };
   const { data, isSuccess, isLoading, error, refetch } = useService(
     "spotifyRecommendation",
     serviceParams,
@@ -46,8 +53,7 @@ const SpotifyRecommender: React.FC = () => {
   );
 
   useEffect(() => {
-    console.log("SpotifyRecommender updated")
-  }, [session, token])
+  }, [session, token]);
 
   if (!token) {
     return <div>Disconnected from Spotify</div>;
