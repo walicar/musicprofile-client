@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../PageLayout";
 import { useNavigate } from "react-router-dom";
-// import StubButton from "../stubs/StubButton";
+import StubButton from "../stubs/StubButton";
 import useLocalStorageState from "use-local-storage-state";
 import TopItemsContainer from "@database/TopItemsContainer";
 import SpotifyRecommender from "@services/spotify/SpotifyRecommender";
@@ -26,7 +26,7 @@ const DashboardPage: React.FC = () => {
       <div>
         <h1>Dashboard</h1>
         <h2>Welcome {session.user.email}</h2>
-        {/* <StubButton /> */}
+        <StubButton />
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
         <TopItemsContainer type={"spotify"}/>
