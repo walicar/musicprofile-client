@@ -1,30 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
 import useService, { makeServiceParams } from "@hooks/useService";
+import { useQuery } from "react-query";
+import TopItemsWrapper from "@database/TopItemsWrapper";
+import { getSpotifyRecommendationUrl } from "./spotify.utils";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SpotifyRecommender: React.FC = () => {
   const [token]: any = useLocalStorageState("spotify-token");
-  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   if (!token) {
     return <div>Disconnected from Spotify</div>;
   }
-  const url =
-    "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const topitems = new TopItemsWrapper(session.access_token, session.user.id);
+  const { status, data: spotifyData, error: spotifyError }: any = useQuery(
+    "spotify_topitems",
+    async () => {
+      return await topitems.getTopItems("spotify", [
+        "songs",
+        "artists",
+      ]);
+    },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
+  );
+  if (spotifyError) {
+    return <div>Could not connect to DB</div>;
+  }
+  let url = undefined;
+  if (status === 'success') {
+    url = getSpotifyRecommendationUrl(spotifyData);
+  }
   const serviceParams = makeServiceParams(
-    url,
+    url!,
     token.access_token,
     { auth_token: session.access_token, id: session.user.id },
     "spotify"
   );
-  const serviceOptions = { refetchOnWindowFocus: false };
+  const serviceOptions = { refetchOnWindowFocus: false, enabled: !!spotifyData};
   const { data, isSuccess, isLoading, error, refetch } = useService(
     "spotifyRecommendation",
     serviceParams,
     serviceOptions
   );
+
+  useEffect(() => {
+    console.log("SpotifyRecommender updated")
+  }, [session, token])
 
   if (!token) {
     return <div>Disconnected from Spotify</div>;
