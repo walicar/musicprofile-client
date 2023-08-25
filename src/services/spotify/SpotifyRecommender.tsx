@@ -2,7 +2,7 @@ import React from "react";
 import useLocalStorageState from "use-local-storage-state";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
-import useService from "@hooks/useService";
+import useService, { makeServiceParams } from "@hooks/useService";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SpotifyRecommender: React.FC = () => {
@@ -13,18 +13,17 @@ const SpotifyRecommender: React.FC = () => {
   }
   const url =
     "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
+  const serviceParams = makeServiceParams(
+    url,
+    token.access_token,
+    { auth_token: session.access_token, id: session.user.id },
+    "spotify"
+  );
+  const serviceOptions = { refetchOnWindowFocus: false };
   const { data, isSuccess, isLoading, error, refetch } = useService(
     "spotifyRecommendation",
-    url,
-    token?.access_token,
-    "spotify",
-    {
-      auth_token: session.access_token,
-      id: session.user.id,
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
+    serviceParams,
+    serviceOptions
   );
 
   if (!token) {

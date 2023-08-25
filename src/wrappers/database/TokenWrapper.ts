@@ -1,6 +1,8 @@
 const API = import.meta.env.VITE_SUPABASE_URL;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
-
+import { refreshHandlers } from "@services/refreshHandlers";
+import { getLocalStorageToken } from "@utils/localStorage";
+import { isEmpty } from "@utils/util";
 export type TokenEntries = { [key: string]: string };
 export class TokenWrapper {
   accessToken: string;
@@ -10,7 +12,7 @@ export class TokenWrapper {
     this.id = _id;
   }
 
-  async writeTokens(tokens: TokenEntries) {
+  async writeRefreshTokens(tokens: TokenEntries) {
     // info should be in the form of { service_name: "token" }
     // e.x { spotify: "123456" }
     console.log("Writing tokens");
@@ -34,7 +36,7 @@ export class TokenWrapper {
     return data;
   }
 
-  async getTokens() {
+  async getRefreshTokens() {
     const apiUrl = API + "/rest/v1/tokens";
     const queryParams = `id=eq.${this.id}&select=*`;
     const requestUrl = `${apiUrl}?${queryParams}`;
@@ -55,7 +57,7 @@ export class TokenWrapper {
     }
   }
 
-  async getToken(service:string) {
+  async getRefreshToken(service: string) {
     // fix queryParams, it gets every token, we don't really need that,
     // could use GQL instead.
     const apiUrl = API + "/rest/v1/tokens";
@@ -76,5 +78,53 @@ export class TokenWrapper {
     } catch (e) {
       return e;
     }
+  }
+
+  isTokenExpired(token: Token) {
+    const expire = new Date(token.created_at);
+    expire.setSeconds(expire.getSeconds() + token.expires_in);
+    const now = new Date();
+    console.log("Checking if expired", now > expire);
+    return now > expire;
+  };
+
+  async validateTokens(services: string[]) {
+    let refreshedTokens: any = {};
+    let newRefreshTokens: TokenEntries = {};
+    // might want to refactor this into, getRefreshToken("service");
+    for (const service of services) {
+      const token: any = getLocalStorageToken(`${service}-token`); // gotta fix this
+      console.log("INSIDE VALIDATE TOKENS", token);
+      if (token && this.isTokenExpired(token)) {
+        const curRefreshToken = await this.getRefreshToken(service);
+        const { refresh_token, access_token, expires_in, error } =
+          await refreshHandlers[service](curRefreshToken);
+        if (error) {
+          console.log(error);
+          break;
+        }
+        const newRefreshTokensCopy = {
+          ...newRefreshTokens,
+          [service]: refresh_token,
+        };
+        newRefreshTokens = newRefreshTokensCopy;
+        const refreshedTokensCopy = {
+          ...refreshedTokens,
+          [service]: {
+            access_token,
+            expires_in,
+            created_at: Date(),
+          },
+        };
+        refreshedTokens = refreshedTokensCopy;
+      }
+    }
+    if (!isEmpty(newRefreshTokens)) {
+      console.log("NOT EMPTY, WRITING TO DB")
+      await this.writeRefreshTokens(newRefreshTokens);
+    } else {
+      console.log("was empty, not writing ...")
+    }
+    return refreshedTokens as Tokens;
   }
 }

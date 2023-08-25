@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import TopItemsWrapper from "./TopItemsWrapper";
+import { TokenWrapper } from "./TokenWrapper";
+import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import List from "@components/List";
 import Error from "@components/Error";
+import { isEmpty } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -14,11 +17,14 @@ type Prop = {
 let initialized = false;
 const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const db = new TopItemsWrapper(session.access_token, session.user.id);
+  const [token, setToken]: any = useLocalStorageState(`${type}-token`)
+  const topitems = new TopItemsWrapper(session.access_token, session.user.id);
+  const tokens = new TokenWrapper(session.access_token, session.user.id);
+  const server = new ServerWrapper(session.access_token, session.user.id);
   const { status, error, data }: any = useQuery(
     `${type}_topitems`,
     async () => {
-      return await db.getTopItems(type, ["songs", "artists", "genres"]);
+      return await topitems.getTopItems(type, ["songs", "artists", "genres"]);
     },
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
@@ -26,11 +32,17 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   useEffect(() => {
     const handleUpdate = async () => {
       console.log("Handlign Update");
-      const lastUpdated = await db.getLastUpdated(type);
+      const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);
       updateAt.setDate(updateAt.getDate() + 1);
       if (updateAt < new Date()) {
         console.log("send update here");
+        const newTokens = await tokens.validateTokens(["spotify"]);
+        if (!isEmpty(newTokens)) {
+          setToken(newTokens["spotify"]);
+        }
+        const message = await server.postUpdate({spotify: token.access_token});
+        console.log(message)
       }
     };
     if (!initialized) {

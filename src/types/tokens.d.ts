@@ -8,3 +8,10 @@ type Token = {
   created_at: string;
   expires_in: number;
 };
+
+type Tokens = {
+  spotify?: Token,
+  lastfm?: Token
+}
+
+type SupportedService = 'spotify' | 'lastfm'

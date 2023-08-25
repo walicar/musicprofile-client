@@ -20,11 +20,11 @@ const SpotifyCallback: React.FC = () => {
   const navigate = useNavigate();
   const db = new TokenWrapper(session.access_token, session.user.id);
   useEffect(() => {
-    const getToken = async () => {
+    const getRefreshToken = async () => {
       try {
         const data = await getSpotifyToken(code!, cookies["spotify-code-verifier"]);
         const {refresh_token, ...token_info} = data;
-        await db.writeTokens({spotify: refresh_token});
+        await db.writeRefreshTokens({spotify: refresh_token});
         setToken({...token_info})
         removeCookie("spotify-code-verifier", { path: "/" });
         navigate("/dashboard");
@@ -35,7 +35,7 @@ const SpotifyCallback: React.FC = () => {
     };
     if (!initalized && session) {
       initalized = true;
-      getToken();
+      getRefreshToken();
     }
   }, []);
   return <PageLoader message={"Connecting to Spotify..."} />;
