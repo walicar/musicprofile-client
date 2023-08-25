@@ -3,11 +3,15 @@ const isEmpty = (obj: { [key: string]: any }) => {
 };
 
 type TokenSetters = {
-  spotify?: any,
-  lastfm?: any,
-}
+  spotify?: any;
+  lastfm?: any;
+};
 
-const validate = async (validator: Function, services: string[], setters: TokenSetters ) => {
+const validate = async (
+  validator: Function,
+  services: string[],
+  setters: TokenSetters,
+) => {
   const newTokens: Tokens = await validator(services);
   if (!isEmpty(newTokens)) {
     for (const service in newTokens) {
@@ -19,11 +23,11 @@ const validate = async (validator: Function, services: string[], setters: TokenS
       }
     }
   }
-} 
+};
 
 const stubMedal = (foo: Function, bar: string, setter: any) => {
   const newInput = foo(bar);
   setter(newInput);
-}
+};
 
-export { isEmpty, validate, stubMedal};
+export { isEmpty, validate, stubMedal };

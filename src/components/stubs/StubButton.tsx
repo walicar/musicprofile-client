@@ -25,11 +25,11 @@ const StubButton: React.FC = () => {
     removeItem();
   };
   const someThing = (inp: string) => {
-    return inp + " AHHHH!"
-  }
+    return inp + " AHHHH!";
+  };
   const stubby = () => {
     stubMedal(someThing, "Kirby", setMedal);
-  }
+  };
 
   const clickUpdate = async () => {
     const refreshedTokens = await tokens.validateTokens(["spotify"]);
@@ -42,7 +42,7 @@ const StubButton: React.FC = () => {
 
   const clickUpdateGeneral = async () => {
     await validate(tokens.validateTokens, ["spotify"], { spotify: setToken });
-    const message = await server.postUpdate({ spotify: token.access_token});
+    const message = await server.postUpdate({ spotify: token.access_token });
     console.log(message);
   };
 

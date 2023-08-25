@@ -1,4 +1,4 @@
 type Session = {
-    id: string;
-    auth_token: string;
-}
+  id: string;
+  auth_token: string;
+};

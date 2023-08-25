@@ -1,7 +1,7 @@
 const statusIcons: StatusIcons = {
-    promoted: "🔼",
-    unchanged: "⏺️",
-    demoted: "🔽"
-}
+  promoted: "🔼",
+  unchanged: "⏺️",
+  demoted: "🔽",
+};
 
-export default statusIcons
+export default statusIcons;

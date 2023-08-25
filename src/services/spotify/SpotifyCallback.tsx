@@ -14,7 +14,7 @@ const SpotifyCallback: React.FC = () => {
     "spotify-code-verifier",
   ]);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const [_token, setToken] = useLocalStorageState(`spotify-token`)
+  const [_token, setToken] = useLocalStorageState(`spotify-token`);
   const [params] = useSearchParams();
   const code = params.get("code");
   const navigate = useNavigate();
@@ -22,10 +22,13 @@ const SpotifyCallback: React.FC = () => {
   useEffect(() => {
     const getRefreshToken = async () => {
       try {
-        const data = await getSpotifyToken(code!, cookies["spotify-code-verifier"]);
-        const {refresh_token, ...token_info} = data;
-        await db.writeRefreshTokens({spotify: refresh_token});
-        setToken({...token_info})
+        const data = await getSpotifyToken(
+          code!,
+          cookies["spotify-code-verifier"],
+        );
+        const { refresh_token, ...token_info } = data;
+        await db.writeRefreshTokens({ spotify: refresh_token });
+        setToken({ ...token_info });
         removeCookie("spotify-code-verifier", { path: "/" });
         navigate("/dashboard");
         // window.location.replace("/dashboard");
