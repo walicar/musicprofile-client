@@ -2,7 +2,7 @@ const API = import.meta.env.VITE_SUPABASE_URL;
 const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
 
 export type TokenEntries = { [key: string]: string };
-export class TokenManager {
+export class TokenWrapper {
   accessToken: string;
   id: string;
   constructor(_accessToken: string, _id: string) {
@@ -50,6 +50,29 @@ export class TokenManager {
       });
       const data = await response.json();
       return data[0];
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async getToken(service:string) {
+    // fix queryParams, it gets every token, we don't really need that,
+    // could use GQL instead.
+    const apiUrl = API + "/rest/v1/tokens";
+    const queryParams = `id=eq.${this.id}&select=*`;
+    const requestUrl = `${apiUrl}?${queryParams}`;
+    const headers = {
+      Authorization: `Bearer ${this.accessToken}`,
+      apiKey: API_KEY!,
+      "content-type": "application/json",
+    };
+    try {
+      const response: any = await fetch(requestUrl, {
+        method: "GET",
+        headers: headers,
+      });
+      const data = await response.json();
+      return data[0][service];
     } catch (e) {
       return e;
     }

@@ -1,6 +1,6 @@
 import { Token, Tokens } from "@tokens/tokensSlice";
 import { SUPPORTED } from "@services/supportedServices";
-import { TokenManager, TokenEntries } from "@database/TokenManager";
+import { TokenWrapper, TokenEntries } from "@database/TokenWrapper";
 import { refreshHandlers } from "@services/refreshHandlers";
 
 // TODO: figure out how to type this
@@ -37,11 +37,11 @@ const validate = async (
 ) => {
   const accessToken = session.accessToken;
   const id = session.id;
-  const tokenManager = new TokenManager(accessToken, id);
+  const TokenWrapper = new TokenWrapper(accessToken, id);
   let refreshedTokens: Tokens = {};
   let newRefreshTokens: TokenEntries = {};
   // might want to refactor this into, getToken("service");
-  let curRefreshTokens: TokenEntries = await tokenManager.getTokens();
+  let curRefreshTokens: TokenEntries = await TokenWrapper.getTokens();
   if (token_collection != undefined) {
     for (const service of services) {
       const token: any = token_collection[service]; // gotta fix this
@@ -65,7 +65,7 @@ const validate = async (
         refreshedTokens = refreshedTokensCopy;
       }
     }
-    await tokenManager.writeTokens(newRefreshTokens);
+    await TokenWrapper.writeTokens(newRefreshTokens);
     return refreshedTokens;
   } else {
     return {};

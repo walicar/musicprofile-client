@@ -2,6 +2,7 @@ import { refreshSpotifyToken } from "@spotify/spotify.service";
 
 export const refreshHandlers: any = {
   spotify: async (refreshToken: any) => {
+    console.log("calling spotify refresh")
     return await refreshSpotifyToken(refreshToken);
   },
   lasfm: async () => {
