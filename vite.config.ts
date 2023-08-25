@@ -18,7 +18,8 @@ export default defineConfig({
       '@services': path.resolve(__dirname, 'src/services'),
       '@spotify': path.resolve(__dirname, 'src/services/spotify'),
       '@lastfm': path.resolve(__dirname, 'src/services/lastfm'),
-      '@server': path.resolve(__dirname, 'src/wrappers/server')
+      '@server': path.resolve(__dirname, 'src/wrappers/server'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
     }
   },
   test: {
