@@ -17,21 +17,31 @@ type Prop = {
 let initialized = false;
 const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const [token, setToken]: any = useLocalStorageState(`${type}-token`)
+  const [token, setToken]: any = useLocalStorageState(`${type}-token`);
   const { status, error, data, refetch }: any = useQuery(
     [`${type}_topitems`, session],
     async () => {
-      const topitems = new TopItemsWrapper(session.access_token, session.user.id);
-      const msg =  await topitems.getTopItems(type, ["songs", "artists", "genres"]);
-      return msg
+      const topitems = new TopItemsWrapper(
+        session.access_token,
+        session.user.id,
+      );
+      const msg = await topitems.getTopItems(type, [
+        "songs",
+        "artists",
+        "genres",
+      ]);
+      return msg;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false },
   );
 
   useEffect(() => {
     const handleUpdate = async () => {
       console.log("Handlign Update");
-      const topitems = new TopItemsWrapper(session.access_token, session.user.id);
+      const topitems = new TopItemsWrapper(
+        session.access_token,
+        session.user.id,
+      );
       const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);
       updateAt.setDate(updateAt.getDate() + 1);
@@ -40,8 +50,10 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
         const tokens = new TokenWrapper(session.access_token, session.user.id);
         await validate(tokens.validateTokens, [type], { [type]: setToken });
         const server = new ServerWrapper(session.access_token, session.user.id);
-        const message = await server.postUpdate({spotify: token.access_token});
-        console.log(message)
+        const message = await server.postUpdate({
+          spotify: token.access_token,
+        });
+        console.log(message);
       }
     };
     if (!initialized) {
@@ -66,7 +78,11 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
         <h3>songs</h3>
         {songs ? <List items={songs} title={"genres"} /> : <p>No songs</p>}
         <h3>artists</h3>
-        {artists ? <List items={artists} title={"genres"} /> : <p>No artists</p>}
+        {artists ? (
+          <List items={artists} title={"genres"} />
+        ) : (
+          <p>No artists</p>
+        )}
         <h3>genres</h3>
         {genres ? <List items={genres} title={"genres"} /> : <p>No genre</p>}
         <button onClick={refetch as any}>Refetch</button>

@@ -80,8 +80,6 @@ export class TokenWrapper {
     }
   }
 
-  
-
   async validateTokens(services: string[]) {
     let refreshedTokens: any = {};
     let newRefreshTokens: TokenEntries = {};
@@ -115,17 +113,17 @@ export class TokenWrapper {
       }
     }
     if (!isEmpty(newRefreshTokens)) {
-      console.log("NOT EMPTY, WRITING TO DB")
+      console.log("NOT EMPTY, WRITING TO DB");
       await this.writeRefreshTokens(newRefreshTokens);
     } else {
-      console.log("was empty, not writing ...")
+      console.log("was empty, not writing ...");
     }
     return refreshedTokens as Tokens;
   }
 }
 
 const isTokenExpired = (token: Token): boolean => {
-  console.log("tokenExpired is being called: ", token)
+  console.log("tokenExpired is being called: ", token);
   const expire = new Date(token.created_at);
   expire.setSeconds(expire.getSeconds() + token.expires_in);
   const now = new Date();

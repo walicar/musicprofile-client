@@ -5,7 +5,8 @@ import useLocalStorageState from "use-local-storage-state";
 
 const SpotifyButton: React.FC = () => {
   const [_cookies, setCookie] = useCookies(["spotify-code-verifier"]);
-  const [token, _setToken, {removeItem}] = useLocalStorageState("spotify-token");
+  const [token, _setToken, { removeItem }] =
+    useLocalStorageState("spotify-token");
 
   const connect = async () => {
     const verifier = generateRandomString(128);
@@ -15,7 +16,7 @@ const SpotifyButton: React.FC = () => {
   };
 
   const disconnect = () => {
-    removeItem()
+    removeItem();
   };
 
   return (

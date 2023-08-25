@@ -14,5 +14,5 @@ type TopItemColumns = {
   songs: TopItemEntry[];
   artists: TopItemEntry[];
   genres: TopItemEntry[];
-  last_updated?: string
+  last_updated?: string;
 };

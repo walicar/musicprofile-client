@@ -29,7 +29,7 @@ const DashboardPage: React.FC = () => {
         <StubButton />
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
-        <TopItemsContainer type={"spotify"}/>
+        <TopItemsContainer type={"spotify"} />
       </div>
     </PageLayout>
   );

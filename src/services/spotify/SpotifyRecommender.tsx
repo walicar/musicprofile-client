@@ -24,7 +24,7 @@ const SpotifyRecommender: React.FC = () => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -32,7 +32,7 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: true, refetchOnWindowFocus: false }
+    { refetchOnMount: true, refetchOnWindowFocus: false },
   );
   if (spotifyError) return <div>Could not connect to DB</div>;
   if (status === "success") {
@@ -44,12 +44,12 @@ const SpotifyRecommender: React.FC = () => {
       url!,
       token.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify"
+      "spotify",
     ),
     {
       refetchOnWindowFocus: false,
       enabled: !!spotifyData && !!url,
-    }
+    },
   );
 
   useEffect(() => {}, [session, token]);

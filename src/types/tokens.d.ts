@@ -10,8 +10,8 @@ type Token = {
 };
 
 type Tokens = {
-  spotify?: Token,
-  lastfm?: Token
-}
+  spotify?: Token;
+  lastfm?: Token;
+};
 
-type SupportedService = 'spotify' | 'lastfm'
+type SupportedService = "spotify" | "lastfm";

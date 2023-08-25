@@ -7,7 +7,7 @@ import { writeLocalStorage } from "@utils/localStorage";
 const createInstance = (
   service: string,
   session: Session,
-  access_token: string
+  access_token: string,
 ) => {
   console.log("creating instance");
   const instance = axios.create({
@@ -44,7 +44,7 @@ const createInstance = (
         }
       }
       return Promise.reject(err);
-    }
+    },
   );
   return instance;
 };
@@ -58,20 +58,20 @@ const makeServiceParams = (
   url: string,
   access_token: string,
   session: Session,
-  service: string
+  service: string,
 ): ServiceParams => ({
   url,
   access_token,
   session,
-  service
+  service,
 });
 
 export default function useService(
   key: string,
   serviceParams: ServiceParams,
-  opt: any
+  opt: any,
 ) {
-  const {service, session, access_token, url} = serviceParams;
+  const { service, session, access_token, url } = serviceParams;
   const instance = createInstance(service, session, access_token);
   return useQuery([key, url], () => queryService(instance, url), opt);
 }

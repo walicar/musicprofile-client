@@ -38,7 +38,8 @@ describe("Testing Spotify Utils", () => {
       ],
     };
     const result = getSpotifyRecommendationUrl(data);
-    const expected = "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=id3%2Cid4&seed_tracks=id1"
+    const expected =
+      "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=id3%2Cid4&seed_tracks=id1";
     expect(result).toEqual(expected);
   });
 });
