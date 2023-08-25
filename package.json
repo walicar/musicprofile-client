@@ -13,7 +13,6 @@
     "test:auto": "npx playwright"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/supabase-js": "^2.32.0",
     "@types/jest": "^29.5.3",
@@ -25,7 +24,6 @@
     "react-query": "^3.39.3",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
-    "redux": "^4.2.1",
     "use-local-storage-state": "^19.0.2"
   },
   "devDependencies": {
