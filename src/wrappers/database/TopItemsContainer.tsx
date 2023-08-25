@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import List from "@components/List";
 import Error from "@components/Error";
-import { isEmpty } from "@utils/util";
+import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -37,10 +37,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
       updateAt.setDate(updateAt.getDate() + 1);
       if (updateAt < new Date()) {
         console.log("send update here");
-        const newTokens = await tokens.validateTokens(["spotify"]);
-        if (!isEmpty(newTokens)) {
-          setToken(newTokens["spotify"]);
-        }
+        await validate(tokens.validateTokens, [type], { [type]: setToken });
         const message = await server.postUpdate({spotify: token.access_token});
         console.log(message)
       }
