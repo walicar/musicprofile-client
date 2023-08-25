@@ -1,88 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import store from "@redux/store";
-import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
-import { isEmpty } from "@utils/util";
+import useService, { makeServiceParams } from "@hooks/useService";
+import { useQuery } from "react-query";
+import TopItemsWrapper from "@database/TopItemsWrapper";
+import { getSpotifyRecommendationUrl } from "./spotify.utils";
 const ID = import.meta.env.VITE_SUPABASE_ID;
-import {
-  selectTokenCollection,
-  validateTokens,
-  useAppSelector,
-} from "@redux/tokens";
 
-let initalized = false;
 const SpotifyRecommender: React.FC = () => {
-  const [token]: any = useLocalStorageState("spotify-access-token");
-  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const tokenCollection = useAppSelector(selectTokenCollection);
-  const tokenStatus = useAppSelector((state) => state.tokens.status);
-  const [errorMessage, setErrorMessage] = useState("");
-  const { status, error, data, refetch } = useQuery(
-    "spotifyRecommendData",
-    async () => {
-      const { access_token } = JSON.parse(tokenCollection.spotify);
-      const url =
-        "https://api.spotify.com/v1/recommendations?limit=10&market=EG&seed_artists=2UUvyxJDBsg7jnRwMAxNND&seed_genres=chill+breakcore&seed_tracks=0iDqn417kRnYSjbUAkibvu";
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
-      const res = await fetch(url, { method: "GET", headers: headers });
-      const data = await res.json();
-      if (res.status === 401) {
-        console.log("yo was this set");
-        setErrorMessage(data.error.message);
-      }
-      return data;
-    },
-    {
-      enabled: !isEmpty(tokenCollection) && tokenStatus === "idle",
-      refetchOnMount: false,
-    }
-  );
-
-  useEffect(() => {
-    const validatePayload = {
-      services: ["spotify"],
-      session: {
-        accessToken: session.access_token,
-        id: session.user.id,
-      },
-    };
-
-    if (!initalized && tokenStatus === "idle") {
-      store.dispatch(validateTokens(validatePayload));
-      initalized = true;
-    }
-
-    if (
-      tokenStatus === "validated" &&
-      errorMessage === "The access token expired"
-    ) {
-      setErrorMessage("");
-      store.dispatch(validateTokens(validatePayload));
-    }
-
-    if (tokenStatus === "validated") {
-      console.log("SpotifyRecommender: validated");
-    }
-  }, [tokenStatus, errorMessage]);
-
+  let url = undefined;
+  const [token]: any = useLocalStorageState("spotify-token");
   if (!token) {
     return <div>Disconnected from Spotify</div>;
   }
-  if (error) {
-    return <Error message={error} />;
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const {
+    status,
+    data: spotifyData,
+    error: spotifyError,
+  }: any = useQuery(
+    ["spotify_topitems", session],
+    async () => {
+      const topitems = new TopItemsWrapper(
+        session.access_token,
+        session.user.id
+      );
+      return await topitems.getTopItems("spotify", [
+        "songs",
+        "artists",
+        "genres",
+      ]);
+    },
+    { refetchOnMount: true, refetchOnWindowFocus: false }
+  );
+  if (spotifyError) return <div>Could not connect to DB</div>;
+  if (status === "success") {
+    url = getSpotifyRecommendationUrl(spotifyData);
   }
+  const { data, isSuccess, isLoading, error, refetch } = useService(
+    "spotifyRecommendation",
+    makeServiceParams(
+      url!,
+      token.access_token,
+      { auth_token: session.access_token, id: session.user.id },
+      "spotify"
+    ),
+    {
+      refetchOnWindowFocus: false,
+      enabled: !!spotifyData && !!url,
+    }
+  );
 
-  if (data?.error) {
-    return <Error message={data.error.message} />;
-  }
+  useEffect(() => {}, [session, token]);
 
-  if (status === "loading") {
+  if (!token) return <div>Disconnected from Spotify</div>;
+
+  if (error) return <Error message={error} />;
+
+  if (isLoading) {
     return <Loading />;
-  } else if (status === "success") {
+  } else if (isSuccess) {
     return (
       <>
         <ul>

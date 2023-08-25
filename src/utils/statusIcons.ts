@@ -1,5 +1,5 @@
 const statusIcons: StatusIcons = {
-    promote: "🔼",
+    promoted: "🔼",
     unchanged: "⏺️",
     demoted: "🔽"
 }
