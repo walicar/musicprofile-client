@@ -1,16 +1,10 @@
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useSearchParams } from "react-router-dom";
-import { getSpotifyToken } from "./spotify.service";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PageLoader from "@components/PageLoader";
+import { getSpotifyToken } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
-import { TokenManager } from "@database/TokenManager";
-import {
-  store,
-  write,
-  useAppSelector,
-  selectTokenCollection,
-} from "@redux/tokens";
+import { TokenWrapper } from "@database/TokenWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -20,36 +14,30 @@ const SpotifyCallback: React.FC = () => {
     "spotify-code-verifier",
   ]);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  useAppSelector(selectTokenCollection);
+  const [_token, setToken] = useLocalStorageState(`spotify-token`)
   const [params] = useSearchParams();
   const code = params.get("code");
-  const codeVerifier = cookies["spotify-code-verifier"];
-  const tokenManager = new TokenManager(session.access_token, session.user.id);
-
+  const navigate = useNavigate();
+  const db = new TokenWrapper(session.access_token, session.user.id);
   useEffect(() => {
     const getToken = async () => {
       try {
-        const data = await getSpotifyToken(code!, codeVerifier);
-        await tokenManager.writeTokens({ spotify: data.refresh_token });
-        // dispatach save token to redux instead of access token
-        const token = {
-          access_token: data.access_token,
-          expires_in: data.expires_in,
-          created_at: data.created_at,
-        };
-        store.dispatch(write({ spotify: token }));
+        const data = await getSpotifyToken(code!, cookies["spotify-code-verifier"]);
+        const {refresh_token, ...token_info} = data;
+        await db.writeTokens({spotify: refresh_token});
+        setToken({...token_info})
         removeCookie("spotify-code-verifier", { path: "/" });
-        window.location.replace("/dashboard");
+        navigate("/dashboard");
+        // window.location.replace("/dashboard");
       } catch (e) {
         console.log(e);
       }
     };
     if (!initalized && session) {
-      // prevent infinite loop
       initalized = true;
       getToken();
     }
-  }, [code, codeVerifier]);
+  }, []);
   return <PageLoader message={"Connecting to Spotify..."} />;
 };
 export default SpotifyCallback;
