@@ -27,14 +27,15 @@ const createInstance = (
         console.log(err.response);
         console.log("REFRESHING TOKEN!!!");
         const db = new TokenWrapper(session.auth_token, session.id);
-        const refreshToken: string = await db.getToken(service);
+        const refreshToken: string = await db.getRefreshToken(service);
         const { access_token, refresh_token, expires_in }: any =
           await refreshHandlers[service](refreshToken);
         const created_at = Date();
         console.log(access_token, refresh_token, expires_in);
         //
-        await db.writeTokens({ [service]: refresh_token });
+        await db.writeRefreshTokens({ [service]: refresh_token });
         const serviceToken: Token = { access_token, created_at, expires_in };
+        // writing to localStorage outside of react does not rerender components
         writeLocalStorage(`${service}-token`, serviceToken);
         console.log("ORIGINAL REQUEST REAL? ", !!originalRequest);
         if (originalRequest) {
@@ -49,20 +50,30 @@ const createInstance = (
 };
 
 const queryService = async (instance: AxiosInstance, url: string) => {
-  console.log("queryService called");
   const { data } = await instance.get(url);
-  console.log(data);
   return data;
 };
 
-export default function useService(
-  key: string,
+const makeServiceParams = (
   url: string,
   access_token: string,
-  service: string,
   session: Session,
+  service: string
+): ServiceParams => ({
+  url,
+  access_token,
+  session,
+  service
+});
+
+export default function useService(
+  key: string,
+  serviceParams: ServiceParams,
   opt: any
 ) {
+  const {service, session, access_token, url} = serviceParams;
   const instance = createInstance(service, session, access_token);
   return useQuery([key, url], () => queryService(instance, url), opt);
 }
+
+export { makeServiceParams };
