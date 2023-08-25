@@ -80,22 +80,17 @@ export class TokenWrapper {
     }
   }
 
-  isTokenExpired(token: Token) {
-    const expire = new Date(token.created_at);
-    expire.setSeconds(expire.getSeconds() + token.expires_in);
-    const now = new Date();
-    console.log("Checking if expired", now > expire);
-    return now > expire;
-  };
+  
 
   async validateTokens(services: string[]) {
     let refreshedTokens: any = {};
     let newRefreshTokens: TokenEntries = {};
     // might want to refactor this into, getRefreshToken("service");
     for (const service of services) {
-      const token: any = getLocalStorageToken(`${service}-token`); // gotta fix this
+      const token: any = await getLocalStorageToken(`${service}-token`); // gotta fix this
       console.log("INSIDE VALIDATE TOKENS", token);
-      if (token && this.isTokenExpired(token)) {
+      const expired = isTokenExpired(token);
+      if (token && expired) {
         const curRefreshToken = await this.getRefreshToken(service);
         const { refresh_token, access_token, expires_in, error } =
           await refreshHandlers[service](curRefreshToken);
@@ -128,3 +123,12 @@ export class TokenWrapper {
     return refreshedTokens as Tokens;
   }
 }
+
+const isTokenExpired = (token: Token): boolean => {
+  console.log("tokenExpired is being called: ", token)
+  const expire = new Date(token.created_at);
+  expire.setSeconds(expire.getSeconds() + token.expires_in);
+  const now = new Date();
+  console.log("Checking if expired", now > expire);
+  return now > expire;
+};
