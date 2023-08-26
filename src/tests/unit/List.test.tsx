@@ -18,15 +18,15 @@ describe("Testing List component", () => {
 
   test("List an array of song objects", async () => {
     const myItems = [
-      { name: "Dance Now", artist: "James" },
-      { name: "Kick Off", artist: "Jarvis" },
-      { name: "Razor", artist: "Bettie" },
+      { name: "Dance Now", artist: "James", status: "promoted" },
+      { name: "Kick Off", artist: "Jarvis", status: "unchanged"},
+      { name: "Razor", artist: "Bettie", status: "demoted"},
     ];
     render(<List items={myItems} title={"songs"} />);
 
-    const item1 = await screen.findByText("Dance Now by James");
-    const item2 = await screen.findByText("Kick Off by Jarvis");
-    const item3 = await screen.findByText("Razor by Bettie");
+    const item1 = await screen.findByText("Dance Now by James === 🔼");
+    const item2 = await screen.findByText("Kick Off by Jarvis === ⏺️");
+    const item3 = await screen.findByText("Razor by Bettie === 🔽");
 
     expect(item1).toBeInTheDocument();
     expect(item2).toBeInTheDocument();
