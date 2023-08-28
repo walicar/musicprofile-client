@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useSupabaseClient } from "../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 
@@ -8,7 +8,8 @@ const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
     console.log("Username:", username);
     console.log("Email:", email);
     console.log("Password:", password);
@@ -30,6 +31,7 @@ const SignUpForm: React.FC = () => {
       <div>
         <label htmlFor="username">Username:</label>
         <input
+          required
           type="text"
           id="username"
           value={username}
@@ -39,6 +41,7 @@ const SignUpForm: React.FC = () => {
       <div>
         <label htmlFor="email">Email:</label>
         <input
+          required
           type="email"
           id="email"
           value={email}
@@ -48,6 +51,7 @@ const SignUpForm: React.FC = () => {
       <div>
         <label htmlFor="password">Password:</label>
         <input
+          required
           type="password"
           id="password"
           value={password}
