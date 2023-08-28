@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
-const ID = import.meta.env.VITE_SUPABASE_ID;
 const URL = import.meta.env.VITE_CLIENT_URL;
 const ForgotForm: React.FC = () => {
-  const supabase: SupabaseClient<any> = useSupabaseClient();
+  const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -14,15 +13,16 @@ const ForgotForm: React.FC = () => {
     return emailRegex.test(email);
   };
 
-  const submit = async () => {
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!email || !isValid(email)) {
       setMessage("Please enter a valid email");
     }
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${URL}/recovery`,
+      redirectTo: `${URL}/settings`,
     });
-    console.log("FORGOR PASSWORD DATA: ", data);
-    console.log("FORGOR PASSWORD ERROR: ", error);
+    console.log("FORGORT PASSWORD DATA: ", data);
+    console.log("FORGORT PASSWORD ERROR: ", error);
     setMessage(`Recovery instructions sent to ${email}`);
   };
 
@@ -33,6 +33,7 @@ const ForgotForm: React.FC = () => {
         <div>
           <label htmlFor="email">Email:</label>
           <input
+            required
             type="email"
             id="email"
             value={email}
@@ -40,7 +41,6 @@ const ForgotForm: React.FC = () => {
               setEmail(e.target.value);
               setIsValidEmail(true); // Reset validation on input change
             }}
-            required
           />
           {!isValidEmail && (
             <p style={{ color: "red" }}>Please enter a valid email.</p>
