@@ -8,14 +8,19 @@ const UpdateUserForm: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
-  const updateUsername = () => {
+  const updateUsername = async () => {
     console.log("handle updating user");
   };
-  const updateEmail = () => {
-    console.log("handle updating email");
+  const updateEmail = async () => {
+    const {data, error} = await supabase.auth.updateUser({email: email});
+    console.log("UpdateEmail Data", data)
+    console.log("UpdateEmail Err", error)
   };
-  const updatePassword = () => {
-    console.log("handle updating password");
+  const updatePassword = async () => {
+    const { data, error } = await supabase.auth.updateUser({password: password});
+    console.log("UpdateEmail Data", data)
+    console.log("UpdateEmail Err", error)
+
   };
 
   return (
