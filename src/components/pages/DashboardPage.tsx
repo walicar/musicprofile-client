@@ -10,6 +10,7 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const username = !!session.user.user_metadata.username ? session.user.user_metadata.username : session.user.email;
 
   useEffect(() => {
     if (!session) {
@@ -20,12 +21,11 @@ const DashboardPage: React.FC = () => {
   if (!session) {
     return <></>;
   }
-
   return (
     <PageLayout>
       <div>
         <h1>Dashboard</h1>
-        <h2>Welcome {session.user.email}</h2>
+        <h2>Welcome {username}</h2>
         <StubButton />
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
