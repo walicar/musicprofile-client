@@ -30,6 +30,7 @@ const SignInForm: React.FC = () => {
         <div>
           <label htmlFor="email">Email:</label>
           <input
+            required
             type="email"
             id="email"
             value={email}
@@ -39,6 +40,7 @@ const SignInForm: React.FC = () => {
         <div>
           <label htmlFor="password">Password:</label>
           <input
+            required
             type="password"
             id="password"
             value={password}
