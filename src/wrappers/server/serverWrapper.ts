@@ -7,10 +7,8 @@ const URL = import.meta.env.VITE_SERVER_URL;
 
 export default class ServerWrapper {
   accessToken: string;
-  id: string;
-  constructor(_accessToken: string, _id: string) {
+  constructor(_accessToken: string) {
     this.accessToken = _accessToken;
-    this.id = _id;
   }
   async postUpdate(serviceTokens: ServiceTokens) {
     const headers = {
@@ -18,7 +16,7 @@ export default class ServerWrapper {
       Authorization: this.accessToken,
       "Content-Type": "application/json",
     };
-    const body = { tokens: { ...serviceTokens }, id: this.id };
+    const body = { tokens: { ...serviceTokens } };
     const opt = {
       method: "POST",
       headers: headers,

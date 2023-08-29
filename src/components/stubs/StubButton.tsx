@@ -31,13 +31,13 @@ const StubButton: React.FC = () => {
   };
 
   const deleter = async () => {
-    const server = new ServerWrapper(session.access_token, session.user.id);
+    const server = new ServerWrapper(session.access_token);
     const message = await server.delete();
     console.log(message);
   };
 
   const clickUpdate = async () => {
-    const server = new ServerWrapper(session.access_token, session.user.id);
+    const server = new ServerWrapper(session.access_token);
     const refreshedTokens = await tokens.validateTokens(["spotify"]);
     if (!isEmpty(refreshedTokens)) {
       setToken(refreshedTokens["spotify"]);
@@ -47,7 +47,7 @@ const StubButton: React.FC = () => {
   };
 
   const clickUpdateGeneral = async () => {
-    const server = new ServerWrapper(session.access_token, session.user.id);
+    const server = new ServerWrapper(session.access_token);
     await validate(tokens.validateTokens, ["spotify"], { spotify: setToken });
     const message = await server.postUpdate({ spotify: token.access_token });
     console.log(message);
