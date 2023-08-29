@@ -49,7 +49,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
         console.log("send update here");
         const tokens = new TokenWrapper(session.access_token, session.user.id);
         await validate(tokens.validateTokens, [type], { [type]: setToken });
-        const server = new ServerWrapper(session.access_token, session.user.id);
+        const server = new ServerWrapper(session.access_token);
         const message = await server.postUpdate({
           spotify: token.access_token,
         });
