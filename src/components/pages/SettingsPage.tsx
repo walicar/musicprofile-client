@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PageLayout from "../PageLayout";
 import { useNavigate } from "react-router-dom";
+import UpdateUserForm from "@components/forms/UpdateUserForm";
 import SpotifyButton from "@spotify/SpotifyButton";
 import LastfmButton from "@lastfm/LastfmButton";
 import useLocalStorageState from "use-local-storage-state";
@@ -24,7 +25,10 @@ const SettingsPage: React.FC = () => {
     <PageLayout>
       <div>
         <h1>Settings</h1>
-        <h2>Welcome {session.user.email}</h2>
+        <span>Welcome {session.user.email}</span>
+        <h2>Update Account Information</h2>
+        <UpdateUserForm />
+        <h2>Streaming Platforms</h2>
         <SpotifyButton />
         <LastfmButton />
       </div>
