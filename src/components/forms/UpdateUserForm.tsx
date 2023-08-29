@@ -9,18 +9,23 @@ const UpdateUserForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
 
   const updateUsername = async () => {
-    console.log("handle updating user");
+    const { data, error } = await supabase.auth.updateUser({
+      data: { username: username },
+    });
+    console.log("UpdateEmail Data", data);
+    console.log("UpdateEmail Err", error);
   };
   const updateEmail = async () => {
-    const {data, error} = await supabase.auth.updateUser({email: email});
-    console.log("UpdateEmail Data", data)
-    console.log("UpdateEmail Err", error)
+    const { data, error } = await supabase.auth.updateUser({ email: email });
+    console.log("UpdateEmail Data", data);
+    console.log("UpdateEmail Err", error);
   };
   const updatePassword = async () => {
-    const { data, error } = await supabase.auth.updateUser({password: password});
-    console.log("UpdateEmail Data", data)
-    console.log("UpdateEmail Err", error)
-
+    const { data, error } = await supabase.auth.updateUser({
+      password: password,
+    });
+    console.log("UpdateEmail Data", data);
+    console.log("UpdateEmail Err", error);
   };
 
   return (
