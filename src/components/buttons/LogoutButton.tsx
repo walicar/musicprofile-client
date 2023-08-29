@@ -9,6 +9,7 @@ const LogoutButton: React.FC = () => {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    localStorage.clear();
     navigate("/");
   };
 
