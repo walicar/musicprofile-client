@@ -10,7 +10,6 @@ const StubButton: React.FC = () => {
   const [token, setToken]: any = useLocalStorageState("spotify-token");
   const [session]: any = useLocalStorageState("sb-localhost-auth-token");
   const tokens = new TokenWrapper(session.access_token, session.user.id);
-  const server = new ServerWrapper(session.access_token, session.user.id);
 
   useEffect(() => {
     console.log("experiment modified: ", medal);
@@ -31,7 +30,14 @@ const StubButton: React.FC = () => {
     stubMedal(someThing, "Kirby", setMedal);
   };
 
+  const deleter = async () => {
+    const server = new ServerWrapper(session.access_token, session.user.id);
+    const message = await server.delete();
+    console.log(message);
+  };
+
   const clickUpdate = async () => {
+    const server = new ServerWrapper(session.access_token, session.user.id);
     const refreshedTokens = await tokens.validateTokens(["spotify"]);
     if (!isEmpty(refreshedTokens)) {
       setToken(refreshedTokens["spotify"]);
@@ -41,6 +47,7 @@ const StubButton: React.FC = () => {
   };
 
   const clickUpdateGeneral = async () => {
+    const server = new ServerWrapper(session.access_token, session.user.id);
     await validate(tokens.validateTokens, ["spotify"], { spotify: setToken });
     const message = await server.postUpdate({ spotify: token.access_token });
     console.log(message);
@@ -53,6 +60,7 @@ const StubButton: React.FC = () => {
       <button onClick={clickUpdate}>CLICK TO UPDATE</button>
       <button onClick={clickUpdateGeneral}>GENERAL CLICK TO UPDATE</button>
       <button onClick={stubby}>Secret stubby</button>
+      <button onClick={deleter}>!!!!!!DELETE ACCOUNT!!!!!</button>
       {token ? <p>I can see token</p> : <p>No token 🙁</p>}
       {medal ? <p>I can see medal {`${medal}`}</p> : <p>No medal 🙁</p>}
     </div>
