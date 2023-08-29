@@ -29,4 +29,19 @@ export default class ServerWrapper {
     const data = await res.json();
     return data;
   }
+  async delete() {
+    const headers = {
+      // don't need Bearer here...
+      Authorization: this.accessToken,
+      "Content-Type": "application/json",
+    };
+    const opt = {
+      method: "DELETE",
+      headers: headers,
+    };
+    const res = await fetch(URL! + "/delete", opt);
+    if (!res.ok) return { error: res.statusText };
+    const data = await res.json();
+    return data;
+  }
 }
