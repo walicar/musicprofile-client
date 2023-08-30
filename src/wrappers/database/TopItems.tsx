@@ -21,12 +21,12 @@ const Categories = {
 };
 
 let initialized = false;
-const TopItemsContainer: React.FC<Prop> = ({ type }) => {
+const TopItems: React.FC<Prop> = ({ type }) => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [token, setToken]: any = useLocalStorageState(`${type}-token`);
   const [category, setCategory] = useState(Categories.SONGS);
   //
-  const { status, error, data, refetch }: any = useQuery(
+  const { status, error, data }: any = useQuery(
     [`${type}_topitems`, session],
     async () => {
       const topitems = new TopItemsWrapper(
@@ -133,4 +133,4 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   }
 };
 
-export default TopItemsContainer;
+export default TopItems;
