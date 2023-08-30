@@ -13,6 +13,8 @@
     "test:auto": "npx playwright"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/supabase-js": "^2.32.0",
     "@types/jest": "^29.5.3",
