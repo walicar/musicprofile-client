@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PageLayout from "../PageLayout";
 import SignInForm from "../forms/SignInForm";
 import ForgotForm from "@components/forms/ForgotForm";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,7 +24,7 @@ const LoginPageBeta: React.FC = () => {
   if (location.state?.from.pathname) console.log("HEY COOL");
 
   return (
-    <PageLayout>
+    <>
       <h1>Login Page</h1>
       {forms[form]}
       <button id={"signin"} onClick={() => setForm("signin")}>
@@ -34,7 +33,7 @@ const LoginPageBeta: React.FC = () => {
       <button id={"forgot"} onClick={() => setForm("forgot")}>
         Forgot
       </button>
-    </PageLayout>
+    </>
   );
 };
 

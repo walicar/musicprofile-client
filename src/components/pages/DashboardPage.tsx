@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PageLayout from "../PageLayout";
 import { useNavigate } from "react-router-dom";
 import StubButton from "../stubs/StubButton";
 import useLocalStorageState from "use-local-storage-state";
@@ -22,16 +21,14 @@ const DashboardPage: React.FC = () => {
     return <></>;
   }
   return (
-    <PageLayout>
-      <div>
+      <>
         <h1>Dashboard</h1>
         <h2>Welcome {username}</h2>
         <StubButton />
         <h2>Spotify Recommender</h2>
         <SpotifyRecommender />
         <TopItemsContainer type={"spotify"} />
-      </div>
-    </PageLayout>
+      </>
   );
 };
 
