@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "./navbar/NavBar";
 
 type Props = {
   children?: React.ReactNode;
@@ -8,7 +7,6 @@ type Props = {
 const PageLayout: React.FC<Props> = ({ children }) => {
   return (
     <div>
-      <NavBar />
       <div>{children}</div>
     </div>
   );
