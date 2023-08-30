@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PageLayout from "../PageLayout";
 import SignUpForm from "@components/forms/SignUpForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
@@ -16,10 +15,10 @@ const SignupPage: React.FC = () => {
   });
   if (location.state?.from.pathname) console.log("HEY COOL");
   return (
-    <PageLayout>
+    <>
       <h1>Signup Page</h1>
       <SignUpForm />
-    </PageLayout>
+    </>
   );
 };
 
