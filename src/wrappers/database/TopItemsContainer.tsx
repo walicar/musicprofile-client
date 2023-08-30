@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TopItemsWrapper from "./TopItemsWrapper";
 import { TokenWrapper } from "./TokenWrapper";
 import ServerWrapper from "@server/ServerWrapper";
@@ -14,16 +14,24 @@ type Prop = {
   type: string;
 };
 
+const Categories = {
+  SONGS: "songs",
+  ARTISTS: "artists",
+  GENRES: "genres",
+};
+
 let initialized = false;
 const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [token, setToken]: any = useLocalStorageState(`${type}-token`);
+  const [category, setCategory] = useState(Categories.SONGS);
+  //
   const { status, error, data, refetch }: any = useQuery(
     [`${type}_topitems`, session],
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       const msg = await topitems.getTopItems(type, [
         "songs",
@@ -32,7 +40,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
       ]);
       return msg;
     },
-    { refetchOnWindowFocus: false },
+    { refetchOnWindowFocus: false }
   );
 
   useEffect(() => {
@@ -40,7 +48,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
       console.log("Handlign Update");
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);
@@ -56,7 +64,7 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
         console.log(message);
       }
     };
-    if (!initialized) {
+    if (!initialized && token) {
       handleUpdate();
       initialized = true;
     }
@@ -73,20 +81,48 @@ const TopItemsContainer: React.FC<Prop> = ({ type }) => {
   if (status === "success") {
     const { songs, artists, genres } = data;
     return (
-      <>
-        <h2>Your {type} Top Items!</h2>
-        <h3>songs</h3>
-        {songs ? <List items={songs} title={"genres"} /> : <p>No songs</p>}
-        <h3>artists</h3>
-        {artists ? (
+      <div>
+        <h1>{type.charAt(0).toUpperCase() + type.slice(1)} Leaderboard</h1>
+        <span className="isolate inline-flex rounded-md shadow-sm">
+          <button
+            type="button"
+            className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            onClick={() => setCategory(Categories.SONGS)}
+          >
+            Songs
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            onClick={() => setCategory(Categories.ARTISTS)}
+          >
+            Artists
+          </button>
+          <button
+            type="button"
+            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            onClick={() => setCategory(Categories.GENRES)}
+          >
+            Genres
+          </button>
+        </span>
+
+        {category === Categories.SONGS ? (
+          <List items={songs} title={"genres"} />
+        ) : (
+          <></>
+        )}
+        {category === Categories.ARTISTS ? (
           <List items={artists} title={"genres"} />
         ) : (
-          <p>No artists</p>
+          <></>
         )}
-        <h3>genres</h3>
-        {genres ? <List items={genres} title={"genres"} /> : <p>No genre</p>}
-        <button onClick={refetch as any}>Refetch</button>
-      </>
+        {category === Categories.GENRES ? (
+          <List items={genres} title={"genres"} />
+        ) : (
+          <></>
+        )}
+      </div>
     );
   }
 
