@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageLayout from "../PageLayout";
 import SignInForm from "../forms/SignInForm";
-import SignUpForm from "../forms/SignUpForm";
 import ForgotForm from "@components/forms/ForgotForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
@@ -11,7 +10,6 @@ const forms: {
   [form: string]: any;
 } = {
   signin: <SignInForm />,
-  signup: <SignUpForm />,
   forgot: <ForgotForm />,
 };
 
@@ -32,9 +30,6 @@ const LoginPageBeta: React.FC = () => {
       {forms[form]}
       <button id={"signin"} onClick={() => setForm("signin")}>
         Sign In
-      </button>
-      <button id={"signup"} onClick={() => setForm("signup")}>
-        Sign Up
       </button>
       <button id={"forgot"} onClick={() => setForm("forgot")}>
         Forgot

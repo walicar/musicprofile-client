@@ -6,18 +6,16 @@ type Props = {
   label: any;
 };
 
-const NavBarPage: React.FC<Props> = ({ path, label }) => {
+const HeaderPage: React.FC<Props> = ({ path, label }) => {
   return (
     <NavLink
       to={path}
       end
-      className={({ isActive }) =>
-        "nav-bar__tab " + (isActive ? "nav-bar__tab--active" : "")
-      }
+      className="text-sm font-semibold leading-6 text-gray-900"
     >
       {label}
     </NavLink>
   );
 };
 
-export default NavBarPage;
+export default HeaderPage;
