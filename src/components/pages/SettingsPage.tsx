@@ -13,6 +13,8 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const [spotify]: any = useLocalStorageState("spotify-token");
+  const [lastfm]: any = useLocalStorageState("lastfm-token");
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const navigate = useNavigate();
 
@@ -84,27 +86,32 @@ const SettingsPage: React.FC = () => {
               className="mt-3 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6"
             >
               <li className="flex justify-between gap-x-6 py-3">
-                <div className="font-medium text-gray-900">Spotify</div>
-                <button
-                  type="button"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Update
-                </button>
+                <div className="flex justify-center items-center">
+                  <span
+                    className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white ${
+                      spotify ? "bg-green-400" : "bg-red-400"
+                    }`}
+                  />
+
+                  <div className="font-medium text-gray-900">Spotify</div>
+                </div>
+                <SpotifyButton />
               </li>
               <li className="flex justify-between gap-x-6 py-3">
-                <div className="font-medium text-gray-900">Lastfm</div>
-                <button
-                  type="button"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Update
-                </button>
+                <div className="flex justify-center items-center">
+                  <span
+                    className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white ${
+                      lastfm ? "bg-green-400" : "bg-red-400"
+                    } `}
+                  />
+                  <div className="font-medium text-gray-900">Lastfm</div>
+                </div>
+                <LastfmButton />
               </li>
             </ul>
           </div>
           <div className="flex justify-center items-center flex-auto">
-              <DeleteButton />
+            <DeleteButton />
           </div>
         </div>
       </main>

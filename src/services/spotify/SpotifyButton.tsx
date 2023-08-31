@@ -16,6 +16,7 @@ const SpotifyButton: React.FC = () => {
 
   const check = async () => {
     try {
+      // TODO: put it in the TopItems wrapper please!
       const { data }: any = await supabase
         .from("spotify_topitems")
         .select("id")
@@ -42,15 +43,23 @@ const SpotifyButton: React.FC = () => {
   };
 
   return (
-    <div>
-      <>
-        {token ? (
-          <button onClick={disconnect}>disconnect from spotify</button>
-        ) : (
-          <button onClick={connect}>connect to spotify</button>
-        )}
-      </>
-    </div>
+    <>
+      {token ? (
+        <button
+          className="font-semibold text-indigo-600 hover:text-indigo-500"
+          onClick={disconnect}
+        >
+          Disconnect
+        </button>
+      ) : (
+        <button
+          className="font-semibold text-indigo-600 hover:text-indigo-500"
+          onClick={connect}
+        >
+          Connect
+        </button>
+      )}
+    </>
   );
 };
 
