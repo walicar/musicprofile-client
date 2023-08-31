@@ -81,12 +81,11 @@ const TopItems: React.FC<Prop> = ({ type }) => {
   if (status === "success") {
     const { songs, artists, genres } = data;
     return (
-      <div>
-        <h1>{type.charAt(0).toUpperCase() + type.slice(1)} Leaderboard</h1>
-        <span className="isolate inline-flex rounded-md shadow-sm">
+      <>
+        <span className="isolate inline-flex">
           <button
             type="button"
-            className="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative inline-flex items-center rounded-tl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             onClick={() => setCategory(Categories.SONGS)}
           >
             Songs
@@ -100,29 +99,30 @@ const TopItems: React.FC<Prop> = ({ type }) => {
           </button>
           <button
             type="button"
-            className="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            className="relative -ml-px inline-flex items-center rounded-tr-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             onClick={() => setCategory(Categories.GENRES)}
           >
             Genres
           </button>
         </span>
-
-        {category === Categories.SONGS ? (
-          <List items={songs} title={"genres"} />
-        ) : (
-          <></>
-        )}
-        {category === Categories.ARTISTS ? (
-          <List items={artists} title={"genres"} />
-        ) : (
-          <></>
-        )}
-        {category === Categories.GENRES ? (
-          <List items={genres} title={"genres"} />
-        ) : (
-          <></>
-        )}
-      </div>
+        <div className="overflow-y-auto max-h-[70vh]">
+          {category === Categories.SONGS ? (
+            <List items={songs} title={"genres"} />
+          ) : (
+            <></>
+          )}
+          {category === Categories.ARTISTS ? (
+            <List items={artists} title={"genres"} />
+          ) : (
+            <></>
+          )}
+          {category === Categories.GENRES ? (
+            <List items={genres} title={"genres"} />
+          ) : (
+            <></>
+          )}
+        </div>
+      </>
     );
   }
 

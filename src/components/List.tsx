@@ -16,17 +16,21 @@ const List: React.FC<Prop> = ({ items, title }) => {
       </ol>
     );
   } else {
-    // assume that we a listing out songs from DB
-    // is there a better way to do this
     return (
-      <ol>
+      <ul role="list" className="space-y-2 bg-gray-100 p-3 max-height-[90vh] rounded-b-md rounded-tr-md">
         {items.map((item: TopItemEntry, index: number) => (
-          <li key={`${title}_${index}`}>
-            {item.name} {item.artist ? `by ${item.artist} ` : ""}===
-            {item.status ? " " + statusIcons[item.status] : ""}
+          <li
+            key={`${title}_${index}`}
+            className="text-sm overflow-hidden rounded-md justify-between bg-white px-5 py-2 shadow flex"
+          >
+              <div className="flex items-center">
+                {index + 1}. {item.name}{" "}
+                {item.artist ? `by ${item.artist} ` : ""}
+              </div>
+              <div className="mr-2">{statusIcons[item.status]}</div>
           </li>
         ))}
-      </ol>
+      </ul>
     );
   }
 };
