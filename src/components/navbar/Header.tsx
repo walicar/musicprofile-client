@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 //
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import LoginButton from "@components/buttons/LoginButton";
 import SignupButton from "@components/buttons/SignupButton";
 //
@@ -20,6 +20,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <header className="bg-white">
@@ -28,17 +29,17 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <button onClick={() => navigate("/")} className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt=""
             />
-          </a>
+          </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
+          {session ? navigation.map((item) => (
             <NavLink
               key={item.name}
               to={item.href}
@@ -51,7 +52,7 @@ export default function Header() {
             >
               {item.name}
             </NavLink>
-          ))}
+          )): <></>}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
           {session ? (
