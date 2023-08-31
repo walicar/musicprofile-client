@@ -45,8 +45,8 @@ const SettingsPage: React.FC = () => {
             <p className="mt-1 text-sm leading-5 text-gray-500">
               Update your profile information
             </p>
-            <dl className="mt-6 space-y-3 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-              <div className="pt-3 sm:flex items-center">
+            <dl className="mt-3 space-y-1 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
+              <div className="pt-2 pb-1 sm:flex items-center">
                 <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
                   Username
                 </dt>
@@ -54,7 +54,7 @@ const SettingsPage: React.FC = () => {
                   <UpdateUsernameForm supabase={supabase} />
                 </dd>
               </div>
-              <div className="pt-3 sm:flex items-center">
+              <div className="pt-2 pb-1  sm:flex items-center">
                 <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
                   Email address
                 </dt>
@@ -62,7 +62,7 @@ const SettingsPage: React.FC = () => {
                   <UpdateEmailForm supabase={supabase} />
                 </dd>
               </div>
-              <div className="pt-3 sm:flex items-center">
+              <div className="pt-2 pb-1  sm:flex items-center">
                 <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
                   Password
                 </dt>
@@ -81,7 +81,7 @@ const SettingsPage: React.FC = () => {
             </p>
             <ul
               role="list"
-              className="mt-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6"
+              className="mt-3 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6"
             >
               <li className="flex justify-between gap-x-6 py-3">
                 <div className="font-medium text-gray-900">Spotify</div>
