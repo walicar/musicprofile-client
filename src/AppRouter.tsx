@@ -6,6 +6,7 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import SettingsPage from "./components/pages/SettingsPage";
 import CallbackPage from "./components/pages/CallbackPage";
 import SignupPage from "@components/pages/SignupPage";
+import ForgotPage from "@components/pages/ForgotPage";
 import Header from "@components/navbar/Header";
 
 function AppRouter() {
@@ -18,6 +19,7 @@ function AppRouter() {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgot" element={<ForgotPage />} />
         <Route path="/callback/*" element={<CallbackPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
