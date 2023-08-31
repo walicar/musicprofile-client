@@ -11,7 +11,6 @@ import LogoutButton from "@components/buttons/LogoutButton";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const navigation = [
-  { name: "Home", href: "/" },
   { name: "Dashboard", href: "/dashboard" },
   { name: "Settings", href: "/settings" },
 ];
@@ -39,20 +38,34 @@ export default function Header() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {session ? navigation.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.href}
-              end
-              className={`text-sm font-semibold leading-6 text-gray-900 ${
-                location.pathname === item.href
-                  ? "text-indigo-600"
-                  : "text-gray-900"
-              }`}
-            >
-              {item.name}
-            </NavLink>
-          )): <></>}
+          <NavLink
+            key={"hHome"}
+            to={"/"}
+            end
+            className={`text-sm font-semibold leading-6 text-gray-900 ${
+              location.pathname === "/" ? "text-indigo-600" : "text-gray-900"
+            }`}
+          >
+            {"Home"}
+          </NavLink>
+          {session ? (
+            navigation.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.href}
+                end
+                className={`text-sm font-semibold leading-6 text-gray-900 ${
+                  location.pathname === item.href
+                    ? "text-indigo-600"
+                    : "text-gray-900"
+                }`}
+              >
+                {item.name}
+              </NavLink>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
           {session ? (
