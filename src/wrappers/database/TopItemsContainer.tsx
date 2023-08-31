@@ -5,7 +5,7 @@ const Services = {
   LASTFM: "lastfm",
 };
 
-export default function TopItemsContainerBeta() {
+const TopItemsContainer: React.FC = () => {
   const [service, setService] = useState(Services.SPOTIFY);
 
   return (
@@ -37,3 +37,4 @@ export default function TopItemsContainerBeta() {
     </>
   );
 }
+export default TopItemsContainer;
