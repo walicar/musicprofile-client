@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 //
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import LoginButton from "@components/buttons/LoginButton";
 import SignupButton from "@components/buttons/SignupButton";
 //
@@ -19,6 +19,7 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const location = useLocation();
 
   return (
     <header className="bg-white">
@@ -42,7 +43,11 @@ export default function Header() {
               key={item.name}
               to={item.href}
               end
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className={`text-sm font-semibold leading-6 text-gray-900 ${
+                location.pathname === item.href
+                  ? "text-indigo-600"
+                  : "text-gray-900"
+              }`}
             >
               {item.name}
             </NavLink>
