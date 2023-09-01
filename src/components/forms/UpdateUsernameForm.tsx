@@ -15,7 +15,7 @@ const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
     if (error) console.log(error);
   };
   return (
-    <div className="flex gap-x-12 items-center sm:flex-auto">
+    <div className="flex gap-x-12 items-center flex-auto">
       <div className="w-full">
         <input
           type="text"
