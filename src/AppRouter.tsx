@@ -14,7 +14,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="flex flex-col h-[84vh]">
+      <div className="flex flex-col lg:h-[84vh]">
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />

@@ -17,10 +17,10 @@ const navigation = {
 };
 const Footer: React.FC = () => {
   return (
-    <footer className=" bg-white lg:px-8" aria-labelledby="footer-heading">
+    <footer className="bg-white lg:px-8" aria-labelledby="footer-heading">
       <div className="border-t border-white/10 md:flex md:items-center md:justify-between">
         <div className="flex justify-center items-center space-x-6 md:order-2">
-          <a href="#" className="text-xs text-gray-400 hover:text-gray-300">Contact</a>
+          <a key="contact" href="#" className="text-xs text-gray-400 hover:text-gray-300">Contact</a>
           {navigation.social.map((item) => (
             <>
               <a
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             </>
           ))}
         </div>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-400 pr-6">
           &copy; 2023 Musicprofile,  All rights reserved.
         </p>
         <p className="text-xs text-gray-400">All copyrighted content on this platform belongs to their respective owners. We do not claim ownership over any copyrighted material unless explicitly stated.</p>
