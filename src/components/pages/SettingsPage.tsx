@@ -38,7 +38,7 @@ const SettingsPage: React.FC = () => {
         <h2>Streaming Platforms</h2>
         <SpotifyButton />
         <LastfmButton /> */}
-      <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-16 min-h-[80vh] shadow-sm ring-1 ring-gray-900/5 rounded-md">
+      <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-16 min-h-[80vh] shadow-sm ring-1 ring-gray-900/5 rounded-md">
         <div className="mx-auto max-w-2xl pt-4 space-y-10 lg:mx-0 lg:max-w-none">
           <div>
             <h2 className="text-base font-semibold leading-1 text-gray-900">
@@ -48,8 +48,8 @@ const SettingsPage: React.FC = () => {
               Update your profile information
             </p>
             <dl className="mt-3 space-y-1 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-              <div className="pt-2 pb-1 sm:flex items-center">
-                <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
+              <div className="pt-2 pb-1  sm:flex items-center">
+                <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
                   Username
                 </dt>
                 <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
