@@ -29,16 +29,7 @@ const SettingsPage: React.FC = () => {
   }
 
   return (
-    <>
-      {/* <h1>Settings</h1>
-        <span>Welcome {session.user.email}</span>
-        <h2>Update Account Information</h2>
-        <UpdateUserForm />
-        <DeleteButton />
-        <h2>Streaming Platforms</h2>
-        <SpotifyButton />
-        <LastfmButton /> */}
-      <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-16 min-h-[80vh] shadow-sm ring-1 ring-gray-900/5 rounded-md">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-16 shadow-sm ring-1 ring-gray-900/5 rounded-md">
         <div className="mx-auto max-w-2xl pt-4 space-y-10 lg:mx-0 lg:max-w-none">
           <div>
             <h2 className="text-base font-semibold leading-1 text-gray-900">
@@ -65,7 +56,7 @@ const SettingsPage: React.FC = () => {
                 </dd>
               </div>
               <div className="pt-2 pb-1  sm:flex items-center">
-                <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
+                <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
                   Password
                 </dt>
                 <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
@@ -114,8 +105,7 @@ const SettingsPage: React.FC = () => {
             <DeleteButton />
           </div>
         </div>
-      </main>
-    </>
+      </div>
   );
 };
 

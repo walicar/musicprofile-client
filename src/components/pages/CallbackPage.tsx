@@ -5,10 +5,9 @@ const CallbackPage: React.FC = () => {
   const service = window.location.pathname.split("/")[2];
   const callback = callbackHandlers[service];
   return (
-    <>
-      <h1>Callback Page: should redirect if there is no service...</h1>
+    <div>
       <>{callback ? callback : <></>}</>
-    </>
+    </div>
   );
 };
 export default CallbackPage;
