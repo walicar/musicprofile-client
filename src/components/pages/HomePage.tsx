@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 Start tracking your listening history
               </h1>
-              <p className="mt-auto text-lg leading-8 text-gray-600">
+              <p className="mt-auto pt-10 text-lg leading-8 text-gray-600">
                 Create an account to view your top songs, artists, and genres on
                 each streaming platform!
               </p>
