@@ -4,7 +4,7 @@ import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputStyles from "@styles/InputStyles";
 //
 import { SupabaseClient } from "@supabase/supabase-js";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useRef } from "react";
 
 type Prop = {
   supabase: SupabaseClient<any>;
@@ -12,6 +12,7 @@ type Prop = {
 
 const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
   const [username, setUsername] = useState<string>("");
+  const newUsername = useRef<string>();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [show, setShow] = useState(false);
@@ -36,6 +37,7 @@ const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
       setErrorMessage(error.message);
       return;
     }
+    newUsername.current = username;
     setShow(true);
     setUsername("");
   };
@@ -113,6 +115,9 @@ const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">
                       Username changed!
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Your username is now {newUsername.current}
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">
