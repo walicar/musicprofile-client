@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SignUpForm from "@components/forms/SignUpForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { SupabaseClient } from "@supabase/supabase-js";
