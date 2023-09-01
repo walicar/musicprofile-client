@@ -17,7 +17,7 @@ const List: React.FC<Prop> = ({ items, title }) => {
     );
   } else {
     return (
-      <ul role="list" className="space-y-2 bg-gray-100 p-3 max-height-[90vh] rounded-b-md">
+      <ul role="list" className="space-y-2 bg-gray-300 p-3 max-height-[90vh] rounded-b-md">
         {items.map((item: TopItemEntry, index: number) => (
           <li
             key={`${title}_${index}`}
