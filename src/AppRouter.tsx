@@ -14,7 +14,7 @@ function AppRouter() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage content={"home page"} />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={<LoginPage />} />
