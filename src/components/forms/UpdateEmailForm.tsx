@@ -115,7 +115,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                       Confirm your new email address!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      Follow the instruction we sent to {newEmail.current} to update your email address.
+                      Follow the instructions we sent to {newEmail.current} to update your email address.
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">
