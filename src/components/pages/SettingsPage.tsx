@@ -57,7 +57,7 @@ const SettingsPage: React.FC = () => {
                 </dd>
               </div>
               <div className="pt-2 pb-1  sm:flex items-center">
-                <dt className="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">
+                <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
                   Email address
                 </dt>
                 <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
