@@ -1,34 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
+import InputStyles from "@styles/InputStyles";
+import testEmail from "@utils/email";
+import ErrorList from "@components/ErrorList";
+
 const ID = import.meta.env.VITE_SUPABASE_ID;
 const SignupPage: React.FC = () => {
-  /*
-  const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
-  const navigate = useNavigate();
- 
-  return (
-    <>
-      <h1>Signup Page</h1>
-      <SignUpForm />
-    </>
-  );
-  */
   const navigate = useNavigate();
   const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const [email, setEmail] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [password, setPassword] = useState<string>("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const validateForm = () => {
+    let flag = true;
+    if (!testEmail(email)) {
+      setErrorMessages((prevMessages) => [
+        ...prevMessages,
+        "Email address is invalid",
+      ]);
+      setIsEmailValid(false);
+      flag = false;
+    }
+    if (password.length === 0) {
+      setErrorMessages((prevMessages) => [
+        ...prevMessages,
+        "Password is missing",
+      ]);
+      setIsPasswordValid(false);
+      flag = false;
+    }
+    return flag;
+  };
 
   useEffect(() => {
     if (session) navigate("/dashboard");
   }, []);
 
   const handleSignup = async (e: React.FormEvent) => {
+    setErrorMessages([]);
     e.preventDefault();
-    const username = email.slice(0, email.indexOf("@"));
+    if (!validateForm()) return;
+    let username = email.slice(0, email.indexOf("@"));
+    if (username.length > 16) username = username.slice(0,16);
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -38,8 +58,15 @@ const SignupPage: React.FC = () => {
         },
       },
     });
+    if (error) {
+      // REMOVE ME
+      console.log("Signup error", error);
+      setErrorMessages((prevMessages) => [...prevMessages, error.message]);
+      return;
+    }
     console.log(error);
   };
+
   return (
     <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -49,8 +76,8 @@ const SignupPage: React.FC = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <form className="space-y-6"  onSubmit={handleSignup}>
+        <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
+          <form className="space-y-6" onSubmit={handleSignup}>
             <div>
               <label
                 htmlFor="email"
@@ -61,13 +88,17 @@ const SignupPage: React.FC = () => {
               <div className="mt-2">
                 <input
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsEmailValid(true);
+                  }}
                   id="email"
                   name="email"
-                  type="email"
+                  type="text"
                   autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={
+                    isEmailValid ? InputStyles.isValid : InputStyles.notValid
+                  }
                 />
               </div>
             </div>
@@ -82,13 +113,17 @@ const SignupPage: React.FC = () => {
               <div className="mt-2">
                 <input
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setIsPasswordValid(true);
+                  }}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={
+                    isPasswordValid ? InputStyles.isValid : InputStyles.notValid
+                  }
                 />
               </div>
             </div>
@@ -168,6 +203,13 @@ const SignupPage: React.FC = () => {
           </div>
         </div>
       </div>
+      {errorMessages.length != 0 ? (
+        <div className="md:absolute md:top-1 lg:top-[160px] md:right-2 lg:right-[65px] xl:right-[115px] md:w-64">
+          <ErrorList messages={errorMessages} />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
