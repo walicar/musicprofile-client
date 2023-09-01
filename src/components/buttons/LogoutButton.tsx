@@ -11,7 +11,6 @@ const LogoutButton: React.FC<Prop> = ({ className }) => {
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    localStorage.clear();
     navigate("/");
   };
 
