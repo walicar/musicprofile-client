@@ -5,9 +5,10 @@ import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
 import Loading from "@components/Loading";
 import List from "@components/List";
-import Error from "@components/Error";
+import ErrorCom from "@components/Error";
 import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
+import WidgetError from "@components/WidgetError";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 type Prop = {
@@ -38,6 +39,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
         "artists",
         "genres",
       ]);
+      if (msg.error) throw new Error(msg.error);
       return msg;
     },
     { refetchOnWindowFocus: false }
@@ -140,9 +142,9 @@ const TopItems: React.FC<Prop> = ({ type }) => {
   }
 
   if (error) {
-    return <Error message={error} />;
+    return <WidgetError message={error}/>
   } else {
-    return <Error />;
+    return <ErrorCom />;
   }
 };
 
