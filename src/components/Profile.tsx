@@ -30,7 +30,6 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <>
       <div className="flex">
         <div className="mr-4 flex-shrink-0">
           <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-500">
@@ -44,7 +43,6 @@ const Profile: React.FC = () => {
           <p className="mt-1 italic"> {data}</p>
         </div>
       </div>
-    </>
   );
 };
 
