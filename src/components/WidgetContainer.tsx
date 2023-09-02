@@ -66,7 +66,7 @@ const WidgetContainer: React.FC = () => {
           </Transition>
         </Menu>
       </div>
-      <div>{widget.content}</div>
+      <div className="border-t-2 mt-1 p-1">{widget.content}</div>
     </div>
   );
 };
