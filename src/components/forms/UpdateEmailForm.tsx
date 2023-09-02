@@ -1,30 +1,42 @@
-import { Transition } from "@headlessui/react";
+import { Transition, Dialog } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputStyles from "@styles/InputStyles";
 //
 import { SupabaseClient } from "@supabase/supabase-js";
-import { useState, Fragment, useRef } from "react";
+import { useEffect, useState, Fragment, useRef } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import testEmail from "@utils/email";
-
+const ID = import.meta.env.VITE_SUPABASE_ID;
 type Prop = {
   supabase: SupabaseClient<any>;
 };
 const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [email, setEmail] = useState<string>("");
+  const [confirmEmail, setConfirmEmail] = useState<string>("");
   const newEmail = useRef<string>();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const isValid = () => testEmail(email);
 
-  const updateEmail = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!isValid()) {
       setIsValidEmail(false);
       setErrorMessage("Invalid email address.");
       return;
     }
+    if (confirmEmail != email) {
+      setIsValidEmail(false);
+      setErrorMessage("Email addresses do not match.");
+      return;
+    }
+
     const { error } = await supabase.auth.updateUser({ email: email });
     if (error) {
       // REMOVE ME
@@ -40,47 +52,22 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-x-3 md:gap-x-6 w-full">
-        <div className="sm:flex-none relative rounded-md shadow-sm">
+      <div className="flex items-center justify-between gap-x-3 md:gap-x-6 w-full">
+        <div className="sm:flex-none rounded-md shadow-sm">
           <input
             type="text"
             name="email"
             id="email"
-            value={email}
-            className={
-              isValidEmail ? InputStyles.isValid : InputStyles.notValid
-            }
-            placeholder="name@example.com"
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setIsValidEmail(true);
-            }}
+            disabled
+            className="disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder={session.user.email}
           />
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            {!isValidEmail ? (
-              <ExclamationCircleIcon
-                className="h-5 w-5 text-red-500"
-                aria-hidden="true"
-              />
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-        <div className="pl-3 w-full">
-          {!isValidEmail ? (
-            <p className="text-sm text-red-600" id="email-error">
-              {errorMessage}
-            </p>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
       <button
         type="button"
         className="font-semibold text-indigo-600 hover:text-indigo-500"
-        onClick={updateEmail}
+        onClick={() => setOpen(true)}
       >
         Update
       </button>
@@ -113,7 +100,8 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                       Confirm your new email address!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      Follow the instructions we sent to {newEmail.current} to update your email address.
+                      Follow the instructions we sent to {newEmail.current} to
+                      update your email address.
                     </p>
                   </div>
                   <div className="ml-4 flex flex-shrink-0">
@@ -134,6 +122,155 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
           </Transition>
         </div>
       </div>
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-1 pt-3 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-3">
+                  <div>
+                    <div className="">
+                      <div className="flex justify-between">
+                        <Dialog.Title
+                          as="h3"
+                          className="text-base font-semibold leading-6 mb-2 text-gray-900"
+                        >
+                          Update Email Address
+                        </Dialog.Title>
+                        <button
+                          type="button"
+                          className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
+                          onClick={() => {
+                            setOpen(false);
+                            setEmail("");
+                            setConfirmEmail("");
+                          }}
+                        >
+                          <span className="sr-only">Close</span>
+                          <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                        </button>
+                      </div>
+                      <div className="border-t-2">
+                        <form
+                          onSubmit={handleSubmit}
+                          className="grid grid-rows-3 gap-y-5 py-3 px-7"
+                        >
+                          <div>
+                            <label
+                              htmlFor="email"
+                              className="text-sm font-semibold"
+                            >
+                              New Email
+                            </label>
+                            <div className="sm:flex-none relative rounded-md shadow-sm">
+                              <input
+                                type="text"
+                                name="email"
+                                id="email"
+                                value={email}
+                                className={
+                                  isValidEmail
+                                    ? InputStyles.isValid
+                                    : InputStyles.notValid
+                                }
+                                placeholder="name@example.com"
+                                onChange={(e) => {
+                                  setEmail(e.target.value);
+                                  setIsValidEmail(true);
+                                }}
+                              />
+                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                {!isValidEmail ? (
+                                  <ExclamationCircleIcon
+                                    className="h-5 w-5 text-red-500"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="confirmEmail"
+                              className="text-sm font-semibold"
+                            >
+                              Confirm New Email
+                            </label>
+                            <div className="sm:flex-none relative rounded-md shadow-sm">
+                              <input
+                                type="text"
+                                name="confirmEmail"
+                                id="confirmEmail"
+                                value={confirmEmail}
+                                className={
+                                  isValidEmail
+                                    ? InputStyles.isValid
+                                    : InputStyles.notValid
+                                }
+                                placeholder="name@example.com"
+                                onChange={(e) => {
+                                  setConfirmEmail(e.target.value);
+                                  setIsValidEmail(true);
+                                }}
+                              />
+                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                {!isValidEmail ? (
+                                  <ExclamationCircleIcon
+                                    className="h-5 w-5 text-red-500"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="mt-3">
+                              {!isValidEmail ? (
+                                <p
+                                  className="text-sm text-red-600"
+                                  id="email-error"
+                                >
+                                  {errorMessage}
+                                </p>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+                          <button>Submit</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
     </>
   );
 };
