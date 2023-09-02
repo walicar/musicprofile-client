@@ -1,4 +1,4 @@
-import { FireIcon } from "@heroicons/react/20/solid";
+// import { FireIcon } from "@heroicons/react/20/solid";
 //
 import React from "react";
 import { useQuery } from "react-query";
