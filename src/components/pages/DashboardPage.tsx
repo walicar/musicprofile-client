@@ -4,6 +4,7 @@ import useLocalStorageState from "use-local-storage-state";
 import TopItemsContainer from "@database/TopItemsContainer";
 import Profile from "@components/Profile";
 import SpotifyRecommender from "@services/spotify/SpotifyRecommender";
+import WidgetContainer from "@components/WidgetContainer";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const borderStyle = "p-2 shadow-sm ring-1 ring-gray-900/5 rounded-lg";
@@ -45,7 +46,8 @@ const DashboardPage: React.FC = () => {
             borderStyle
           }
         >
-          <SpotifyRecommender />
+          {/* <SpotifyRecommender /> */}
+          <WidgetContainer />
         </div>
       </div>
     </div>
