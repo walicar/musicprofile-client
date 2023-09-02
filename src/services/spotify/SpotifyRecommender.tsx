@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import Loading from "@components/Loading";
 import Error from "@components/Error";
 import useService, { makeServiceParams } from "@hooks/useService";
 import { useQuery } from "react-query";
 import TopItemsWrapper from "@database/TopItemsWrapper";
 import { getSpotifyRecommendationUrl } from "./spotify.utils";
 import WidgetError from "@components/WidgetError";
+import WidgetLoad from "@components/WidgetLoad";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -58,7 +58,7 @@ const SpotifyRecommender: React.FC = () => {
   if (error) return <Error message={error} />;
 
   if (isLoading) {
-    return <Loading />;
+    return <WidgetLoad />;
   } else if (isSuccess) {
     return (
       <>

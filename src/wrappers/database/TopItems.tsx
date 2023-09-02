@@ -3,12 +3,12 @@ import TopItemsWrapper from "./TopItemsWrapper";
 import { TokenWrapper } from "./TokenWrapper";
 import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
-import Loading from "@components/Loading";
 import List from "@components/List";
 import ErrorCom from "@components/Error";
 import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
 import WidgetError from "@components/WidgetError";
+import WidgetLoad from "@components/WidgetLoad";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 type Prop = {
@@ -73,11 +73,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
   }, [session, token]);
 
   if (status === "loading") {
-    return (
-      <>
-        <Loading />
-      </>
-    );
+    return <WidgetLoad />;
   }
 
   if (status === "success") {
