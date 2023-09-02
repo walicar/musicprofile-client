@@ -40,12 +40,12 @@ const Profile: React.FC = () => {
           </span>
         </span>
       </div>
-      <div className="py-1 ml-2 flex gap-x-8 justify-center items-center">
-        <div>
+      <div className="py-1 ml-2 flex justify-between items-center">
+        <div className="w-[160px]">
           <h4 className="text-lg font-bold">{username}</h4>
           <p className="mt-1 italic"> {data}</p>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex-none flex justify-center items-center">
           <span className="mr-2">5</span>
           <FireIcon className="h-5 w-5" />
         </div>
