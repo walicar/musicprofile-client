@@ -82,7 +82,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     const { songs, artists, genres } = data;
     return (
       <>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-between">
           <span className="isolate flex-none inline-flex">
             <button
               type="button"
@@ -106,7 +106,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
               Genres
             </button>
           </span>
-          <span className="flex-grow"></span>
+          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 sm:-ml-3">Leaderboard</span>
           <span className="flex-none">
             <button
               type="button"
