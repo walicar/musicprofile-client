@@ -89,7 +89,7 @@ const SpotifyRecommender: React.FC = () => {
       </>
     );
   } else {
-    return <Error />;
+    return <WidgetError />;
   }
 };
 

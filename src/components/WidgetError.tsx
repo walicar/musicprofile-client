@@ -1,7 +1,7 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 type Prop = {
-  message: string;
+  message?: string;
 };
 const WidgetError: React.FC<Prop> = ({ message }) => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const WidgetError: React.FC<Prop> = ({ message }) => {
       <div className="flex justify-center items-center mx-auto">
         <ExclamationTriangleIcon className="h-32 w-32" />
       </div>
-      <div>{message}</div>
+      <div>{message ? message : "An error happened!"}</div>
       <button className="underline text-sm" onClick={()=>navigate("/settings")}>Go to settings</button>
     </div>
   );
