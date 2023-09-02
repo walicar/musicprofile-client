@@ -45,10 +45,10 @@ const Profile: React.FC = () => {
           <h4 className="text-lg font-bold">{username}</h4>
           <p className="mt-1 italic"> {data}</p>
         </div>
-        <div className="flex-none flex justify-center items-center">
+        {/* <div className="flex-none flex justify-center items-center">
           <span className="mr-2">5</span>
           <FireIcon className="h-5 w-5" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
