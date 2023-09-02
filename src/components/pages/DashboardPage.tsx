@@ -38,7 +38,9 @@ const DashboardPage: React.FC = () => {
           }
         >
           <Profile />
-          <div className="absolute bottom-2 right-3 text-sm cursor-pointer font-semibold text-indigo-600 hover:text-indigo-500">Share</div>
+          <div className="absolute bottom-2 right-3 text-sm cursor-pointer font-semibold text-indigo-600 hover:text-indigo-500">
+            Share
+          </div>
         </div>
         <div
           className={
