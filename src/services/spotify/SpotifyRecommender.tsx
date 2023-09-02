@@ -62,7 +62,7 @@ const SpotifyRecommender: React.FC = () => {
   } else if (isSuccess) {
     return (
       <>
-        <ul role="list" className="space-y-2 bg-gray-300 p-3 rounded-t-md">
+        <ul role="list" className="space-y-2 bg-gray-300 p-3 rounded-t-md rounded-br-md">
           {data.tracks.map((item: any, index: number) => (
             <li
               key={`sprec_${index}`}
