@@ -47,6 +47,8 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
     }
     newEmail.current = email;
     setEmail("");
+    setConfirmEmail("");
+    setOpen(false);
     setShow(true);
   };
 
@@ -123,7 +125,16 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
         </div>
       </div>
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={setOpen}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => {
+            setOpen(false);
+            setEmail("");
+            setConfirmEmail("");
+            setIsValidEmail(true);
+          }}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -164,6 +175,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                             setOpen(false);
                             setEmail("");
                             setConfirmEmail("");
+                            setIsValidEmail(true);
                           }}
                         >
                           <span className="sr-only">Close</span>
@@ -260,7 +272,11 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                               )}
                             </div>
                           </div>
-                          <button>Submit</button>
+                          <button
+                            className="font-semibold text-indigo-600 hover:text-indigo-500"
+                          >
+                            Submit
+                          </button>
                         </form>
                       </div>
                     </div>
