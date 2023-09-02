@@ -6,6 +6,8 @@ import Profile from "@components/Profile";
 import SpotifyRecommender from "@services/spotify/SpotifyRecommender";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
+const borderStyle = "p-2 shadow-sm ring-1 ring-gray-900/5 rounded-lg"
+
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
@@ -19,21 +21,19 @@ const DashboardPage: React.FC = () => {
     return <></>;
   }
   return (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-2 gap-y-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          <div className="-mx-4 px-1 py-2 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-6 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-8 xl:pb-6 xl:pt-8">
-            <TopItemsContainer />
-          </div>
-          <div className="lg:col-start-3 lg:row-end-1 grid grid-rows-1 gap-y-2">
-            <div className="ring-1 ring-gray-900/5 px-4 py-4 sm:rounded-lg">
-              <Profile />
-            </div>
-            <div className="ring-1 ring-gray-900/5  row-start-2 px-4 py-4 sm:rounded-lg">
-              <SpotifyRecommender />
-            </div>
-          </div>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col gap-y-4 lg:grid lg:grid-cols-12 lg:gap-4">
+        <div className={"order-2 lg:order-1 lg:row-span-2 lg:col-span-8 " + borderStyle}>
+          <TopItemsContainer />
+        </div>
+        <div className={"order-1 lg:order-2 lg:row-start-1 lg:col-start-9 lg:col-span-4 " + borderStyle}>
+          <Profile />
+        </div>
+        <div className={"order-last lg:row-start-2 lg:col-start-9 lg:col-span-4 " + borderStyle}>
+          <SpotifyRecommender />
         </div>
       </div>
+    </div>
   );
 };
 

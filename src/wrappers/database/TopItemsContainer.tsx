@@ -10,7 +10,7 @@ const TopItemsContainer: React.FC = () => {
 
   return (
     <>
-      <div className="flex grid-cols-5 grid-rows-1">
+      <div className="flex">
         <div className="flex-none pt-9 max-w-30 col-span-1 col-start-1 flex flex-col">
           <button
             type="button"
