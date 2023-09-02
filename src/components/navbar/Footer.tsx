@@ -22,7 +22,6 @@ const Footer: React.FC = () => {
         <div className="flex justify-center items-center space-x-6 md:order-2">
           <a key="contact" href="#" className="text-xs text-gray-400 hover:text-gray-300">Contact</a>
           {navigation.social.map((item) => (
-            <>
               <a
                 key={item.name}
                 href={item.href}
@@ -31,7 +30,6 @@ const Footer: React.FC = () => {
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </a>
-            </>
           ))}
         </div>
         <p className="text-xs text-gray-400 pr-6">
