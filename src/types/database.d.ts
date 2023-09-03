@@ -6,7 +6,7 @@ type TopItemEntry = {
 };
 
 type StatusIcons = {
-  [status: string]: string;
+  [status: string]: any;
 };
 
 type TopItemColumns = {

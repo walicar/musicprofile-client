@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-import { useSupabaseClient } from "../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import InputStyles from "@styles/InputStyles";
-import ErrorList from "@components/ErrorList";
 import testEmail from "@utils/email";
+import ErrorList from "@components/ErrorList";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
-
-const SigninPage: React.FC = () => {
+const SignupPage: React.FC = () => {
   const navigate = useNavigate();
   const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
@@ -40,36 +39,45 @@ const SigninPage: React.FC = () => {
     return flag;
   };
 
-  const handleSignin = async (e: React.FormEvent) => {
+  useEffect(() => {
+    if (session) navigate("/dashboard");
+  }, []);
+
+  const handleSignup = async (e: React.FormEvent) => {
     setErrorMessages([]);
     e.preventDefault();
     if (!validateForm()) return;
-    const { error }: any = await supabase.auth.signInWithPassword({
+    let username = email.slice(0, email.indexOf("@"));
+    if (username.length > 16) username = username.slice(0,16);
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: username,
+        },
+      },
     });
     if (error) {
-      console.log("Login error", error);
+      // REMOVE ME
+      console.log("Signup error", error);
       setErrorMessages((prevMessages) => [...prevMessages, error.message]);
       return;
     }
-    navigate("/dashboard");
+    console.log(error);
   };
 
-  useEffect(() => {
-    if (session) navigate("/dashboard");
-  }, [setErrorMessages]);
-
   return (
-    <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8 relative">
+    <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-3 sm:mt-6  text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Log into your account
+        <h2 className="mt-3 sm:mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Create a new account
         </h2>
       </div>
+
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
-          <form className="space-y-6" onSubmit={handleSignin}>
+          <form className="space-y-6" onSubmit={handleSignup}>
             <div>
               <label
                 htmlFor="email"
@@ -137,7 +145,7 @@ const SigninPage: React.FC = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Log In
+                Sign up
               </button>
             </div>
           </form>
@@ -206,4 +214,4 @@ const SigninPage: React.FC = () => {
   );
 };
 
-export default SigninPage;
+export default SignupPage;
