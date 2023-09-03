@@ -20,6 +20,7 @@ export default defineConfig({
       "@lastfm": path.resolve(__dirname, "src/services/lastfm"),
       "@server": path.resolve(__dirname, "src/wrappers/server"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@styles": path.resolve(__dirname, "src/styles"),
     },
   },
   test: {

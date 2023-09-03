@@ -5,12 +5,18 @@ const LastfmButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    console.log("trying to connect to LASTFM");
     navigate("/");
   };
 
   return (
     <div>
-      <button onClick={handleClick}>connect to lastfm</button>
+      <button
+        className="font-semibold text-indigo-600 hover:text-indigo-500"
+        onClick={handleClick}
+      >
+        Connect
+      </button>
     </div>
   );
 };

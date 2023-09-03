@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PageLoader from "@components/PageLoader";
 import { getSpotifyToken } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
 import { TokenWrapper } from "@database/TokenWrapper";
+import WidgetLoad from "@components/WidgetLoad";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -41,6 +41,6 @@ const SpotifyCallback: React.FC = () => {
       getRefreshToken();
     }
   }, []);
-  return <PageLoader message={"Connecting to Spotify..."} />;
+  return <WidgetLoad message={"Connecting to Spotify..."} />;
 };
 export default SpotifyCallback;

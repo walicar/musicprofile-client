@@ -1,18 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const LoginButton: React.FC = () => {
+type Prop = {
+  className: string
+}
+const LoginButton: React.FC<Prop> = ({className}) => {
   const navigate = useNavigate();
   return (
-    <div>
-      <button
-        onClick={() => {
-          navigate("/login");
-        }}
-      >
-        log in
-      </button>
-    </div>
+    <button
+      className={className}
+      onClick={() => {
+        navigate("/login");
+      }}
+    >
+      Log in
+    </button>
   );
 };
 
