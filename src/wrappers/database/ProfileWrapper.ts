@@ -10,7 +10,7 @@ export class ProfileWrapper {
   }
 
   async getTitle() {
-    console.log("getTitle Fetch caleld")
+    console.log("getTitle Fetch caleld");
     const apiUrl = API + "/rest/v1/profiles";
     const queryParams = `id=eq.${this.id}&select=title`;
     const requestUrl = `${apiUrl}?${queryParams}`;
@@ -27,7 +27,7 @@ export class ProfileWrapper {
     });
     console.log(response.statusText);
     const data = await response.json();
-    console.log(data[0].title)
-    return data[0].title
+    console.log(data[0].title);
+    return data[0].title;
   }
 }

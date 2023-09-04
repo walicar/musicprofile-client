@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
         throw new Error(error);
       }
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false },
   );
   const username = !!session.user.user_metadata.username
     ? session.user.user_metadata.username

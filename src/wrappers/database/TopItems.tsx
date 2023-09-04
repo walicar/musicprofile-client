@@ -32,7 +32,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       const msg = await topitems.getTopItems(type, [
         "songs",
@@ -42,7 +42,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
       if (msg.error) throw new Error(msg.error);
       return msg;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false },
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
       console.log("Handlign Update");
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);
@@ -104,14 +104,16 @@ const TopItems: React.FC<Prop> = ({ type }) => {
               Genres
             </button>
           </span>
-          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 sm:-ml-3">Leaderboard</span>
+          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 sm:-ml-3">
+            Leaderboard
+          </span>
           <span className="flex-none">
             <button
               type="button"
               className="relative inline-flex items-center rounded-tr-md rounded-tl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
               onClick={refetch as any}
             >
-              Refresh  
+              Refresh
             </button>
           </span>
         </div>
@@ -138,7 +140,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
   }
 
   if (error) {
-    return <WidgetError message={error}/>
+    return <WidgetError message={error} />;
   } else {
     return <ErrorCom />;
   }

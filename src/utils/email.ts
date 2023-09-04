@@ -3,4 +3,4 @@ const pattern =
 
 const testEmail = (email: string): boolean => pattern.test(email);
 
-export default testEmail
+export default testEmail;

@@ -19,8 +19,8 @@ describe("Testing List component", () => {
   test("List an array of song objects", async () => {
     const myItems = [
       { name: "Dance Now", artist: "James", status: "promoted" },
-      { name: "Kick Off", artist: "Jarvis", status: "unchanged"},
-      { name: "Razor", artist: "Bettie", status: "demoted"},
+      { name: "Kick Off", artist: "Jarvis", status: "unchanged" },
+      { name: "Razor", artist: "Bettie", status: "demoted" },
     ];
     render(<List items={myItems} title={"songs"} />);
 
