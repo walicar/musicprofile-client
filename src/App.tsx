@@ -13,6 +13,7 @@ const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 const queryClient = new QueryClient();
 
 function App() {
+  /*
   const [session, setSession] = useLocalStorageState(`sb-${ID}-auth-token`);
   useEffect(() => {
     const {
@@ -24,6 +25,7 @@ function App() {
 
     return () => subscription.unsubscribe();
   }, [setSession, session]);
+  */
   return (
     <SupabaseClientContext.Provider value={supabase}>
       <QueryClientProvider client={queryClient}>

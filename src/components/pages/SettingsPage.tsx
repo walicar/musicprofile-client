@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SpotifyButton from "@spotify/SpotifyButton";
 import LastfmButton from "@lastfm/LastfmButton";
@@ -9,20 +9,34 @@ import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import UpdateUsernameForm from "@components/forms/UpdateUsernameForm";
 import UpdateEmailForm from "@components/forms/UpdateEmailForm";
 import UpdatePasswordForm from "@components/forms/UpdatePasswordForm";
+import RecoveryForm from "@components/forms/RecoveryForm";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
-  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [spotify]: any = useLocalStorageState("spotify-token");
+  const [showRecoveryForm, setShowRecoveryForm] = useState(false);
   const [lastfm]: any = useLocalStorageState("lastfm-token");
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!session) {
-      navigate("/login");
-    }
-  }, []);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("session: ", session)
+      if (!session) navigate("/login")
+    }).catch((e) => console.log(e))
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event == "PASSWORD_RECOVERY") {
+        console.log("SHOW THING HERE");
+        setShowRecoveryForm(true);
+      } 
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   if (!session) {
     return <></>;
@@ -104,6 +118,7 @@ const SettingsPage: React.FC = () => {
           <div className="flex justify-center items-center flex-auto">
             <DeleteButton />
           </div>
+          {showRecoveryForm ? <RecoveryForm />: <></>}
         </div>
       </div>
   );
