@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import InputStyles from "@styles/InputStyles";
 import testEmail from "@utils/email";
 import ErrorList from "@components/ErrorList";
 
-const ID = import.meta.env.VITE_SUPABASE_ID;
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
-  const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -40,7 +37,9 @@ const SignupPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (session) navigate("/dashboard");
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate("/dashboard");
+    });
   }, []);
 
   const handleSignup = async (e: React.FormEvent) => {
