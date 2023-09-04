@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "../contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import InputStyles from "@styles/InputStyles";
 import ErrorList from "@components/ErrorList";
 import testEmail from "@utils/email";
 
-const ID = import.meta.env.VITE_SUPABASE_ID;
-
 const SigninPage: React.FC = () => {
   const navigate = useNavigate();
-  const [session] = useLocalStorageState(`sb-${ID}-auth-token`);
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -57,7 +53,9 @@ const SigninPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (session) navigate("/dashboard");
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate("/dashboard");
+    });
   }, [setErrorMessages]);
 
   return (
