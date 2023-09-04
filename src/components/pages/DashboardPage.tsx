@@ -3,16 +3,22 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import TopItemsContainer from "@database/TopItemsContainer";
 import Profile from "@components/Profile";
-import SpotifyRecommender from "@services/spotify/SpotifyRecommender";
 import WidgetContainer from "@components/WidgetContainer";
+import { useSupabaseClient } from "@components/contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const borderStyle = "p-2 shadow-sm ring-1 ring-gray-900/5 rounded-lg";
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
+  const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) navigate("/login");
+    });
+
     if (!session) {
       navigate("/login");
     }
@@ -48,7 +54,6 @@ const DashboardPage: React.FC = () => {
             borderStyle
           }
         >
-          {/* <SpotifyRecommender /> */}
           <WidgetContainer />
         </div>
       </div>

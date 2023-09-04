@@ -57,7 +57,9 @@ const SigninPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (session) navigate("/dashboard");
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate("/dashboard");
+    });
   }, [setErrorMessages]);
 
   return (
