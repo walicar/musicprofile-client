@@ -13,7 +13,7 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const SpotifyRecommender: React.FC = () => {
   let url = undefined;
   const [token]: any = useLocalStorageState("spotify-token");
-  if (!token) return <WidgetError message="Disconnected from Spotify"/>;
+  if (!token) return <WidgetError message="Disconnected from Spotify" />;
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const {
     status,
@@ -24,7 +24,7 @@ const SpotifyRecommender: React.FC = () => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -32,7 +32,7 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: true, refetchOnWindowFocus: false }
+    { refetchOnMount: true, refetchOnWindowFocus: false },
   );
   if (spotifyError) return <div>Could not connect to DB</div>;
   if (status === "success") {
@@ -44,16 +44,15 @@ const SpotifyRecommender: React.FC = () => {
       url!,
       token.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify"
+      "spotify",
     ),
     {
       refetchOnWindowFocus: false,
       enabled: !!spotifyData && !!url,
-    }
+    },
   );
 
   useEffect(() => {}, [session, token]);
-
 
   if (error) return <Error message={error} />;
 
@@ -62,7 +61,10 @@ const SpotifyRecommender: React.FC = () => {
   } else if (isSuccess) {
     return (
       <>
-        <ul role="list" className="space-y-2 bg-gray-300 p-3 rounded-t-md rounded-br-md">
+        <ul
+          role="list"
+          className="space-y-2 bg-gray-300 p-3 rounded-t-md rounded-br-md"
+        >
           {data.tracks.map((item: any, index: number) => (
             <li
               key={`sprec_${index}`}

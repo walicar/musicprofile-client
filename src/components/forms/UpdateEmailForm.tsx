@@ -272,9 +272,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                               )}
                             </div>
                           </div>
-                          <button
-                            className="font-semibold text-indigo-600 hover:text-indigo-500"
-                          >
+                          <button className="font-semibold text-indigo-600 hover:text-indigo-500">
                             Submit
                           </button>
                         </form>

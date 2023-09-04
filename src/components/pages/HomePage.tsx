@@ -20,7 +20,8 @@ const items = [
   {
     id: "about3",
     title: "Interact with widgets",
-    content: "Get new song recommendations, or look at the statistics of a song!",
+    content:
+      "Get new song recommendations, or look at the statistics of a song!",
     icon: <MusicalNoteIcon className="h-8 w-8" />,
   },
 ];

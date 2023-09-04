@@ -8,8 +8,8 @@ describe("LoginPageA", () => {
     render(
       <BrowserRouter>
         <LoginPageBeta />
-      </BrowserRouter>
-    )
+      </BrowserRouter>,
+    ),
   );
   test("Page initially renders signin form", async () => {
     const heading = await screen.findByRole("heading", { name: "Sign In" });
@@ -24,10 +24,10 @@ describe("LoginPageA", () => {
   test("Page can switch to forgot form", async () => {
     const button = await screen.findByRole("button", { name: "Forgot" });
     fireEvent.click(button);
-    const heading = await screen.findByRole("heading", { name: "Password Recovery" });
+    const heading = await screen.findByRole("heading", {
+      name: "Password Recovery",
+    });
     expect(heading).toContainHTML("Password Recovery");
   });
-  test("Page redirects user to dashboard if already signed in", async () => {
-    
-  });
+  test("Page redirects user to dashboard if already signed in", async () => {});
 });

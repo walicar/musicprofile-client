@@ -9,7 +9,6 @@ import InputStyles from "@styles/InputStyles";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Fragment, useState } from "react";
 
-
 type Prop = {
   supabase: SupabaseClient<any>;
 };

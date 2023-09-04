@@ -57,7 +57,7 @@ const SignupPage: React.FC = () => {
     e.preventDefault();
     if (!validateForm()) return;
     let username = email.slice(0, email.indexOf("@"));
-    if (username.length > 16) username = username.slice(0,16);
+    if (username.length > 16) username = username.slice(0, 16);
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,

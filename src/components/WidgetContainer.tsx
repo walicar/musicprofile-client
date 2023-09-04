@@ -66,7 +66,9 @@ const WidgetContainer: React.FC = () => {
           </Transition>
         </Menu>
       </div>
-      <div className="border-t-2 mt-1 p-1 overflow-scroll max-h-[400px]">{widget.content}</div>
+      <div className="border-t-2 mt-1 p-1 overflow-scroll max-h-[400px]">
+        {widget.content}
+      </div>
     </div>
   );
 };

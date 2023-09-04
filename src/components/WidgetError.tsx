@@ -11,7 +11,12 @@ const WidgetError: React.FC<Prop> = ({ message }) => {
         <ExclamationTriangleIcon className="h-32 w-32" />
       </div>
       <div>{message ? message : "An error happened!"}</div>
-      <button className="underline text-sm" onClick={()=>navigate("/settings")}>Go to settings</button>
+      <button
+        className="underline text-sm"
+        onClick={() => navigate("/settings")}
+      >
+        Go to settings
+      </button>
     </div>
   );
 };

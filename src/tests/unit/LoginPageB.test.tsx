@@ -25,7 +25,7 @@ describe("LoginPageB", () => {
     render(
       <BrowserRouter>
         <LoginPageBeta />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     expect(mockedUseNavigate).toHaveBeenCalledOnce();
   });
