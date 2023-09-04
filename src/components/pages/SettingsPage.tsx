@@ -10,27 +10,21 @@ import UpdateUsernameForm from "@components/forms/UpdateUsernameForm";
 import UpdateEmailForm from "@components/forms/UpdateEmailForm";
 import UpdatePasswordForm from "@components/forms/UpdatePasswordForm";
 import RecoveryForm from "@components/forms/RecoveryForm";
+import useSession from "@hooks/useSession";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
-  const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const session = useSession();
   const [spotify]: any = useLocalStorageState("spotify-token");
   const [showRecoveryForm, setShowRecoveryForm] = useState(false);
   const [lastfm]: any = useLocalStorageState("lastfm-token");
   const supabase: SupabaseClient<any> = useSupabaseClient();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("session: ", session)
-      if (!session) navigate("/login")
-    }).catch((e) => console.log(e))
-
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange((event) => {
       if (event == "PASSWORD_RECOVERY") {
-        console.log("SHOW THING HERE");
         setShowRecoveryForm(true);
       } 
     })
