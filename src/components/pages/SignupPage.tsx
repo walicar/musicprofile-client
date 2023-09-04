@@ -13,6 +13,7 @@ const SignupPage: React.FC = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const validateForm = () => {
@@ -25,7 +26,7 @@ const SignupPage: React.FC = () => {
       setIsEmailValid(false);
       flag = false;
     }
-    if (password.length === 0) {
+    if (!password.length || !confirmPassword.length) {
       setErrorMessages((prevMessages) => [
         ...prevMessages,
         "Password is missing",
@@ -33,6 +34,15 @@ const SignupPage: React.FC = () => {
       setIsPasswordValid(false);
       flag = false;
     }
+    if (password != confirmPassword) {
+      setErrorMessages((prevMessages) => [
+        ...prevMessages,
+        "Passwords do not match",
+      ]);
+      setIsPasswordValid(false);
+      flag = false;
+    }
+
     return flag;
   };
 
@@ -119,7 +129,31 @@ const SignupPage: React.FC = () => {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
+                  className={
+                    isPasswordValid ? InputStyles.isValid : InputStyles.notValid
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Re-enter Password
+              </label>
+              <div className="mt-2">
+                <input
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    setIsPasswordValid(true);
+                  }}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
                   className={
                     isPasswordValid ? InputStyles.isValid : InputStyles.notValid
                   }
@@ -150,7 +184,7 @@ const SignupPage: React.FC = () => {
           </form>
 
           <div>
-            <div className="relative mt-10">
+            <div className="relative mt-2">
               <div
                 className="absolute inset-0 flex items-center"
                 aria-hidden="true"
