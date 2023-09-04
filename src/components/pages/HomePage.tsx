@@ -7,20 +7,20 @@ import {
 const items = [
   {
     id: "about1",
-    title: "Personalized leaderboards!",
-    content: "Yes you can personalize leaderboard (EDIT ME)",
+    title: "Get insights from your personal leaderboard",
+    content: "Visit daily to see how your music taste changes!",
     icon: <ArrowTrendingUpIcon className="h-8 w-8" />,
   },
   {
     id: "about2",
-    title: "Share your rankings with customized cards!",
-    content: "Yes you can personalize leaderboard (EDIT ME)",
+    title: "Share your taste with customized cards",
+    content: "Show your friends what you've been listening to!",
     icon: <UserCircleIcon className="h-8 w-8" />,
   },
   {
     id: "about3",
-    title: "Interact with special APPS?",
-    content: "Yes you can personalize leaderboard (EDIT ME)",
+    title: "Interact with widgets",
+    content: "Get new song recommendations, or look at the statistics of a song!",
     icon: <MusicalNoteIcon className="h-8 w-8" />,
   },
 ];
@@ -48,15 +48,15 @@ const HomePage: React.FC = () => {
           </div>
           <div className="max-w-lg px-4 shadow-sm ring-1 ring-gray-900/5 sm:px-6 lg:px-8">
             <h2 className="text-2xl pt-5 font-bold leading-1 text-gray-900">
-              About
+              Join now!
             </h2>
             <div className="pt-7">
               <div className="overflow-hidden rounded-md bg-white shadow">
                 <ul role="list" className="divide-y divide-gray-200">
                   {items.map((item) => (
                     <li key={item.id} className="px-6 py-4 ">
-                      <div className="inline-flex text-lg">
-                        {item.icon}
+                      <div className="inline-flex font-semibold text-lg">
+                        <span className="mr-3"> {item.icon}</span>
                         {item.title}
                       </div>
                       <div className="text-md">{item.content}</div>
