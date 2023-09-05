@@ -27,7 +27,7 @@ export default class ServerWrapper {
     const data = await res.json();
     return data;
   }
-  async delete() {
+  async deleteAccount() {
     const headers = {
       // don't need Bearer here...
       Authorization: this.accessToken,
