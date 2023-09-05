@@ -21,7 +21,7 @@ const WidgetContainer: React.FC = () => {
   const [widget, setWidget] = useState(Widgets[0]);
 
   return (
-    <div>
+    <div className="h-[440px]">
       <div className="inline-flex py-1 justify-between items-center w-full">
         <h2 className="text-md px-1 font-semibold text-gray-900">Widgets</h2>
         <Menu as="div" className="relative inline-block flex-3 text-left">
