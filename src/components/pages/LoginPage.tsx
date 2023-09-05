@@ -140,7 +140,7 @@ const SigninPage: React.FC = () => {
             </div>
           </form>
 
-          <div>
+          {/* <div>
             <div className="relative mt-10">
               <div
                 className="absolute inset-0 flex items-center"
@@ -190,7 +190,7 @@ const SigninPage: React.FC = () => {
                 <span className="text-sm font-semibold leading-6">GitHub</span>
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {errorMessages.length != 0 ? (
