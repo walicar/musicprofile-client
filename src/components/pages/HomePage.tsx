@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="max-w-lg px-4 shadow-sm ring-1 ring-gray-900/5 sm:px-6 lg:px-8">
+          <div className="max-w-lg px-4 m:px-6 lg:px-8">
             <h2 className="text-2xl pt-5 font-bold leading-1 text-gray-900">
               Join now!
             </h2>
