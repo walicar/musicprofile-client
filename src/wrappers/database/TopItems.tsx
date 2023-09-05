@@ -76,6 +76,10 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     return <WidgetLoad />;
   }
 
+  if (error) {
+    return <WidgetError message={error.message} />;
+  } 
+
   if (status === "success") {
     const { songs, artists, genres } = data;
     return (
@@ -137,13 +141,11 @@ const TopItems: React.FC<Prop> = ({ type }) => {
         </div>
       </>
     );
+  } else {
+
+  return <WidgetError />;
   }
 
-  if (error) {
-    return <WidgetError message={error} />;
-  } else {
-    return <ErrorCom />;
-  }
 };
 
 export default TopItems;
