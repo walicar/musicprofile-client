@@ -22,7 +22,7 @@ const DeleteButton: React.FC = () => {
     /*
     setShowDialog(false);
     const server = new ServerWrapper(session.access_token);
-    await server.delete();
+    await server.deleteAccount();
     await supabase.auth.signOut();
     navigate("/");
     */
