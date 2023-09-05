@@ -2,6 +2,7 @@ import SpotifyRecommender from "@services/spotify/SpotifyRecommender";
 import { useState, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import WidgetSoon from "./WidgetSoon";
 
 const Widgets = [
   {
@@ -12,7 +13,7 @@ const Widgets = [
   {
     id: "spotifyinfo",
     name: "Spotify Track Info",
-    content: <div>fart</div>,
+    content: <WidgetSoon />,
   },
 ];
 
