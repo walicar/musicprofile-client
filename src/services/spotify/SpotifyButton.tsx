@@ -4,6 +4,7 @@ import { generateRandomString, getAuthURL } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
+import ServerWrapper from "@server/ServerWrapper";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
@@ -15,15 +16,16 @@ const SpotifyButton: React.FC = () => {
     useLocalStorageState("spotify-token");
 
   const check = async () => {
+    // if user does not have a spotify_topitems record, then insert it
     try {
-      // TODO: put it in the TopItems wrapper please!
       const { data }: any = await supabase
         .from("spotify_topitems")
         .select("id")
         .eq("id", session.user.id);
       if (data.length === 0) {
-        console.log("insert here");
-        await supabase.from("spotify_topitems").insert({ id: session.user.id });
+        const server = new ServerWrapper(session.access_token);
+        const message = await server.postTopitems("spotify");
+        console.log("Check postTopitems: ", message);
       }
     } catch (e) {
       console.log(e);
