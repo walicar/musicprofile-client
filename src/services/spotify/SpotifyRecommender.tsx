@@ -13,18 +13,16 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const SpotifyRecommender: React.FC = () => {
   let url = undefined;
   const [token]: any = useLocalStorageState("spotify-token");
-  if (!token) return <WidgetError message="Disconnected from Spotify" />;
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const {
     status,
     data: spotifyData,
-    error: spotifyError,
   }: any = useQuery(
     ["spotify_topitems", session],
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -32,9 +30,12 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: true, refetchOnWindowFocus: false },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
   );
-  if (spotifyError) return <div>Could not connect to DB</div>;
+  if (!token) return <WidgetError message="Disconnected from Spotify" />;
+  // TODO: this line causes everything to break when: user can't get items from 
+  //   top_items
+  // if (spotifyError) return <WidgetError message="Disconnected from Spotify" />;
   if (status === "success") {
     url = getSpotifyRecommendationUrl(spotifyData);
   }
@@ -44,15 +45,15 @@ const SpotifyRecommender: React.FC = () => {
       url!,
       token.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify",
+      "spotify"
     ),
     {
       refetchOnWindowFocus: false,
       enabled: !!spotifyData && !!url,
-    },
+    }
   );
 
-  useEffect(() => {}, [session, token]);
+  //useEffect(() => {}, [session, token]);
 
   if (error) return <Error message={error} />;
 
