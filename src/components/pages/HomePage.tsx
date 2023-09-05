@@ -33,9 +33,6 @@ const HomePage: React.FC = () => {
         <div className="flex pt-16 gap-x-6">
           <div className="flex-5 mx-auto max-w-2xl sm:py-12 lg:py-20">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-              <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Musicprofile Logo
-              </div>
             </div>
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
