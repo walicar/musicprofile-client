@@ -10,7 +10,9 @@ const WidgetError: React.FC<Prop> = ({ message }) => {
       <div className="flex justify-center items-center mx-auto">
         <ExclamationTriangleIcon className="h-32 w-32" />
       </div>
-      <div>{message ? message : "An error happened!"}</div>
+      <div className="flex justify-center items-center">
+        <div>{message ? message : "An error happened!"}</div>
+      </div>
       <button
         className="underline text-sm"
         onClick={() => navigate("/settings")}
