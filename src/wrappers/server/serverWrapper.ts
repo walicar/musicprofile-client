@@ -42,4 +42,19 @@ export default class ServerWrapper {
     const data = await res.json();
     return data;
   }
+  async postTopitems(type: string) {
+    const headers = {
+      // don't need Bearer here...
+      Authorization: this.accessToken,
+      "Content-Type": "application/json",
+    };
+    const opt = {
+      method: "POST",
+      headers: headers,
+    };
+    const res = await fetch(URL! + "/topitems/" + type, opt);
+    if (!res.ok) return { error: res.statusText };
+    const data = await res.json();
+    return data;
+  }
 }
