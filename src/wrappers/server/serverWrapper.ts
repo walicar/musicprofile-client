@@ -37,7 +37,7 @@ export default class ServerWrapper {
       method: "DELETE",
       headers: headers,
     };
-    const res = await fetch(URL! + "/delete", opt);
+    const res = await fetch(URL! + "/account", opt);
     if (!res.ok) return { error: res.statusText };
     const data = await res.json();
     return data;
