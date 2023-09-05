@@ -45,7 +45,7 @@ const WidgetContainer: React.FC = () => {
             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
                 {Widgets.map((item) => (
-                  <Menu.Item>
+                  <Menu.Item key={item.id}>
                     {({ active }) => (
                       <a
                         id={item.id}
