@@ -22,12 +22,41 @@ const List: React.FC<Prop> = ({ items, title }) => {
         className="space-y-2 bg-gray-300 p-3 max-height-[90vh] rounded-b-md"
       >
         {items.map((item: TopItemEntry, index: number) => (
+          // <li
+          //   key={`${title}_${index}`}
+          //   className="text-sm overflow-hidden rounded-md justify-between bg-white px-5 py-2 shadow flex"
+          // >
+          //   <div className="flex items-center">
+          //     {index + 1}. <a href={item.url}>{item.name} {item.artist ? `by ${item.artist} ` : ""}</a>
+          //   </div>
+          //   <div className="mr-2">{statusIcons[item.status]}</div>
+          // </li>
           <li
             key={`${title}_${index}`}
             className="text-sm overflow-hidden rounded-md justify-between bg-white px-5 py-2 shadow flex"
           >
             <div className="flex items-center">
-              {index + 1}. {item.name} {item.artist ? `by ${item.artist} ` : ""}
+              {item.img ? (
+                <img
+                  className="inline-block mr-3 h-6 w-6 rounded-full"
+                  src={item.img}
+                />
+              ) : (
+                <></>
+              )}
+              <div>
+                {index + 1}.{" "}
+                {item.url ? (
+                  <a href={item.url} className="hover:text-indigo-600">
+                    {item.name} {item.artist ? `by ${item.artist} ` : ""}
+                  </a>
+                ) : (
+                  <>
+                    {" "}
+                    {item.name} {item.artist ? `by ${item.artist} ` : ""}{" "}
+                  </>
+                )}
+              </div>
             </div>
             <div className="mr-2">{statusIcons[item.status]}</div>
           </li>

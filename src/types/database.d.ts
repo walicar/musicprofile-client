@@ -3,6 +3,8 @@ type TopItemEntry = {
   status: string;
   artist?: string;
   id?: string;
+  url?: string;
+  img?: string;
 };
 
 type StatusIcons = {

@@ -77,7 +77,9 @@ const SpotifyRecommender: React.FC = () => {
                   src={item.album.images[0].url}
                 />
                 <div>
+                <a href={item.uri} className="hover:text-indigo-600">
                   {item.name} {`by ${item.artists[0].name} `}
+                  </a>
                 </div>
               </div>
             </li>
