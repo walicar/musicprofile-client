@@ -43,17 +43,17 @@ const ForgotPage: React.FC = () => {
     <>
       <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-3 sm:mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-3 sm:mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-neutral-50">
             Account Recovery
           </h2>
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-8 shadow sm:rounded-lg sm:px-12">
+          <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-8 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-3" onSubmit={handleForgot}>
               <div className="w-full sm:h-24">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-50"
                 >
                   Email address
                 </label>
@@ -118,7 +118,7 @@ const ForgotPage: React.FC = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white dark:ring-slate-600 dark:bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 ">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
@@ -128,10 +128,10 @@ const ForgotPage: React.FC = () => {
                     />
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 dark:text-neutral-50">
                       Recover your account!
                     </p>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">
                       Follow the instructions we sent to {recipient.current} to
                       recover your account.
                     </p>
@@ -139,7 +139,7 @@ const ForgotPage: React.FC = () => {
                   <div className="ml-4 flex flex-shrink-0">
                     <button
                       type="button"
-                      className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="inline-flex rounded-md bg-white dark:bg-slate-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => {
                         setShow(false);
                       }}
