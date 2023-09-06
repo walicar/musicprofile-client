@@ -8,6 +8,7 @@ import SignupButton from "@components/buttons/SignupButton";
 //
 import useLocalStorageState from "use-local-storage-state";
 import LogoutButton from "@components/buttons/LogoutButton";
+import ThemeButton from "@components/buttons/ThemeButton";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const navigation = [
@@ -15,14 +16,14 @@ const navigation = [
   { name: "Settings", href: "/settings" },
 ];
 
-export default function Header() {
+const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
-    <header className="bg-white h-[84px]">
+    <header className="bg-white dark:bg-slate-200 h-[84px]">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
         aria-label="Global"
@@ -39,7 +40,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           <NavLink
-            key={"hHome"}
+            key={"home"}
             to={"/"}
             end
             className={`text-sm font-semibold leading-6 text-gray-900 ${
@@ -68,6 +69,7 @@ export default function Header() {
           )}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
+          <ThemeButton />
           {session ? (
             <LogoutButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900" />
           ) : (
@@ -162,4 +164,6 @@ export default function Header() {
       </Dialog>
     </header>
   );
-}
+};
+
+export default Header;
