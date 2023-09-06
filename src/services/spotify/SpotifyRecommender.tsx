@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import Error from "@components/Error";
 import useService, { makeServiceParams } from "@hooks/useService";
 import { useQuery } from "react-query";
 import TopItemsWrapper from "@database/TopItemsWrapper";
@@ -55,7 +54,7 @@ const SpotifyRecommender: React.FC = () => {
 
   //useEffect(() => {}, [session, token]);
 
-  if (error) return <Error message={error} />;
+  if (error) return <WidgetError message={error as string} />;
 
   if (isLoading) {
     return <WidgetLoad />;
