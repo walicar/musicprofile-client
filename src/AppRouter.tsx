@@ -11,26 +11,29 @@ import Header from "@components/navbar/Header";
 import Footer from "@components/navbar/Footer";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function AppRouter() {
   const [theme, setTheme]: any = useLocalStorageState("theme");
 
   useEffect(() => {
     if (!theme) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          setTheme("dark")
-        } else {
-          setTheme("light")
-        }
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setTheme("dark");
+      } else {
+        setTheme("light");
+      }
     }
-
-  }, [])
+  }, []);
 
   return (
     <div className={theme}>
+      <Helmet>
+        <body className={theme === "dark" ? "bg-slate-900" : "bg-white"}></body>
+      </Helmet>
       <BrowserRouter>
         <Header />
-        <div className="flex flex-col lg:h-[84vh]">
+        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col lg:h-[84vh]">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />
