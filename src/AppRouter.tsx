@@ -11,7 +11,7 @@ import Header from "@components/navbar/Header";
 import Footer from "@components/navbar/Footer";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 function AppRouter() {
   const [theme, setTheme]: any = useLocalStorageState("theme");
