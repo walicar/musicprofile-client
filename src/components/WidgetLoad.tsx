@@ -9,7 +9,7 @@ const WidgetLoad: React.FC<Prop> = ({ message }) => {
         <ArrowPathIcon className="h-32 w-32" />
       </div>
       <div className="flex justify-center items-center">
-      <div>{message ? message : "Loading..."}</div>
+        <div>{message ? message : "Loading..."}</div>
       </div>
     </div>
   );

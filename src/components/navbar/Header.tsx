@@ -44,7 +44,9 @@ const Header: React.FC = () => {
             to={"/"}
             end
             className={`text-sm font-semibold leading-6 text-gray-900 ${
-              location.pathname === "/" ? "text-indigo-600" : "text-gray-900 dark:text-neutral-50"
+              location.pathname === "/"
+                ? "text-indigo-600"
+                : "text-gray-900 dark:text-neutral-50"
             }`}
           >
             {"Home"}

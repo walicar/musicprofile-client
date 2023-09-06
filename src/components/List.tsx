@@ -9,7 +9,7 @@ type Prop = {
 
 const format = (input: string): string => {
   return input.charAt(0).toUpperCase() + input.slice(1);
-}
+};
 const List: React.FC<Prop> = ({ items, title }) => {
   if (Array.isArray(items) && typeof items[0] === "string") {
     return (
@@ -43,12 +43,14 @@ const List: React.FC<Prop> = ({ items, title }) => {
                 {index + 1}.{" "}
                 {item.url ? (
                   <a href={item.url} className="hover:text-indigo-600">
-                    {format(item.name)} {item.artist ? `by ${item.artist} ` : ""}
+                    {format(item.name)}{" "}
+                    {item.artist ? `by ${item.artist} ` : ""}
                   </a>
                 ) : (
                   <>
                     {" "}
-                    {format(item.name)} {item.artist ? `by ${item.artist} ` : ""}{" "}
+                    {format(item.name)}{" "}
+                    {item.artist ? `by ${item.artist} ` : ""}{" "}
                   </>
                 )}
               </div>
