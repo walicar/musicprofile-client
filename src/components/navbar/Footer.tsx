@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
           <a
             key="contact"
             href="#"
-            className="text-xs text-gray-400 hover:text-gray-300 dark:text-neutral-50"
+            className="text-xs text-gray-400 hover:text-gray-300"
           >
             Contact
           </a>
