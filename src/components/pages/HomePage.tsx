@@ -49,14 +49,22 @@ const HomePage: React.FC = () => {
             </h2>
             <div className="pt-7">
               <div className="overflow-hidden rounded-md bg-gray-100 dark:bg-slate-800 shadow">
-                <ul role="list" className="divide-y divide-gray-200 dark:divide-slate-600">
+                <ul
+                  role="list"
+                  className="divide-y divide-gray-200 dark:divide-slate-600"
+                >
                   {items.map((item) => (
                     <li key={item.id} className="px-6 py-4 ">
                       <div className="inline-flex font-semibold text-lg">
-                        <span className="mr-3 text-indigo-600"> {item.icon}</span>
+                        <span className="mr-3 text-indigo-600">
+                          {" "}
+                          {item.icon}
+                        </span>
                         {item.title}
                       </div>
-                      <div className="text-md text-gray-600 dark:text-neutral-400">{item.content}</div>
+                      <div className="text-md text-gray-600 dark:text-neutral-400">
+                        {item.content}
+                      </div>
                     </li>
                   ))}
                 </ul>

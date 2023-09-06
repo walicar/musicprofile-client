@@ -17,7 +17,10 @@ const navigation = {
 };
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white dark:bg-slate-900 lg:px-8" aria-labelledby="footer-heading">
+    <footer
+      className="bg-white dark:bg-slate-900 lg:px-8"
+      aria-labelledby="footer-heading"
+    >
       <div className="md:flex md:items-center md:justify-between">
         <div className="flex justify-center items-center space-x-6 md:order-2">
           <a

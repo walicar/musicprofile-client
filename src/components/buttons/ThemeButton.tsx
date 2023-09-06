@@ -13,7 +13,11 @@ const ThemeButton: React.FC = () => {
   };
   return (
     <button onClick={toggle}>
-        {theme === "dark" ? <MoonIcon className="h-6 w-6"/> : <SunIcon className="h-6 w-6"/>}
+      {theme === "dark" ? (
+        <MoonIcon className="h-6 w-6" />
+      ) : (
+        <SunIcon className="h-6 w-6" />
+      )}
     </button>
   );
 };

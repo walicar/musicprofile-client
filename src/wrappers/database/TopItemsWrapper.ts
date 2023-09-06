@@ -73,7 +73,8 @@ export default class TopItemsWrapper {
     const res = await fetch(URL, opt);
     if (!res.ok) return "2222-01-01 12:00:00+00";
     const { data } = await res.json();
-    if (data[`${type}_topitemsCollection`].edges.length === 0) return "2222-01-01 12:00:00+00";
+    if (data[`${type}_topitemsCollection`].edges.length === 0)
+      return "2222-01-01 12:00:00+00";
     // we can find data.statusText to be Unauthorized, check this later;
     // shouldn't happen because we always verify tokens before sending a request
     return data[`${type}_topitemsCollection`].edges[0].node.last_updated;

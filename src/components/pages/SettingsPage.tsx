@@ -97,7 +97,9 @@ const SettingsPage: React.FC = () => {
                   }`}
                 />
 
-                <div className="font-medium text-gray-900 dark:text-neutral-50">Spotify</div>
+                <div className="font-medium text-gray-900 dark:text-neutral-50">
+                  Spotify
+                </div>
               </div>
               <SpotifyButton />
             </li>
@@ -108,7 +110,9 @@ const SettingsPage: React.FC = () => {
                     lastfm ? "bg-green-400" : "bg-red-400"
                   } `}
                 />
-                <div className="font-medium text-gray-900 dark:text-neutral-50">Lastfm</div>
+                <div className="font-medium text-gray-900 dark:text-neutral-50">
+                  Lastfm
+                </div>
               </div>
               <LastfmButton />
             </li>

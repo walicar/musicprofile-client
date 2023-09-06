@@ -23,7 +23,9 @@ const WidgetContainer: React.FC = () => {
   return (
     <div className="h-[440px]">
       <div className="inline-flex py-1 justify-between items-center w-full">
-        <h2 className="text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">Widgets</h2>
+        <h2 className="text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">
+          Widgets
+        </h2>
         <Menu as="div" className="relative inline-block flex-3 text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white dark:bg-slate-700 dark:text-neutral-50 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50">
@@ -51,7 +53,9 @@ const WidgetContainer: React.FC = () => {
                       <a
                         id={item.id}
                         className={`${
-                          active ? "text-gray-900 dark:text-neutral-50" : "text-gray-700 dark:text-neutral-400"
+                          active
+                            ? "text-gray-900 dark:text-neutral-50"
+                            : "text-gray-700 dark:text-neutral-400"
                         } hover:cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-900 block px-4 py-2 text-sm`}
                         onClick={() => {
                           setWidget(item);

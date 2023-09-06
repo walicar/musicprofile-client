@@ -13,15 +13,12 @@ const SpotifyRecommender: React.FC = () => {
   let url = undefined;
   const [token]: any = useLocalStorageState("spotify-token");
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const {
-    status,
-    data: spotifyData,
-  }: any = useQuery(
+  const { status, data: spotifyData }: any = useQuery(
     ["spotify_topitems", session],
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -29,10 +26,10 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: false, refetchOnWindowFocus: false }
+    { refetchOnMount: false, refetchOnWindowFocus: false },
   );
   if (!token) return <WidgetError message="Disconnected from Spotify" />;
-  // TODO: this line causes everything to break when: user can't get items from 
+  // TODO: this line causes everything to break when: user can't get items from
   //   top_items
   // if (spotifyError) return <WidgetError message="Disconnected from Spotify" />;
   if (status === "success") {
@@ -44,12 +41,12 @@ const SpotifyRecommender: React.FC = () => {
       url!,
       token.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify"
+      "spotify",
     ),
     {
       refetchOnWindowFocus: false,
       enabled: !!spotifyData && !!url,
-    }
+    },
   );
 
   //useEffect(() => {}, [session, token]);
@@ -76,8 +73,8 @@ const SpotifyRecommender: React.FC = () => {
                   src={item.album.images[0].url}
                 />
                 <div>
-                <a href={item.uri} className="hover:text-indigo-600">
-                  {item.name} {`by ${item.artists[0].name} `}
+                  <a href={item.uri} className="hover:text-indigo-600">
+                    {item.name} {`by ${item.artists[0].name} `}
                   </a>
                 </div>
               </div>
