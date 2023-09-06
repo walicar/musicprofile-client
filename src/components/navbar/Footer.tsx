@@ -17,13 +17,13 @@ const navigation = {
 };
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white lg:px-8" aria-labelledby="footer-heading">
-      <div className="border-t border-white/10 md:flex md:items-center md:justify-between">
+    <footer className="bg-white dark:bg-slate-900 lg:px-8" aria-labelledby="footer-heading">
+      <div className="md:flex md:items-center md:justify-between">
         <div className="flex justify-center items-center space-x-6 md:order-2">
           <a
             key="contact"
             href="#"
-            className="text-xs text-gray-400 hover:text-gray-300"
+            className="text-xs text-gray-400 hover:text-gray-300 dark:text-neutral-50"
           >
             Contact
           </a>

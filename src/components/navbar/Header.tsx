@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="bg-white dark:bg-slate-200 h-[84px]">
+    <header className="bg-white dark:bg-slate-900 dark:text-neutral-50 h-[84px]">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
         aria-label="Global"
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
             to={"/"}
             end
             className={`text-sm font-semibold leading-6 text-gray-900 ${
-              location.pathname === "/" ? "text-indigo-600" : "text-gray-900"
+              location.pathname === "/" ? "text-indigo-600" : "text-gray-900 dark:text-neutral-50"
             }`}
           >
             {"Home"}
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
                 className={`text-sm font-semibold leading-6 text-gray-900 ${
                   location.pathname === item.href
                     ? "text-indigo-600"
-                    : "text-gray-900"
+                    : "text-gray-900 dark:text-neutral-50"
                 }`}
               >
                 {item.name}
@@ -71,18 +71,18 @@ const Header: React.FC = () => {
         <div className="flex flex-1 items-center justify-end gap-x-6">
           <ThemeButton />
           {session ? (
-            <LogoutButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900" />
+            <LogoutButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900 dark:text-neutral-50" />
           ) : (
             <>
-              <LoginButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900" />
-              <SignupButton className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
+              <LoginButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900 dark:text-neutral-50" />
+              <SignupButton className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm dark:text-neutral-50 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
             </>
           )}
         </div>
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-neutral-300"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>

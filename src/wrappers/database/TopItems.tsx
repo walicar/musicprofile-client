@@ -84,37 +84,37 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     const { songs, artists, genres } = data;
     return (
       <>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between ">
           <span className="isolate flex-none inline-flex">
             <button
               type="button"
-              className="relative inline-flex items-center rounded-tl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              className="relative inline-flex items-center rounded-tl-md bg-white dark:bg-slate-900 dark:text-neutral-50 dark:hover:bg-slate-600 px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 dark:ring-slate-700"
               onClick={() => setCategory(Categories.SONGS)}
             >
               Songs
             </button>
             <button
               type="button"
-              className="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              className="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 dark:bg-slate-900 dark:text-neutral-50 dark:hover:bg-slate-600 dark:ring-slate-700"
               onClick={() => setCategory(Categories.ARTISTS)}
             >
               Artists
             </button>
             <button
               type="button"
-              className="relative -ml-px inline-flex items-center rounded-tr-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              className="relative -ml-px inline-flex items-center rounded-tr-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 dark:bg-slate-900 dark:text-neutral-50 dark:hover:bg-slate-600  dark:ring-slate-700"
               onClick={() => setCategory(Categories.GENRES)}
             >
               Genres
             </button>
           </span>
-          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 sm:-ml-3">
+          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 dark:text-neutral-50 sm:-ml-3">
             Leaderboard
           </span>
           <span className="flex-none">
             <button
               type="button"
-              className="relative inline-flex items-center rounded-tr-md rounded-tl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+              className="relative inline-flex items-center rounded-tr-md rounded-tl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 dark:bg-slate-900 dark:text-neutral-50 dark:hover:bg-slate-600 dark:ring-slate-700"
               onClick={refetch as any}
             >
               Refresh
