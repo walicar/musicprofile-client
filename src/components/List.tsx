@@ -23,12 +23,12 @@ const List: React.FC<Prop> = ({ items, title }) => {
     return (
       <ul
         role="list"
-        className="space-y-2 bg-gray-300 p-3 max-height-[90vh] rounded-b-md"
+        className="space-y-2 bg-gray-300 dark:bg-slate-700 p-3 max-height-[90vh] rounded-b-md"
       >
         {items.map((item: TopItemEntry, index: number) => (
           <li
             key={`${title}_${index}`}
-            className="text-sm overflow-hidden rounded-md justify-between bg-white px-5 py-2 shadow flex"
+            className="text-sm overflow-hidden rounded-md justify-between bg-white dark:bg-slate-900 px-5 py-2 shadow flex"
           >
             <div className="flex items-center">
               {item.img ? (

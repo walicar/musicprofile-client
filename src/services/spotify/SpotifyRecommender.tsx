@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
-import Error from "@components/Error";
 import useService, { makeServiceParams } from "@hooks/useService";
 import { useQuery } from "react-query";
 import TopItemsWrapper from "@database/TopItemsWrapper";
@@ -55,7 +54,7 @@ const SpotifyRecommender: React.FC = () => {
 
   //useEffect(() => {}, [session, token]);
 
-  if (error) return <Error message={error} />;
+  if (error) return <WidgetError message={error as string} />;
 
   if (isLoading) {
     return <WidgetLoad />;
@@ -64,12 +63,12 @@ const SpotifyRecommender: React.FC = () => {
       <>
         <ul
           role="list"
-          className="space-y-2 bg-gray-300 p-3 rounded-t-md rounded-br-md"
+          className="space-y-2 bg-gray-300 dark:bg-slate-700 p-3 rounded-t-md rounded-br-md"
         >
           {data.tracks.map((item: any, index: number) => (
             <li
               key={`sprec_${index}`}
-              className="text-sm overflow-hidden rounded-md justify-between bg-white px-5 py-2 shadow flex"
+              className="text-sm overflow-hidden rounded-md justify-between bg-white dark:bg-slate-900 px-5 py-2 shadow flex "
             >
               <div className="flex items-center">
                 <img
@@ -86,7 +85,7 @@ const SpotifyRecommender: React.FC = () => {
           ))}
         </ul>
         <button
-          className="relative inline-flex items-center rounded-br-md rounded-bl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          className="relative inline-flex items-center rounded-br-md rounded-bl-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 dark:bg-slate-900 dark:text-neutral-50 dark:hover:bg-slate-600 dark:ring-slate-700"
           onClick={refetch as any}
         >
           Refresh

@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
   return (
     <div className="flex py-1 relative">
       <div className="mr-4 flex-shrink-0">
-        <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-500">
+        <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-500 dark:bg-slate-700">
           <span className="text-xl font-medium leading-none text-white">
             {username.charAt(0).toUpperCase()}
           </span>

@@ -8,7 +8,7 @@ import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
-const borderStyle = "p-2 shadow-sm ring-1 ring-gray-900/5 rounded-lg";
+const borderStyle = "p-2 shadow-sm ring-1 ring-gray-900/5 dark:ring-slate-700 rounded-lg";
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
