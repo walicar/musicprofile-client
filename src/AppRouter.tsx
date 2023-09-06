@@ -29,7 +29,7 @@ function AppRouter() {
   return (
     <div className={theme}>
       <Helmet>
-        <body className={theme === "dark" ? "bg-slate-900" : "bg-white"}></body>
+        <body className={theme === "dark" ? "bg-slate-900 dark" : "bg-white"}></body>
       </Helmet>
       <BrowserRouter>
         <Header />

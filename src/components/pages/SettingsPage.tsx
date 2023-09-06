@@ -42,18 +42,18 @@ const SettingsPage: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pt-4 sm:px-6 lg:px-16 shadow-sm ring-1 ring-gray-900/5 rounded-md">
+    <div className="mx-auto max-w-3xl px-4 pt-4 sm:px-6 lg:px-16 shadow-sm ring-1 ring-gray-900/5 dark:ring-slate-600 ounded-md">
       <div className="mx-auto max-w-3xl py-5 space-y-10 lg:mx-0 lg:max-w-none">
         <div>
-          <h2 className="text-base font-semibold leading-1 text-gray-900">
+          <h2 className="text-base font-semibold leading-1 text-gray-900 dark:text-neutral-50 ">
             Profile
           </h2>
-          <p className="mt-1 text-sm leading-5 text-gray-500">
+          <p className="mt-1 text-sm leading-5 text-gray-500 dark:text-neutral-400">
             Update your profile information
           </p>
-          <dl className="mt-3 space-y-1 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
+          <dl className="mt-3 space-y-1 divide-y divide-gray-100 dark:divide-slate-500 border-t border-gray-200 dark:border-slate-500 text-sm leading-6">
             <div className="pt-2 pb-1  sm:flex items-center">
-              <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
+              <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6 dark:text-neutral-50">
                 Username
               </dt>
               <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
@@ -61,7 +61,7 @@ const SettingsPage: React.FC = () => {
               </dd>
             </div>
             <div className="pt-2 pb-1  sm:flex items-center">
-              <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
+              <dt className="font-medium text-gray-900 dark:text-neutral-50 sm:w-32 sm:flex-none sm:pr-6">
                 Email address
               </dt>
               <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
@@ -69,7 +69,7 @@ const SettingsPage: React.FC = () => {
               </dd>
             </div>
             <div className="pt-2 pb-1  sm:flex items-center">
-              <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6">
+              <dt className="font-medium text-gray-900 dark:text-neutral-50 sm:w-32 sm:flex-none sm:pr-6">
                 Password
               </dt>
               <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
@@ -79,36 +79,36 @@ const SettingsPage: React.FC = () => {
           </dl>
         </div>
         <div>
-          <h2 className="text-base font-semibold leading-1 text-gray-900">
+          <h2 className="text-base font-semibold leading-1 text-gray-900 dark:text-neutral-50">
             Streaming Platforms
           </h2>
-          <p className="mt-1 text-sm leading-5 text-gray-500">
+          <p className="mt-1 text-sm leading-5 text-gray-500 dark:text-neutral-400">
             Connect Musicprofile to other streaming platforms.
           </p>
           <ul
             role="list"
-            className="mt-3 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6"
+            className="mt-3 divide-y divide-gray-100 dark:divide-slate-500 border-t border-gray-200 dark:border-slate-500 text-sm leading-6"
           >
             <li className="flex justify-between gap-x-6 py-3">
               <div className="flex justify-center items-center">
                 <span
-                  className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white ${
+                  className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white dark:ring-slate-900 ${
                     spotify ? "bg-green-400" : "bg-red-400"
                   }`}
                 />
 
-                <div className="font-medium text-gray-900">Spotify</div>
+                <div className="font-medium text-gray-900 dark:text-neutral-50">Spotify</div>
               </div>
               <SpotifyButton />
             </li>
-            <li className="flex justify-between gap-x-6 py-3">
+            <li className="flex justify-between gap-x-6 py-3  ">
               <div className="flex justify-center items-center">
                 <span
-                  className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white ${
+                  className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white dark:ring-slate-900 ${
                     lastfm ? "bg-green-400" : "bg-red-400"
                   } `}
                 />
-                <div className="font-medium text-gray-900">Lastfm</div>
+                <div className="font-medium text-gray-900 dark:text-neutral-50">Lastfm</div>
               </div>
               <LastfmButton />
             </li>
