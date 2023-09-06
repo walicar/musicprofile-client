@@ -4,7 +4,6 @@ import { TokenWrapper } from "./TokenWrapper";
 import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
 import List from "@components/List";
-import ErrorCom from "@components/Error";
 import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
 import WidgetError from "@components/WidgetError";
