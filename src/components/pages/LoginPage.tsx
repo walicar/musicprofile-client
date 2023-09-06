@@ -59,19 +59,19 @@ const SigninPage: React.FC = () => {
   }, [setErrorMessages]);
 
   return (
-    <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8 relative">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-3 sm:mt-6  text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+    <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8 relative ">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md ">
+        <h2 className="mt-3 sm:mt-6  text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-neutral-50">
           Log into your account
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
+        <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-6 shadow sm:rounded-lg sm:px-12">
           <form className="space-y-6" onSubmit={handleSignin}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-50"
               >
                 Email address
               </label>
@@ -96,7 +96,7 @@ const SigninPage: React.FC = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900 dark:text-neutral-50"
               >
                 Password
               </label>
