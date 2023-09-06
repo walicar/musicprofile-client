@@ -2,15 +2,38 @@ import React, { useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import InputStyles from "@styles/InputStyles";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { useSupabaseClient } from "@components/contexts/SupabaseContext";
+import { SupabaseClient } from "@supabase/supabase-js";
+import ServerWrapper from "@server/ServerWrapper";
+const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const LastfmButton: React.FC = () => {
+  const supabase: SupabaseClient<any> = useSupabaseClient();
+  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [token, setToken, { removeItem }]: any =
     useLocalStorageState("lastfm-token");
   const [username, setUsername] = useState<string>("");
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleClick = () => {
+  const check = async () => {
+    try {
+      const { data }: any = await supabase
+        .from("lastfm_topitems")
+        .select("id")
+        .eq("id", session.user.id);
+      if (data.length === 0) {
+        const server = new ServerWrapper(session.access_token);
+        const message = await server.postTopitems("lastfm");
+        console.log("Check postTopitems: ", message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const connect = async () => {
+    await check();
     if (!username.length) {
       setIsValidUsername(false);
       setErrorMessage("Please enter your Lastfm username");
@@ -75,7 +98,7 @@ const LastfmButton: React.FC = () => {
         <button
           type="button"
           className="font-semibold text-indigo-600 hover:text-indigo-500"
-          onClick={handleClick}
+          onClick={connect}
         >
           Connect
         </button>
