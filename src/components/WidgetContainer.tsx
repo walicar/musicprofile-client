@@ -23,10 +23,10 @@ const WidgetContainer: React.FC = () => {
   return (
     <div className="h-[440px]">
       <div className="inline-flex py-1 justify-between items-center w-full">
-        <h2 className="text-md px-1 font-semibold text-gray-900">Widgets</h2>
+        <h2 className="text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">Widgets</h2>
         <Menu as="div" className="relative inline-block flex-3 text-left">
           <div>
-            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white dark:bg-slate-700 dark:text-neutral-50 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50">
               {widget.name}
               <ChevronDownIcon
                 className="-mr-1 h-5 w-5 text-gray-400"
@@ -43,7 +43,7 @@ const WidgetContainer: React.FC = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-slate-900 dark:text-neutral-50 shadow-lg ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none">
               <div className="py-1">
                 {Widgets.map((item) => (
                   <Menu.Item key={item.id}>
@@ -51,8 +51,8 @@ const WidgetContainer: React.FC = () => {
                       <a
                         id={item.id}
                         className={`${
-                          active ? "text-gray-900" : "text-gray-700"
-                        } hover:cursor-pointer hover:bg-gray-50 block px-4 py-2 text-sm`}
+                          active ? "text-gray-900 dark:text-neutral-50" : "text-gray-700 dark:text-neutral-400"
+                        } hover:cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-900 block px-4 py-2 text-sm`}
                         onClick={() => {
                           setWidget(item);
                         }}
@@ -67,7 +67,7 @@ const WidgetContainer: React.FC = () => {
           </Transition>
         </Menu>
       </div>
-      <div className="border-t-2 mt-1 p-1 overflow-scroll max-h-[400px]">
+      <div className="border-t-2 dark:border-slate-600 mt-1 pt-2 p-1 overflow-scroll max-h-[400px]">
         {widget.content}
       </div>
     </div>
