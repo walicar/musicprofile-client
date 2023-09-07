@@ -1,12 +1,12 @@
 import TopItems from "./TopItems";
 import { useState } from "react";
-const Services = {
-  SPOTIFY: "spotify",
-  LASTFM: "lastfm",
+const Services: any = {
+  spotify: <TopItems type={"spotify"} />,
+  lastfm: <TopItems type={"lastfm"} />,
 };
 
 const TopItemsContainer: React.FC = () => {
-  const [service, setService] = useState(Services.SPOTIFY);
+  const [service, setService] = useState("spotify");
 
   return (
     <>
@@ -22,17 +22,12 @@ const TopItemsContainer: React.FC = () => {
           <button
             type="button"
             className="relative -mt-px -mr-px inline-flex items-center rounded-bl-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-neutral-50 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:hover:bg-slate-600 focus:z-10 dark:ring-slate-700"
-            onClick={() => {
-              console.log("trying to set service to lastfm, not finished");
-              setService("spotify");
-            }}
+            onClick={() => setService("lastfm")}
           >
             Lastfm
           </button>
         </div>
-        <div className="flex-1">
-          <TopItems type={service} />
-        </div>
+        <div className="flex-1">{Services[service]}</div>
       </div>
     </>
   );
