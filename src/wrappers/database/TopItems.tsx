@@ -107,7 +107,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
               Genres
             </button>
           </span>
-          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 dark:text-neutral-50 sm:-ml-3">
+          <span className="invisible sm:visible flex-2 text-[15px] sm:text-md font-semibold text-gray-900 dark:text-neutral-50 sm:-ml-3">
             Leaderboard
           </span>
           <span className="flex-none">
