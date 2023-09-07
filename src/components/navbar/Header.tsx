@@ -28,8 +28,8 @@ const Header: React.FC = () => {
         className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
-          <button onClick={() => navigate("/")} className="-m-1.5 p-1.5">
+        <div className="flex lg:flex-1 sm">
+          <button onClick={() => navigate("/")} className="-m-1.5 p-1.5 invisible :visible">
             <span className="sr-only">Your Company</span>
             <img
               className="h-8 w-auto"
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-slate-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center gap-x-6">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
             )}
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-neutral-400"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -133,10 +133,10 @@ const Header: React.FC = () => {
                   key={"Home"}
                   to={"/"}
                   end
-                  className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 ${
+                  className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-slate-700 ${
                     location.pathname === "/"
                       ? "text-indigo-600"
-                      : "text-gray-900"
+                      : "text-gray-900 dark:text-neutral-50 "
                   }`}
                 >
                   {"Home"}
@@ -147,10 +147,10 @@ const Header: React.FC = () => {
                       key={item.name}
                       to={item.href}
                       end
-                      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 ${
+                      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-slate-700 ${
                         location.pathname === item.href
                           ? "text-indigo-600"
-                          : "text-gray-900"
+                          : "text-gray-900 dark:text-neutral-50 "
                       }`}
                     >
                       {item.name}
