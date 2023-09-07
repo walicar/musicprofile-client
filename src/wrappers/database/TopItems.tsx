@@ -22,6 +22,7 @@ const Categories = {
 
 let initialized = false;
 const TopItems: React.FC<Prop> = ({ type }) => {
+  // TODO: set and use session from useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [token, setToken]: any = useLocalStorageState(`${type}-token`);
   const [category, setCategory] = useState(Categories.SONGS);
@@ -31,7 +32,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       const msg = await topitems.getTopItems(type, [
         "songs",
@@ -41,31 +42,30 @@ const TopItems: React.FC<Prop> = ({ type }) => {
       if (msg.error) throw new Error(msg.error);
       return msg;
     },
-    { refetchOnWindowFocus: false },
+    { refetchOnWindowFocus: false }
   );
 
   useEffect(() => {
     const handleUpdate = async () => {
-      console.log("Handlign Update");
+      console.log(`trying to update ${type}`)
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);
       updateAt.setDate(updateAt.getDate() + 1);
       if (updateAt < new Date()) {
-        console.log("send update here");
         const tokens = new TokenWrapper(session.access_token, session.user.id);
-        await validate(tokens.validateTokens, [type], { [type]: setToken });
         const server = new ServerWrapper(session.access_token);
+        if (type != "lastfm") await validate(tokens.validateTokens, [type], { [type]: setToken });
         const message = await server.postUpdate({
-          spotify: token.access_token,
+          [type]: token.access_token,
         });
         console.log(message);
       }
     };
-    if (!initialized && token) {
+    if (token) {
       handleUpdate();
       initialized = true;
     }
@@ -107,7 +107,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
               Genres
             </button>
           </span>
-          <span className="flex-2 text-[15px] sm:text-md font-semibold text-gray-900 dark:text-neutral-50 sm:-ml-3">
+          <span className="invisible sm:visible flex-2 text-[15px] sm:text-md font-semibold text-gray-900 dark:text-neutral-50 sm:-ml-3">
             Leaderboard
           </span>
           <span className="flex-none">

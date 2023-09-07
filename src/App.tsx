@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createClient } from "@supabase/supabase-js";
+import { HelmetProvider } from "react-helmet-async";
 import SupabaseClientContext from "@contexts/SupabaseContext";
 import AppRouter from "./AppRouter";
 import useLocalStorageState from "use-local-storage-state";
@@ -27,7 +28,9 @@ function App() {
   return (
     <SupabaseClientContext.Provider value={supabase}>
       <QueryClientProvider client={queryClient}>
-        <AppRouter />
+        <HelmetProvider>
+          <AppRouter />
+        </HelmetProvider>
       </QueryClientProvider>
     </SupabaseClientContext.Provider>
   );
