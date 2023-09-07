@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
                   {items.map((item) => (
                     <li key={item.id} className="px-6 py-4 ">
                       <div className="inline-flex font-semibold text-lg">
-                        <span className="mr-3 text-indigo-600">
+                        <span className="mr-3 text-orange-500">
                           {" "}
                           {item.icon}
                         </span>

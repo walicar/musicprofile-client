@@ -180,7 +180,7 @@ const RecoveryForm: React.FC = () => {
                               <></>
                             )}
                           </div>
-                          <button className="font-semibold text-indigo-600 hover:text-indigo-500">
+                          <button className="font-semibold text-orange-500 hover:text-indigo-500">
                             Submit
                           </button>
                         </form>

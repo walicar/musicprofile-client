@@ -61,14 +61,14 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
             name="email"
             id="email"
             disabled
-            className="disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:disabled:bg-slate-800 dark:disabled:ring-slate-600"
+            className="disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 dark:disabled:bg-slate-800 dark:disabled:ring-slate-600"
             placeholder={session.user.email}
           />
         </div>
       </div>
       <button
         type="button"
-        className="font-semibold text-indigo-600 hover:text-indigo-500"
+        className="font-semibold text-orange-500 hover:text-indigo-500"
         onClick={() => setOpen(true)}
       >
         Update
@@ -272,7 +272,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                               )}
                             </div>
                           </div>
-                          <button className="font-semibold text-indigo-600 hover:text-indigo-500">
+                          <button className="font-semibold text-orange-500 hover:text-indigo-500">
                             Submit
                           </button>
                         </form>

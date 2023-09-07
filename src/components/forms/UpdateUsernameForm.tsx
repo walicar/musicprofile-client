@@ -83,7 +83,7 @@ const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
       </div>
       <button
         type="button"
-        className="font-semibold text-indigo-600 hover:text-indigo-500"
+        className="font-semibold text-orange-500 hover:text-indigo-500"
         onClick={updateUsername}
       >
         Update

@@ -48,7 +48,7 @@ const List: React.FC<Prop> = ({ items, title }) => {
               <div>
                 {index + 1}.{" "}
                 {item.url ? (
-                  <a href={item.url} className="hover:text-indigo-600">
+                  <a href={item.url} className="hover:text-orange-500">
                     {format(item.name)}{" "}
                     {item.artist ? `by ${item.artist} ` : ""}
                   </a>
