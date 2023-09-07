@@ -123,7 +123,7 @@ const SigninPage: React.FC = () => {
               <div className="text-sm leading-6">
                 <a
                   onClick={() => navigate("/forgot")}
-                  className="cursor-pointer font-semibold text-orange-500 hover:text-indigo-500"
+                  className="cursor-pointer font-semibold text-orange-500 hover:text-orange-400"
                 >
                   Forgot password?
                 </a>
@@ -133,7 +133,7 @@ const SigninPage: React.FC = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
               >
                 Log In
               </button>

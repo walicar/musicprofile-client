@@ -68,7 +68,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
       </div>
       <button
         type="button"
-        className="font-semibold text-orange-500 hover:text-indigo-500"
+        className="font-semibold text-orange-500 hover:text-orange-400"
         onClick={() => setOpen(true)}
       >
         Update
@@ -109,7 +109,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                   <div className="ml-4 flex flex-shrink-0">
                     <button
                       type="button"
-                      className="inline-flex rounded-md bg-white dark:bg-slate-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="inline-flex rounded-md bg-white dark:bg-slate-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
                       onClick={() => {
                         setShow(false);
                       }}
@@ -272,7 +272,7 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
                               )}
                             </div>
                           </div>
-                          <button className="font-semibold text-orange-500 hover:text-indigo-500">
+                          <button className="font-semibold text-orange-500 hover:text-orange-400">
                             Submit
                           </button>
                         </form>
