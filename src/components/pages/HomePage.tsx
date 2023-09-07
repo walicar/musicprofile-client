@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-slate-900 ">
       <div className="relative isolate px-6 py-1 lg:px-8">
-        <div className="flex flex-col gap-y-5 sm:flex-row pt-16 gap-x-6">
+        <div className="flex flex-col gap-y-5 md:flex-row pt-16 gap-x-6">
           <div className="flex-5 mx-auto max-w-2xl sm:py-12 lg:py-20">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
             <div className="text-center">
@@ -43,8 +43,8 @@ const HomePage: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="max-w-lg px-4 m:px-6 lg:px-8">
-            <h2 className="text-2xl pt-5 font-bold leading-1 text-gray-900 dark:text-neutral-50 flex justify-center">
+          <div className="m:max-w-lg px-4 m:px-6 lg:px-8">
+            <h2 className="text-2xl pt-5 font-bold leading-1  text-gray-900 dark:text-neutral-50 flex justify-center">
               <div>Join now!</div>
             </h2>
             <div className="pt-7">
