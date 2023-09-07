@@ -30,7 +30,7 @@ const Header: React.FC = () => {
       >
         <div className="flex lg:flex-1 sm">
           <button onClick={() => navigate("/")} className="-m-1.5 p-1.5 invisible sm:visible">
-            <span className="sr-only">Your Company</span>
+            <span className="sr-only">Musicprofile</span>
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=500"
