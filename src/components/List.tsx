@@ -1,5 +1,6 @@
 import React from "react";
 import statusIcons from "@utils/statusIcons";
+import WidgetError from "./WidgetError";
 
 type Prop = {
   // items: string[] | { [key: string]: any }[]
@@ -11,6 +12,11 @@ const format = (input: string): string => {
   return input.charAt(0).toUpperCase() + input.slice(1);
 };
 const List: React.FC<Prop> = ({ items, title }) => {
+  if (!items || items.length === 0) {
+    return (
+      <WidgetError message={`No ${title} found`}/>
+    );
+  }
   if (Array.isArray(items) && typeof items[0] === "string") {
     return (
       <ol>

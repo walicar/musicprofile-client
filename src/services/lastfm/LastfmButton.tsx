@@ -39,7 +39,7 @@ const LastfmButton: React.FC = () => {
       setErrorMessage("Please enter your Lastfm username");
       return;
     }
-    setToken(username);
+    setToken({ access_token: username });
     setUsername("");
   };
 
@@ -63,7 +63,7 @@ const LastfmButton: React.FC = () => {
             className={
               isValidUsername ? InputStyles.isValid : InputStyles.notValid
             }
-            placeholder={token ? token : "Lastfm Username"}
+            placeholder={token ? token.access_token : "Lastfm Username"}
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             {!isValidUsername ? (
