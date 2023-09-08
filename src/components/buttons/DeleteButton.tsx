@@ -17,15 +17,11 @@ const DeleteButton: React.FC = () => {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
   const confirmDelete = async () => {
-    console.log("Stub out delete button FOR NOW");
     setOpen(false);
-    /*
-    setShowDialog(false);
     const server = new ServerWrapper(session.access_token);
     await server.deleteAccount();
     await supabase.auth.signOut();
     navigate("/");
-    */
   };
 
   return (
