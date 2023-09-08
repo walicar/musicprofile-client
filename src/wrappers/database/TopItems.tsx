@@ -8,6 +8,9 @@ import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
 import WidgetError from "@components/WidgetError";
 import WidgetLoad from "@components/WidgetLoad";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
+import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 type Prop = {
@@ -20,10 +23,11 @@ const Categories = {
   GENRES: "genres",
 };
 
-let initialized = false;
 const TopItems: React.FC<Prop> = ({ type }) => {
   // TODO: set and use session from useSupabaseClient();
-  const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const supabase: SupabaseClient<any> = useSupabaseClient();
+  const [session, setSession]: any = useLocalStorageState(`sb-${ID}-auth-token`);
+  const navigate = useNavigate();
   const [token, setToken]: any = useLocalStorageState(`${type}-token`);
   const [category, setCategory] = useState(Categories.SONGS);
   //
@@ -65,10 +69,11 @@ const TopItems: React.FC<Prop> = ({ type }) => {
         console.log(message);
       }
     };
-    if (token) {
-      handleUpdate();
-      initialized = true;
-    }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) navigate("/login");
+      setSession(session);
+    });
+    if (token) handleUpdate();
   }, [session, token]);
 
   if (status === "loading") {
