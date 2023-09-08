@@ -5,7 +5,7 @@ import { describe, test } from "vitest";
 describe("testing spotify button", () => {
   test("show 'connect' button when there is no spotify access-token", async () => {
     render(<SpotifyButton />);
-    const buttonName = "connect to spotify";
+    const buttonName = "Connect";
     const connectButton = await screen.findByRole("button", {
       name: buttonName,
     });

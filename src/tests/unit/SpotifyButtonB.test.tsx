@@ -13,7 +13,7 @@ describe("testing spotify button", () => {
       ],
     }));
     render(<SpotifyButton />);
-    const buttonName = "disconnect from spotify";
+    const buttonName = "Disconnect";
     const disconnectButton = await screen.findByRole("button", {
       name: buttonName,
     });

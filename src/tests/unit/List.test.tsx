@@ -24,9 +24,9 @@ describe("Testing List component", () => {
     ];
     render(<List items={myItems} title={"songs"} />);
 
-    const item1 = await screen.findByText("Dance Now by James === 🔼");
-    const item2 = await screen.findByText("Kick Off by Jarvis === ⏺️");
-    const item3 = await screen.findByText("Razor by Bettie === 🔽");
+    const item1 = await screen.findByText("1. Dance Now by James");
+    const item2 = await screen.findByText("2. Kick Off by Jarvis");
+    const item3 = await screen.findByText("3. Razor by Bettie");
 
     expect(item1).toBeInTheDocument();
     expect(item2).toBeInTheDocument();
