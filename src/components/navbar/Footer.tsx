@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           >
             Contact
           </a>
-          {navigation.social.map((item) => (
+          {/* {navigation.social.map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
             </a>
-          ))}
+          ))} */}
         </div>
         <p className="text-xs text-gray-400 pr-6">
           &copy; 2023 Musicprofile, All rights reserved.
