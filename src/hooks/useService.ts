@@ -7,7 +7,7 @@ import { writeLocalStorage } from "@utils/localStorage";
 const createInstance = (
   service: string,
   session: Session,
-  access_token: string,
+  access_token: string
 ) => {
   const instance = axios.create({
     headers: {
@@ -39,21 +39,26 @@ const createInstance = (
         }
       }
       return Promise.reject(err);
-    },
+    }
   );
   return instance;
 };
 
 const queryService = async (instance: AxiosInstance, url: string) => {
-  const { data } = await instance.get(url);
-  return data;
+  try {
+    if (url.includes("undefined") && url.includes("spotify")) throw new Error("No Spotify Records");
+    const { data } = await instance.get(url);
+    return data;
+  } catch (e: any) {
+    throw new Error(e.message);
+  }
 };
 
 const makeServiceParams = (
   url: string,
   access_token: string,
   session: Session,
-  service: string,
+  service: string
 ): ServiceParams => ({
   url,
   access_token,
@@ -64,7 +69,7 @@ const makeServiceParams = (
 export default function useService(
   key: string,
   serviceParams: ServiceParams,
-  opt: any,
+  opt: any
 ) {
   const { service, session, access_token, url } = serviceParams;
   const instance = createInstance(service, session, access_token);

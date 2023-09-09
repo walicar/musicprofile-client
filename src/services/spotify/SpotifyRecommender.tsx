@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useLocalStorageState from "use-local-storage-state";
 import useService, { makeServiceParams } from "@hooks/useService";
 import { useQuery } from "react-query";
@@ -9,16 +9,23 @@ import WidgetLoad from "@components/WidgetLoad";
 
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
+type ReturnType = {
+  data: any;
+  isSuccess: boolean;
+  isLoading: boolean;
+  error: any;
+  refetch: any;
+};
+
 const SpotifyRecommender: React.FC = () => {
-  let url = undefined;
   const [token]: any = useLocalStorageState("spotify-token");
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const { status, data: spotifyData }: any = useQuery(
+  const { data: spotifyData }: any = useQuery(
     ["spotify_topitems", session],
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id,
+        session.user.id
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -26,32 +33,25 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: false, refetchOnWindowFocus: false },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
   );
+  const url = getSpotifyRecommendationUrl(spotifyData);
   if (!token) return <WidgetError message="Disconnected from Spotify" />;
-  // TODO: this line causes everything to break when: user can't get items from
-  //   top_items
-  // if (spotifyError) return <WidgetError message="Disconnected from Spotify" />;
-  if (status === "success") {
-    url = getSpotifyRecommendationUrl(spotifyData);
-  }
-  const { data, isSuccess, isLoading, error, refetch } = useService(
+  const { data, isSuccess, isLoading, error, refetch }: ReturnType = useService(
     "spotifyRecommendation",
     makeServiceParams(
-      url!,
+      url,
       token.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify",
+      "spotify"
     ),
     {
       refetchOnWindowFocus: false,
-      enabled: !!spotifyData && !!url,
-    },
+      enabled: !!url && !!token,
+    }
   );
 
-  //useEffect(() => {}, [session, token]);
-
-  if (error) return <WidgetError message={error as string} />;
+  if (error) return <WidgetError message={error.message} />;
 
   if (isLoading) {
     return <WidgetLoad />;

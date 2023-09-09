@@ -1,4 +1,7 @@
+import { isEmpty } from "@utils/util";
+
 export const getSpotifyRecommendationUrl = (data: TopItemColumns) => {
+  if (!data || isEmpty(data)) return "";
   const seed_tracks: string[] = data.songs.map((item) => item.id!);
   const seed_artists: string[] = data.artists.map((item) => item.id!);
   const url = new URL("https://api.spotify.com/v1/recommendations");
