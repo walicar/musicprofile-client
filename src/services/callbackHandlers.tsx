@@ -1,4 +1,3 @@
-import StubComponent from "../components/stubs/StubComponent";
 import SpotifyCallback from "@spotify/SpotifyCallback";
 
 type Handlers = {
@@ -7,7 +6,7 @@ type Handlers = {
 
 const callbackHandlers: Handlers = {
   spotify: <SpotifyCallback />,
-  lasfm: <StubComponent />,
+  lasfm: <></>,
 };
 
 export default callbackHandlers;
