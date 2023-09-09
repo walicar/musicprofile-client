@@ -15,7 +15,7 @@ vi.mock("react-router-dom", async () => {
 const mockGetSession = vi.fn();
 vi.mock("@components/contexts/SupabaseContext", async () => {
   const actual: any = await vi.importActual(
-    "@components/contexts/SupabaseContext"
+    "@components/contexts/SupabaseContext",
   );
   return {
     ...actual,
@@ -48,7 +48,7 @@ describe("LoginPageA", async () => {
       render(
         <BrowserRouter>
           <LoginPageBeta />
-        </BrowserRouter>
+        </BrowserRouter>,
       );
     });
 

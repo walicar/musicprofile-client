@@ -107,16 +107,16 @@ const SettingsPage: React.FC = () => {
           <dl className="mt-3 space-y-1 divide-y divide-gray-100 dark:divide-slate-500 border-t border-gray-200 dark:border-slate-500 text-sm leading-6">
             <div className="pt-2 pb-1  sm:flex items-center">
               <dt className="font-medium text-gray-900 sm:w-32 sm:flex-none sm:pr-6 dark:text-neutral-50">
-              <div className="flex items-center">
-                <span
-                  className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white dark:ring-slate-900 ${
-                    lastfm ? "bg-green-400" : "bg-red-400"
-                  } `}
-                />
-                <div className="flex-3 font-medium text-gray-900 dark:text-neutral-50">
-                  Lastfm
+                <div className="flex items-center">
+                  <span
+                    className={`mr-1 h-2.5 w-2.5 rounded-full ring-2 ring-white dark:ring-slate-900 ${
+                      lastfm ? "bg-green-400" : "bg-red-400"
+                    } `}
+                  />
+                  <div className="flex-3 font-medium text-gray-900 dark:text-neutral-50">
+                    Lastfm
+                  </div>
                 </div>
-              </div>
               </dt>
               <dd className="mt-1 flex items-center sm:mt-0 sm:flex-auto">
                 <LastfmButton />
