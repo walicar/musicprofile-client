@@ -21,6 +21,7 @@ const DeleteButton: React.FC = () => {
     const server = new ServerWrapper(session.access_token);
     await server.deleteAccount();
     await supabase.auth.signOut();
+    localStorage.clear();
     navigate("/");
   };
 
