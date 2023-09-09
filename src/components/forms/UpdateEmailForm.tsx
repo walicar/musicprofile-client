@@ -39,8 +39,6 @@ const UpdateEmailForm: React.FC<Prop> = ({ supabase }) => {
 
     const { error } = await supabase.auth.updateUser({ email: email });
     if (error) {
-      // REMOVE ME
-      console.log("ERROR Update Email ", error);
       setIsValidEmail(false);
       setErrorMessage(error.message);
       return;

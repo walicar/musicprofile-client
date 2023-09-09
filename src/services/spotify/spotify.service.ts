@@ -68,7 +68,6 @@ export async function getSpotifyToken(code: string, codeVerifier: any) {
     });
     if (!response.ok) throw new Error("HTTP fail: " + response.status);
     const data = await response.json();
-    console.log("From getSpotifyToken", data);
     const createdAt = Date();
     const newData = { ...data, created_at: createdAt };
     return newData;

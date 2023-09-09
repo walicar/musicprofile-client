@@ -9,7 +9,6 @@ const createInstance = (
   session: Session,
   access_token: string,
 ) => {
-  console.log("creating instance");
   const instance = axios.create({
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -24,20 +23,16 @@ const createInstance = (
     (res) => res,
     async (err: any) => {
       if (err.response && err.response.status === 401) {
-        console.log(err.response);
-        console.log("REFRESHING TOKEN!!!");
         const db = new TokenWrapper(session.auth_token, session.id);
         const refreshToken: string = await db.getRefreshToken(service);
         const { access_token, refresh_token, expires_in }: any =
           await refreshHandlers[service](refreshToken);
         const created_at = Date();
-        console.log(access_token, refresh_token, expires_in);
         //
         await db.writeRefreshTokens({ [service]: refresh_token });
         const serviceToken: Token = { access_token, created_at, expires_in };
         // writing to localStorage outside of react does not rerender components
         writeLocalStorage(`${service}-token`, serviceToken);
-        console.log("ORIGINAL REQUEST REAL? ", !!originalRequest);
         if (originalRequest) {
           originalRequest.headers.Authorization = `Bearer ${access_token}`;
           return axios(originalRequest);

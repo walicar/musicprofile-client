@@ -15,10 +15,8 @@ const validate = async (
   const newTokens: Tokens = await validator(services);
   if (!isEmpty(newTokens)) {
     for (const service in newTokens) {
-      console.log("util validate proecssing: ", service);
       const token: Token | undefined = newTokens[service as SupportedService];
       if (token) {
-        console.log("util validate setting");
         setters[service as SupportedService](token);
       }
     }

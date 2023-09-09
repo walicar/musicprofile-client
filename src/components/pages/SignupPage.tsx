@@ -68,12 +68,9 @@ const SignupPage: React.FC = () => {
       },
     });
     if (error) {
-      // REMOVE ME
-      console.log("Signup error", error);
       setErrorMessages((prevMessages) => [...prevMessages, error.message]);
       return;
     }
-    console.log(error);
   };
 
   return (

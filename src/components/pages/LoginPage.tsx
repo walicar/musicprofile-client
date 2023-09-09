@@ -45,7 +45,6 @@ const SigninPage: React.FC = () => {
       password: password,
     });
     if (error) {
-      console.log("Login error", error);
       setErrorMessages((prevMessages) => [...prevMessages, error.message]);
       return;
     }

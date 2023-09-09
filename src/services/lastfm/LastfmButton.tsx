@@ -25,7 +25,6 @@ const LastfmButton: React.FC = () => {
       if (data.length === 0) {
         const server = new ServerWrapper(session.access_token);
         const message = await server.postTopitems("lastfm");
-        console.log("Check postTopitems: ", message);
       }
     } catch (e) {
       console.log(e);

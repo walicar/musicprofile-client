@@ -31,8 +31,6 @@ const UpdateUsernameForm: React.FC<Prop> = ({ supabase }) => {
       data: { username: username },
     });
     if (error) {
-      // REMOVE ME
-      console.log("updateUsername Error", error);
       setIsValidUsername(false);
       setErrorMessage(error.message);
       return;

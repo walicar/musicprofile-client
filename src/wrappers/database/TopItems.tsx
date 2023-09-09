@@ -51,7 +51,6 @@ const TopItems: React.FC<Prop> = ({ type }) => {
 
   useEffect(() => {
     const handleUpdate = async () => {
-      console.log(`trying to update ${type}`)
       const topitems = new TopItemsWrapper(
         session.access_token,
         session.user.id
@@ -66,7 +65,6 @@ const TopItems: React.FC<Prop> = ({ type }) => {
         const message = await server.postUpdate({
           [type]: token.access_token,
         });
-        console.log(message);
       }
     };
     supabase.auth.getSession().then(({ data: { session } }) => {
