@@ -7,6 +7,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "@contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
+import { clearLocalStorage } from "@utils/localStorage";
 const ID = import.meta.env.VITE_SUPABASE_ID;
 
 const DeleteButton: React.FC = () => {
@@ -21,7 +22,7 @@ const DeleteButton: React.FC = () => {
     const server = new ServerWrapper(session.access_token);
     await server.deleteAccount();
     await supabase.auth.signOut();
-    localStorage.clear();
+    clearLocalStorage();
     navigate("/");
   };
 

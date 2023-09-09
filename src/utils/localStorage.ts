@@ -11,4 +11,12 @@ const getLocalStorageToken = (key: string) => {
   }
 };
 
-export { writeLocalStorage, getLocalStorageToken };
+const clearLocalStorage = () => {
+  for (let key in localStorage) {
+    if (localStorage.hasOwnProperty(key) && key !== "theme") {
+      localStorage.removeItem(key);
+    }
+  }
+};
+
+export { writeLocalStorage, getLocalStorageToken, clearLocalStorage };
