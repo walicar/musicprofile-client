@@ -85,7 +85,7 @@ const Header: React.FC = () => {
             <LogoutButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900 dark:text-neutral-50" />
           ) : (
             <>
-              <LoginButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900 dark:text-neutral-500" />
+              <LoginButton className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900 dark:text-neutral-50" />
               <SignupButton className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm dark:text-neutral-50 hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500" />
             </>
           )}
