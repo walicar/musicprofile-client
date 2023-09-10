@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import InputStyles from "@styles/InputStyles";
 import testEmail from "@utils/email";
 import ErrorList from "@components/ErrorList";
@@ -15,6 +16,8 @@ const SignupPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [captchaToken, setCaptchaToken] = useState<string>("");
+  const captcha = useRef<any>();
 
   const validateForm = () => {
     let flag = true;
@@ -65,8 +68,10 @@ const SignupPage: React.FC = () => {
         data: {
           username: username,
         },
+        captchaToken
       },
     });
+    captcha.current.resetCaptcha();
     if (error) {
       setErrorMessages((prevMessages) => [...prevMessages, error.message]);
       return;
@@ -81,7 +86,7 @@ const SignupPage: React.FC = () => {
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-6 shadow sm:rounded-lg sm:px-12">
           <form className="space-y-6" onSubmit={handleSignup}>
             <div>
@@ -169,7 +174,12 @@ const SignupPage: React.FC = () => {
                 </a>
               </div>
             </div>
-
+            <div className="flex justify-center items-center">
+              <HCaptcha 
+              ref={captcha}
+              sitekey="a749f12c-718e-4df9-bba3-17ed0b6b4eb0"
+              onVerify={setCaptchaToken}/>
+            </div>
             <div>
               <button
                 type="submit"
