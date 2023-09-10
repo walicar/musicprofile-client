@@ -11,7 +11,7 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const SpotifyButton: React.FC = () => {
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const [_cookies, setCookie] = useCookies(["spotify-code-verifier"]);
+  const [_codeVerifier, setCodeVerifier] = useLocalStorageState("spotify-code-verifier")
   const [token, _setToken, { removeItem }] =
     useLocalStorageState("spotify-token");
 
@@ -34,7 +34,7 @@ const SpotifyButton: React.FC = () => {
   const connect = async () => {
     await check();
     const verifier = generateRandomString(128);
-    setCookie("spotify-code-verifier", verifier, { path: "/" });
+    setCodeVerifier(verifier);
     const URL = await getAuthURL(verifier);
     window.location.replace(URL);
   };
