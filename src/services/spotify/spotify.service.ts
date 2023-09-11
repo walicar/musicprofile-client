@@ -35,7 +35,7 @@ export async function getAuthURL(codeVerifier: any) {
   // localStorage values.
   let codeChallenge = await generateCodeChallenge(codeVerifier);
   let state = generateRandomString(16);
-  let scope = "user-read-private user-read-email user-top-read";
+  let scope = "user-top-read";
   let args = new URLSearchParams({
     response_type: "code",
     client_id: clientId!,
