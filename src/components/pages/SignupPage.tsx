@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
@@ -68,7 +68,7 @@ const SignupPage: React.FC = () => {
         data: {
           username: username,
         },
-        captchaToken
+        captchaToken,
       },
     });
     captcha.current.resetCaptcha();
@@ -175,10 +175,11 @@ const SignupPage: React.FC = () => {
               </div>
             </div>
             <div className="flex justify-center items-center">
-              <HCaptcha 
-              ref={captcha}
-              sitekey="a749f12c-718e-4df9-bba3-17ed0b6b4eb0"
-              onVerify={setCaptchaToken}/>
+              <HCaptcha
+                ref={captcha}
+                sitekey="a749f12c-718e-4df9-bba3-17ed0b6b4eb0"
+                onVerify={setCaptchaToken}
+              />
             </div>
             <div>
               <button

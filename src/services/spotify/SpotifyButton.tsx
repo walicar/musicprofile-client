@@ -10,9 +10,8 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const SpotifyButton: React.FC = () => {
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const [, setCodeVerifier] = useLocalStorageState("spotify-code-verifier")
-  const [token, , { removeItem }] =
-    useLocalStorageState("spotify-token");
+  const [, setCodeVerifier] = useLocalStorageState("spotify-code-verifier");
+  const [token, , { removeItem }] = useLocalStorageState("spotify-token");
 
   const check = async () => {
     // if user does not have a spotify_topitems record, then insert it

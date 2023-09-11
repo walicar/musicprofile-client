@@ -25,7 +25,7 @@ const SpotifyRecommender: React.FC = () => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       return await topitems.getTopItems("spotify", [
         "songs",
@@ -33,7 +33,7 @@ const SpotifyRecommender: React.FC = () => {
         "genres",
       ]);
     },
-    { refetchOnMount: false, refetchOnWindowFocus: false }
+    { refetchOnMount: false, refetchOnWindowFocus: false },
   );
   const url = getSpotifyRecommendationUrl(spotifyData);
   const { data, isSuccess, isLoading, error, refetch }: ReturnType = useService(
@@ -42,12 +42,12 @@ const SpotifyRecommender: React.FC = () => {
       url,
       token?.access_token,
       { auth_token: session.access_token, id: session.user.id },
-      "spotify"
+      "spotify",
     ),
     {
       refetchOnWindowFocus: false,
       enabled: !!url && !!token,
-    }
+    },
   );
 
   if (!token) return <WidgetError message="Disconnected from Spotify" />;

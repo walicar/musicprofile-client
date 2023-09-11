@@ -15,6 +15,6 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    "no-control-regex": 0
+    "no-control-regex": 0,
   },
 };

@@ -10,7 +10,7 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 let initalized = false;
 const SpotifyCallback: React.FC = () => {
   const [codeVerifier, , { removeItem }] = useLocalStorageState(
-    "spotify-code-verifier"
+    "spotify-code-verifier",
   );
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
   const [, setToken] = useLocalStorageState(`spotify-token`);

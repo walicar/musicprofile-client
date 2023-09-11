@@ -41,7 +41,7 @@ export default class TopItemsWrapper {
     if (!res.ok) return { error: res.statusText };
     const { data } = await res.json();
     if (data[`${type}_topitemsCollection`].edges.length === 0) {
-      return {}
+      return {};
     } else {
       return data[`${type}_topitemsCollection`].edges[0].node;
     }

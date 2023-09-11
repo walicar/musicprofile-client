@@ -16,9 +16,10 @@ const Footer: React.FC = () => {
           >
             Contact
           </a>
-          <a key="privacy"
-          onClick={() => navigate("/privacy")}
-          className="text-xs text-gray-400 hover:text-gray-300 hover:cursor-pointer"
+          <a
+            key="privacy"
+            onClick={() => navigate("/privacy")}
+            className="text-xs text-gray-400 hover:text-gray-300 hover:cursor-pointer"
           >
             Privacy
           </a>

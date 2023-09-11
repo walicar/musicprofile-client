@@ -27,7 +27,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
   // TODO: set and use session from useSupabaseClient();
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session, setSession]: any = useLocalStorageState(
-    `sb-${ID}-auth-token`
+    `sb-${ID}-auth-token`,
   );
   const navigate = useNavigate();
   const [token, setToken]: any = useLocalStorageState(`${type}-token`);
@@ -38,7 +38,7 @@ const TopItems: React.FC<Prop> = ({ type }) => {
     async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       const msg = await topitems.getTopItems(type, [
         "songs",
@@ -48,14 +48,14 @@ const TopItems: React.FC<Prop> = ({ type }) => {
       if (msg.error) throw new Error(msg.error);
       return msg;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false },
   );
 
   useEffect(() => {
     const handleUpdate = async () => {
       const topitems = new TopItemsWrapper(
         session.access_token,
-        session.user.id
+        session.user.id,
       );
       const lastUpdated = await topitems.getLastUpdated(type);
       const updateAt = new Date(lastUpdated);

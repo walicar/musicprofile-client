@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPage: React.FC = () => {
   return (
-    <div className="grid center-items mx-auto px-6 py-4 lg:px-8 max-w-6xl" >
+    <div className="grid center-items mx-auto px-6 py-4 lg:px-8 max-w-6xl">
       <h1 className="font-bold text-4xl">Privacy Policy</h1>
       <br />
       <h2 className="font-bold text-xl py-2 dark:border-slate-600 border-t">
@@ -12,7 +12,10 @@ const PrivacyPage: React.FC = () => {
         Musicprofile is committed to protecting your personal information and
         your right to privacy. If you have any questions or concerns about our
         policy or our practices with regards to your personal information,
-        please contact us at <a className="underline text-orange-500" href="#">contact@musicprofile.io.</a>
+        please contact us at{" "}
+        <a className="underline text-orange-500" href="#">
+          contact@musicprofile.io.
+        </a>
       </p>
       <br />
       <h2 className="font-bold text-xl">2. What Information We Collect</h2>

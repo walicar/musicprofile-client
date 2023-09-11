@@ -13,7 +13,10 @@ const getLocalStorageToken = (key: string) => {
 
 const clearLocalStorage = () => {
   for (const key in localStorage) {
-    if (Object.prototype.isPrototypeOf.call(localStorage, key) && key !== "theme") {
+    if (
+      Object.prototype.isPrototypeOf.call(localStorage, key) &&
+      key !== "theme"
+    ) {
       localStorage.removeItem(key);
     }
   }
