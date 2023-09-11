@@ -12,6 +12,7 @@ import Footer from "@components/navbar/Footer";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import PrivacyPage from "@components/pages/PrivacyPage";
 
 function AppRouter() {
   const [theme, setTheme]: any = useLocalStorageState("theme");
@@ -35,7 +36,7 @@ function AppRouter() {
       </Helmet>
       <BrowserRouter>
         <Header />
-        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col lg:h-[84vh]">
+        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col min-h-[84vh]">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -44,6 +45,7 @@ function AppRouter() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/forgot" element={<ForgotPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/callback/*" element={<CallbackPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

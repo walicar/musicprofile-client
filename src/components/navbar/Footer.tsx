@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <footer
       className="bg-white dark:bg-slate-900 lg:px-8"
@@ -12,6 +15,12 @@ const Footer: React.FC = () => {
             className="text-xs text-gray-400 hover:text-gray-300"
           >
             Contact
+          </a>
+          <a key="privacy"
+          onClick={() => navigate("/privacy")}
+          className="text-xs text-gray-400 hover:text-gray-300 hover:cursor-pointer"
+          >
+            Privacy
           </a>
         </div>
         <p className="text-xs text-gray-400 pr-6">
