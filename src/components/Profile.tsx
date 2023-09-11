@@ -15,7 +15,7 @@ const Profile: React.FC = () => {
       try {
         return await profile.getTitle();
       } catch (error: any) {
-        throw new Error(error);
+        throw new Error("Failed to get Profile information");
       }
     },
     { refetchOnWindowFocus: false },
@@ -25,10 +25,11 @@ const Profile: React.FC = () => {
     : session.user.email;
 
   if (error) {
-    return <span>ERROR: {error as string}</span>;
+    return <span>{error as string}</span>;
   }
+
   if (isLoading) {
-    return <span>I'm Loading</span>;
+    return <span className="dark:text-neutral-50">Loading...</span>;
   }
 
   return (
