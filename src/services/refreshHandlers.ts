@@ -7,7 +7,7 @@ export const refreshHandlers: any = {
   lasfm: async () => {
     // STUBBED
     console.warn("Usage of stub lastfm refresh handler");
-    const promise = new Promise((resolve, _reject) => {
+    const promise = new Promise((resolve) => {
       setTimeout(() => {
         resolve({
           access_token: "A_LASTFM_ACCESS_TOKEN",

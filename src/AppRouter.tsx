@@ -25,7 +25,7 @@ function AppRouter() {
         setTheme("light");
       }
     }
-  }, []);
+  }, [theme, setTheme]);
 
   return (
     <div className={theme}>

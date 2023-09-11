@@ -53,7 +53,7 @@ const SignupPage: React.FC = () => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) navigate("/dashboard");
     });
-  }, []);
+  }, [navigate, supabase]);
 
   const handleSignup = async (e: React.FormEvent) => {
     setErrorMessages([]);

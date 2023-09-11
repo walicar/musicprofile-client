@@ -20,7 +20,7 @@ const Profile: React.FC = () => {
     },
     { refetchOnWindowFocus: false },
   );
-  const username = !!session.user.user_metadata.username
+  const username = session.user.user_metadata.username
     ? session.user.user_metadata.username
     : session.user.email;
 

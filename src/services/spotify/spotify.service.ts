@@ -4,7 +4,7 @@ const redirectUri = import.meta.env.VITE_CLIENT_URL + "/callback/spotify";
 export function generateRandomString(length: number) {
   // used for code_verifier and state
   let text = "";
-  let possible =
+  const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (let i = 0; i < length; i++) {
@@ -33,10 +33,10 @@ async function generateCodeChallenge(codeVerifier: string) {
 export async function getAuthURL(codeVerifier: any) {
   // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
-  let codeChallenge = await generateCodeChallenge(codeVerifier);
-  let state = generateRandomString(16);
-  let scope = "user-top-read";
-  let args = new URLSearchParams({
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
+  const state = generateRandomString(16);
+  const scope = "user-top-read";
+  const args = new URLSearchParams({
     response_type: "code",
     client_id: clientId!,
     scope: scope,
@@ -51,7 +51,7 @@ export async function getAuthURL(codeVerifier: any) {
 export async function getSpotifyToken(code: string, codeVerifier: any) {
   // codeVerifier is any because useLocalStorageState has :unknown type on
   // localStorage values.
-  let body = new URLSearchParams({
+  const body = new URLSearchParams({
     grant_type: "authorization_code",
     code: code,
     redirect_uri: redirectUri,

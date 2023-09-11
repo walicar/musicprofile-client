@@ -35,7 +35,7 @@ const SettingsPage: React.FC = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [navigate, setSession, supabase]);
 
   if (!session) {
     return <></>;

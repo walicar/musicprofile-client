@@ -7,8 +7,7 @@ import {
 import InputStyles from "@styles/InputStyles";
 //
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Fragment, useState, useEffect } from "react";
-import useLocalStorageState from "use-local-storage-state";
+import { Fragment, useState } from "react";
 
 type Prop = {
   supabase: SupabaseClient<any>;

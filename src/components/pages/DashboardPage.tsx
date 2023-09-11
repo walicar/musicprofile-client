@@ -23,7 +23,7 @@ const DashboardPage: React.FC = () => {
     if (!session) {
       navigate("/login");
     }
-  }, [session]);
+  }, [session, navigate, supabase]);
 
   if (!session) {
     return <></>;

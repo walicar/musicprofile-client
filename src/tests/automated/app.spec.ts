@@ -1,5 +1,4 @@
 import { test, expect, type Page } from "@playwright/test";
-const URL = "http://localhost:3000";
 
 // this tests spotify, and redux store
 // - connect to spotify

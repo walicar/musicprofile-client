@@ -1,11 +1,10 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputStyles from "@styles/InputStyles";
 //
 import { SupabaseClient } from "@supabase/supabase-js";
-import { useEffect, useState, Fragment, useRef } from "react";
+import { useState, Fragment, useRef } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import testEmail from "@utils/email";
 const ID = import.meta.env.VITE_SUPABASE_ID;

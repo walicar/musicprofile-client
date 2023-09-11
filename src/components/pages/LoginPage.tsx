@@ -55,7 +55,7 @@ const SigninPage: React.FC = () => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) navigate("/dashboard");
     });
-  }, [setErrorMessages]);
+  }, [setErrorMessages, navigate, supabase]);
 
   return (
     <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8 relative ">

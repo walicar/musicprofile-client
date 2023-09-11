@@ -110,7 +110,6 @@ export class TokenWrapper {
     }
     if (!isEmpty(newRefreshTokens)) {
       await this.writeRefreshTokens(newRefreshTokens);
-    } else {
     }
     return refreshedTokens as Tokens;
   }

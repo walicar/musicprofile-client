@@ -1,5 +1,4 @@
 import React from "react";
-import { useCookies } from "react-cookie";
 import { generateRandomString, getAuthURL } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
@@ -11,8 +10,8 @@ const ID = import.meta.env.VITE_SUPABASE_ID;
 const SpotifyButton: React.FC = () => {
   const supabase: SupabaseClient<any> = useSupabaseClient();
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);
-  const [_codeVerifier, setCodeVerifier] = useLocalStorageState("spotify-code-verifier")
-  const [token, _setToken, { removeItem }] =
+  const [, setCodeVerifier] = useLocalStorageState("spotify-code-verifier")
+  const [token, , { removeItem }] =
     useLocalStorageState("spotify-token");
 
   const check = async () => {
@@ -24,7 +23,7 @@ const SpotifyButton: React.FC = () => {
         .eq("id", session.user.id);
       if (data.length === 0) {
         const server = new ServerWrapper(session.access_token);
-        const message = await server.postTopitems("spotify");
+        await server.postTopitems("spotify");
       }
     } catch (e) {
       console.log(e);

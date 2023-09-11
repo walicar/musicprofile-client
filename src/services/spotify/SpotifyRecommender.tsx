@@ -36,12 +36,11 @@ const SpotifyRecommender: React.FC = () => {
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
   const url = getSpotifyRecommendationUrl(spotifyData);
-  if (!token) return <WidgetError message="Disconnected from Spotify" />;
   const { data, isSuccess, isLoading, error, refetch }: ReturnType = useService(
     "spotifyRecommendation",
     makeServiceParams(
       url,
-      token.access_token,
+      token?.access_token,
       { auth_token: session.access_token, id: session.user.id },
       "spotify"
     ),
@@ -50,6 +49,8 @@ const SpotifyRecommender: React.FC = () => {
       enabled: !!url && !!token,
     }
   );
+
+  if (!token) return <WidgetError message="Disconnected from Spotify" />;
 
   if (error) return <WidgetError message={error.message} />;
 

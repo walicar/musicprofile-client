@@ -8,7 +8,7 @@ type TokenSetters = {
 };
 
 const validate = async (
-  validator: Function,
+  validator: any,
   services: string[],
   setters: TokenSetters,
 ) => {
@@ -23,7 +23,7 @@ const validate = async (
   }
 };
 
-const stubMedal = (foo: Function, bar: string, setter: any) => {
+const stubMedal = (foo: any, bar: string, setter: any) => {
   const newInput = foo(bar);
   setter(newInput);
 };
