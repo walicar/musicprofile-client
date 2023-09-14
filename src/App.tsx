@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session: any) => {
+    } = supabase.auth.onAuthStateChange((_event, session: any) => {
       setSession(session);
     });
 
