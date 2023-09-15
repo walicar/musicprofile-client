@@ -13,7 +13,7 @@ const format = (input: string): string => {
 };
 const List: React.FC<Prop> = ({ items, title }) => {
   if (!items || items.length === 0) {
-    return <WidgetError message={`No ${title} found`} />;
+    return <WidgetError message="No records found" showSettings={false}/>;
   }
   if (Array.isArray(items) && typeof items[0] === "string") {
     return (

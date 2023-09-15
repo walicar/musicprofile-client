@@ -2,8 +2,9 @@ import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 type Prop = {
   message?: string;
+  showSettings?: boolean;
 };
-const WidgetError: React.FC<Prop> = ({ message }) => {
+const WidgetError: React.FC<Prop> = ({ message, showSettings = true }) => {
   const navigate = useNavigate();
   return (
     <div className="grid grid-rows-2  text-gray-600 dark:text-slate-600 justify-center items-center mt-10">
@@ -13,12 +14,16 @@ const WidgetError: React.FC<Prop> = ({ message }) => {
       <div className="flex justify-center items-center">
         <div>{message ? message : "An error happened!"}</div>
       </div>
-      <button
-        className="underline text-sm"
-        onClick={() => navigate("/settings")}
-      >
-        Go to settings
-      </button>
+      {showSettings ? (
+        <button
+          className="underline text-sm"
+          onClick={() => navigate("/settings")}
+        >
+          Go to settings
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
