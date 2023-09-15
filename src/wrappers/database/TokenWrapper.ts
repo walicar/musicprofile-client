@@ -1,8 +1,9 @@
-const API = import.meta.env.VITE_SUPABASE_URL;
-const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
+import config from "@utils/config";
 import { refreshHandlers } from "@services/refreshHandlers";
 import { getLocalStorageToken } from "@utils/localStorage";
 import { isEmpty } from "@utils/util";
+const API = config.SUPABASE_URL;
+const API_KEY = config.SUPABASE_ANON_KEY;
 export type TokenEntries = { [key: string]: string };
 export class TokenWrapper {
   accessToken: string;

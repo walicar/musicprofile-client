@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-//
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import LoginButton from "@components/buttons/LoginButton";
 import SignupButton from "@components/buttons/SignupButton";
-//
+import config from "@utils/config";
 import useLocalStorageState from "use-local-storage-state";
 import LogoutButton from "@components/buttons/LogoutButton";
 import ThemeButton from "@components/buttons/ThemeButton";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+const ID = config.SUPABASE_ID;
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard" },

@@ -7,7 +7,8 @@ import React, { useState, Fragment, useRef } from "react";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import testEmail from "@utils/email";
-const URL = import.meta.env.VITE_CLIENT_URL;
+import config from "@utils/config";
+const URL = config.CLIENT_URL;
 
 const ForgotPage: React.FC = () => {
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();

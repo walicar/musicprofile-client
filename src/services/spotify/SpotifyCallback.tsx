@@ -4,8 +4,8 @@ import { getSpotifyToken } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
 import { TokenWrapper } from "@database/TokenWrapper";
 import WidgetLoad from "@components/WidgetLoad";
-
-const ID = import.meta.env.VITE_SUPABASE_ID;
+import config from "@utils/config";
+const ID = config.SUPABASE_ID;
 
 let initalized = false;
 const SpotifyCallback: React.FC = () => {

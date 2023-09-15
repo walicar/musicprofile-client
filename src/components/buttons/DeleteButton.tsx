@@ -2,13 +2,14 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 //
+import config from "@utils/config";
 import ServerWrapper from "@server/ServerWrapper";
 import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "@contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { clearLocalStorage } from "@utils/localStorage";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+const ID = config.SUPABASE_ID;
 
 const DeleteButton: React.FC = () => {
   const supabase: SupabaseClient<any> = useSupabaseClient();

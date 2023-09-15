@@ -4,8 +4,8 @@ import useLocalStorageState from "use-local-storage-state";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
 import { SupabaseClient } from "@supabase/supabase-js";
 import ServerWrapper from "@server/ServerWrapper";
-
-const ID = import.meta.env.VITE_SUPABASE_ID;
+import config from "@utils/config";
+const ID = config.SUPABASE_ID;
 
 const SpotifyButton: React.FC = () => {
   const supabase: SupabaseClient<any> = useSupabaseClient();

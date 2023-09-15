@@ -6,8 +6,8 @@ import TopItemsWrapper from "@database/TopItemsWrapper";
 import { getSpotifyRecommendationUrl } from "./spotify.utils";
 import WidgetError from "@components/WidgetError";
 import WidgetLoad from "@components/WidgetLoad";
-
-const ID = import.meta.env.VITE_SUPABASE_ID;
+import config from "@utils/config";
+const ID = config.SUPABASE_ID;
 
 type ReturnType = {
   data: any;

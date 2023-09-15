@@ -10,7 +10,8 @@ import UpdateUsernameForm from "@components/forms/UpdateUsernameForm";
 import UpdateEmailForm from "@components/forms/UpdateEmailForm";
 import UpdatePasswordForm from "@components/forms/UpdatePasswordForm";
 import RecoveryForm from "@components/forms/RecoveryForm";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+import config from "@utils/config";
+const ID = config.SUPABASE_ID;
 
 const SettingsPage: React.FC = () => {
   const [session, setSession] = useLocalStorageState(`sb-${ID}-auth-token`);

@@ -1,10 +1,11 @@
 // import { FireIcon } from "@heroicons/react/20/solid";
 //
+import config from "@utils/config";
 import React from "react";
 import { useQuery } from "react-query";
 import useLocalStorageState from "use-local-storage-state";
 import { ProfileWrapper } from "@database/ProfileWrapper";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+const ID = config.SUPABASE_ID;
 
 const Profile: React.FC = () => {
   const [session]: any = useLocalStorageState(`sb-${ID}-auth-token`);

@@ -1,4 +1,5 @@
-const URL = import.meta.env.VITE_SERVER_URL;
+import config from "@utils/config";
+const URL = config.SERVER_URL;
 /**
  * Abstracts fetches to the backend server
  * @param accessToken - User's JWT

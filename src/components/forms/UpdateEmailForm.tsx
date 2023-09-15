@@ -3,11 +3,13 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import InputStyles from "@styles/InputStyles";
 //
+import config from "@utils/config";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useState, Fragment, useRef } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import testEmail from "@utils/email";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+const ID = config.SUPABASE_ID;
+
 type Prop = {
   supabase: SupabaseClient<any>;
 };

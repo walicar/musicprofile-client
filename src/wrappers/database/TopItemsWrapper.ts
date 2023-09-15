@@ -1,5 +1,6 @@
-const API = import.meta.env.VITE_SUPABASE_URL;
-const API_KEY = import.meta.env.VITE_SUPABASE_PUB;
+import config from "@utils/config";
+const API = config.SUPABASE_URL;
+const API_KEY = config.SUPABASE_ANON_KEY;
 
 export default class TopItemsWrapper {
   accessToken: string;

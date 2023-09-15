@@ -1,4 +1,5 @@
 import "./App.css";
+import config from "./utils/config";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createClient } from "@supabase/supabase-js";
@@ -6,10 +7,10 @@ import { HelmetProvider } from "react-helmet-async";
 import SupabaseClientContext from "@contexts/SupabaseContext";
 import AppRouter from "./AppRouter";
 import useLocalStorageState from "use-local-storage-state";
+const PROJECT_URL = config.SUPABASE_URL;
+const PUB_KEY = config.SUPABASE_ANON_KEY;
+const ID = config.SUPABASE_ID;
 
-const PROJECT_URL = import.meta.env.VITE_SUPABASE_URL;
-const PUB_KEY = import.meta.env.VITE_SUPABASE_PUB;
-const ID = import.meta.env.VITE_SUPABASE_ID;
 const supabase = createClient(PROJECT_URL!, PUB_KEY!);
 const queryClient = new QueryClient();
 

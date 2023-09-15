@@ -11,7 +11,8 @@ import WidgetLoad from "@components/WidgetLoad";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
-const ID = import.meta.env.VITE_SUPABASE_ID;
+import config from "@utils/config";
+const ID = config.SUPABASE_ID;
 
 type Prop = {
   type: string;
