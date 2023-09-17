@@ -15,4 +15,6 @@ const config = {
     import.meta.env.VITE_SPOTIFY_ID,
 };
 
+console.log("Testing check CONFIG, ", config)
+
 export default config;
