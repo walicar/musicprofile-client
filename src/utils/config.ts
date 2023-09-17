@@ -15,8 +15,4 @@ const config = {
     import.meta.env.VITE_SPOTIFY_ID,
 };
 
-console.log("Testing check CONFIG, ", config)
-const test = import.meta.env.VITE_CLIENT_URL
-console.log("can i check for the meta env?, ", test)
-
 export default config;
