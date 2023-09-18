@@ -16,14 +16,14 @@ import { useCookies } from "react-cookie";
 import { CookieConfig } from "@utils/cookies";
 
 function AppRouter() {
-  const [cookies, setCookie]:any = useCookies(["theme"])
+  const [cookies, setCookie]: any = useCookies(["theme"]);
 
   useEffect(() => {
     if (!cookies.theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setCookie("theme","dark", CookieConfig);
+        setCookie("theme", "dark", CookieConfig);
       } else {
-        setCookie("theme","light", CookieConfig);
+        setCookie("theme", "light", CookieConfig);
       }
     }
   }, [cookies, setCookie]);
@@ -32,7 +32,9 @@ function AppRouter() {
     <div className={cookies.theme}>
       <Helmet>
         <body
-          className={cookies.theme === "dark" ? "bg-slate-900 dark" : "bg-white"}
+          className={
+            cookies.theme === "dark" ? "bg-slate-900 dark" : "bg-white"
+          }
         ></body>
       </Helmet>
       <BrowserRouter>

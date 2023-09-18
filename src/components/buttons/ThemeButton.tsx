@@ -4,12 +4,13 @@ import { useCookies } from "react-cookie";
 import { CookieConfig } from "@utils/cookies";
 
 const ThemeButton: React.FC = () => {
-  const [cookies, setCookie]:any = useCookies(["theme"]);
+  const [cookies, setCookie]: any = useCookies(["theme"]);
   const toggle = () => {
+    console.log(cookies.theme);
     if (cookies.theme === "dark") {
-      setCookie("theme","light", CookieConfig);
+      setCookie("theme", "light", CookieConfig);
     } else {
-      setCookie("theme","dark", CookieConfig);
+      setCookie("theme", "dark", CookieConfig);
     }
   };
   return (
