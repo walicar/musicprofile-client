@@ -1,19 +1,21 @@
 import React from "react";
-import useLocalStorageState from "use-local-storage-state";
 import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import { useCookies } from "react-cookie";
+import { CookieConfig } from "@utils/cookies";
 
 const ThemeButton: React.FC = () => {
-  const [theme, setTheme]: any = useLocalStorageState("theme");
+  const [cookies, setCookie]: any = useCookies(["theme"]);
   const toggle = () => {
-    if (theme === "dark") {
-      setTheme("light");
+    console.log(cookies.theme);
+    if (cookies.theme === "dark") {
+      setCookie("theme", "light", CookieConfig);
     } else {
-      setTheme("dark");
+      setCookie("theme", "dark", CookieConfig);
     }
   };
   return (
     <button onClick={toggle}>
-      {theme === "dark" ? (
+      {cookies.theme === "dark" ? (
         <MoonIcon className="h-6 w-6" />
       ) : (
         <SunIcon className="h-6 w-6" />

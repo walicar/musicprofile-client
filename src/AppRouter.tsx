@@ -9,29 +9,32 @@ import SignupPage from "@components/pages/SignupPage";
 import ForgotPage from "@components/pages/ForgotPage";
 import Header from "@components/navbar/Header";
 import Footer from "@components/navbar/Footer";
-import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import PrivacyPage from "@components/pages/PrivacyPage";
+import { useCookies } from "react-cookie";
+import { CookieConfig } from "@utils/cookies";
 
 function AppRouter() {
-  const [theme, setTheme]: any = useLocalStorageState("theme");
+  const [cookies, setCookie]: any = useCookies(["theme"]);
 
   useEffect(() => {
-    if (!theme) {
+    if (!cookies.theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark");
+        setCookie("theme", "dark", CookieConfig);
       } else {
-        setTheme("light");
+        setCookie("theme", "light", CookieConfig);
       }
     }
-  }, [theme, setTheme]);
+  }, [cookies, setCookie]);
 
   return (
-    <div className={theme}>
+    <div className={cookies.theme}>
       <Helmet>
         <body
-          className={theme === "dark" ? "bg-slate-900 dark" : "bg-white"}
+          className={
+            cookies.theme === "dark" ? "bg-slate-900 dark" : "bg-white"
+          }
         ></body>
       </Helmet>
       <BrowserRouter>

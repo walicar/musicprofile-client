@@ -76,15 +76,17 @@ const DeleteButton: React.FC = () => {
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-base font-semibold leading-6 text-gray-900"
+                        className="text-base font-semibold leading-6 text-gray-900 dark:text-neutral-50"
                       >
-                        Deactivate account
+                        Deactivate account?
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          Are you sure you want to delete your account? All of
-                          your data will be permanently removed from our servers
-                          forever. This action cannot be undone.
+                        <p className="text-sm text-gray-500 dark:text-slate-500">
+                          You'll permanently lose:
+                          <ul className="list-disc list-inside">
+                            <li>Profile</li>
+                            <li>Leaderboard</li>
+                          </ul>
                         </p>
                       </div>
                     </div>
