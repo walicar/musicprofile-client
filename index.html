@@ -7,6 +7,14 @@
     <title>Musicprofile</title>
   </head>
   <body class="h-full">
+    <script>
+      if (localStorage.theme === "\"dark\"" || (!('theme' in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.style.backgroundColor = "#111827";
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.backgroundColor = "background: white";
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
