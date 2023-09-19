@@ -19,6 +19,7 @@ function AppRouter() {
   const [cookies, setCookie]: any = useCookies(["theme"]);
 
   useEffect(() => {
+    if (document.body.style) document.body.removeAttribute("style");
     if (!cookies.theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         setCookie("theme", "dark", CookieConfig);
