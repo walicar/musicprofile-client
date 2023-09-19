@@ -6,7 +6,6 @@ const ThemeButton: React.FC = () => {
   const [theme, setTheme]:any = useLocalStorageState("theme")
   const toggle = () => {
     if (theme === "dark") {
-      console.log("this should be here")
       setTheme("light")
     } else {
       setTheme("dark")
