@@ -69,14 +69,8 @@ const PrivacyPage: React.FC = () => {
         account, visit your account settings.
       </p>
       <br />
-      <h2 className="font-bold text-xl">6. Cookie Usage</h2>
-      <p>
-        Musicprofile utilizes cookies to personalize your website theme
-        preferences, enhancing your browsing experience.
-      </p>
-      <br />
       <h2 className="font-bold text-xl">
-        7. Analytical Data Processing with Cloudflare
+        6. Analytical Data Processing with Cloudflare
       </h2>
       <p>
         We use Cloudflare, a third-party service provider, to process analytical
