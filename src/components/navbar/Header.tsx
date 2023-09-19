@@ -22,9 +22,9 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="bg-white dark:bg-slate-900 dark:text-neutral-50 h-[84px]">
+    <header className="bg-white dark:bg-slate-900 dark:text-neutral-50 h-[80px]">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-5 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1 sm">

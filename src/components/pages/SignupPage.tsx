@@ -8,6 +8,9 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import InputStyles from "@styles/InputStyles";
 import testEmail from "@utils/email";
 import ErrorList from "@components/ErrorList";
+import config from "@utils/config";
+
+const KEY = config.HCAP_KEY;
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
@@ -98,15 +101,15 @@ const SignupPage: React.FC = () => {
   
   return (
     <>
-      <div className="flex flex-1 flex-col justify-center py-1 sm:px-6 lg:px-8">
+      <div className="flex flex-1 flex-col justify-center sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-3 sm:mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-neutral-50">
             Create a new account
           </h2>
         </div>
 
-        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-6 shadow sm:rounded-lg sm:px-12">
+        <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-[480px]">
+          <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-6 shadow sm:rounded-lg sm:px-12 h-[74vh]">
             <form className="space-y-6" onSubmit={handleSignup}>
               <div>
                 <label
@@ -200,7 +203,7 @@ const SignupPage: React.FC = () => {
               <div className="flex justify-center items-center">
                 <HCaptcha
                   ref={captcha}
-                  sitekey="a749f12c-718e-4df9-bba3-17ed0b6b4eb0"
+                  sitekey={KEY!}
                   onVerify={setCaptchaToken}
                 />
               </div>

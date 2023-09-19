@@ -22,6 +22,7 @@ jobs:
       VITE_SUPABASE_URL: ${{secrets.SUPABASE_URL}}
       VITE_SUPABASE_ANON_KEY: ${{secrets.SUPABASE_ANON_KEY}}
       VITE_SPOTIFY_ID: ${{secrets.SPOTIFY_ID}}
+      VITE_HCAP_KEY: ${{secrets.HCAP_KEY}}
 
     steps:
     - name: Checkout code
