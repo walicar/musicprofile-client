@@ -18,7 +18,7 @@ const TopItemsContainer: React.FC = () => {
               service == "spotify"
                 ? "text-orange-500"
                 : "text-gray-900 dark:text-neutral-50"
-            } relative -mr-px inline-flex items-center rounded-tl-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50 dark:hover:bg-slate-600 focus:z-10`}
+            } relative -mr-px inline-flex items-center rounded-tl-md bg-white dark:bg-slate-900 px-3 py-2 text-xs sm:text-sm font-semibold ring-1 ring-inset ring-gray-300 dark:ring-slate-700 hover:bg-gray-50 dark:hover:bg-slate-600 focus:z-10`}
             onClick={() => setService("spotify")}
           >
             Spotify
@@ -29,7 +29,7 @@ const TopItemsContainer: React.FC = () => {
               service == "lastfm"
                 ? "text-orange-500"
                 : "text-gray-900 dark:text-neutral-50"
-            } relative -mt-px -mr-px inline-flex items-center rounded-bl-md bg-white dark:bg-slate-900 px-3 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:hover:bg-slate-600 focus:z-10 dark:ring-slate-700`}
+            } relative -mt-px -mr-px inline-flex items-center rounded-bl-md bg-white dark:bg-slate-900 px-3 py-2 text-xs sm:text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:hover:bg-slate-600 focus:z-10 dark:ring-slate-700`}
             onClick={() => setService("lastfm")}
           >
             Lastfm

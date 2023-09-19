@@ -23,7 +23,7 @@ const WidgetContainer: React.FC = () => {
   return (
     <div className="h-[440px]">
       <div className="inline-flex py-1 justify-between items-center w-full">
-        <h2 className="text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">
+        <h2 className="text-sm sm:text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">
           Widgets
         </h2>
         <Menu as="div" className="relative inline-block flex-3 text-left">

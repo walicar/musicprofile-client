@@ -27,7 +27,7 @@ const List: React.FC<Prop> = ({ items, title }) => {
     return (
       <ul
         role="list"
-        className="space-y-2 bg-gray-300 dark:bg-slate-700 p-3 max-height-[90vh] rounded-b-md"
+        className="space-y-2 bg-gray-300 dark:bg-slate-700 p-3 max-height-[95vh] rounded-b-md"
       >
         {items.map((item: TopItemEntry, index: number) => (
           <li
