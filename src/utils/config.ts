@@ -13,6 +13,8 @@ const config = {
 
   SPOTIFY_ID:
     import.meta.env.VITE_SPOTIFY_ID,
+  
+  HCAP_KEY: import.meta.env.VITE_HCAP_KEY || "10000000-ffff-ffff-ffff-000000000001"
 };
 
 export default config;

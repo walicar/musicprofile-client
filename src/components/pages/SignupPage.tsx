@@ -8,6 +8,9 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import InputStyles from "@styles/InputStyles";
 import testEmail from "@utils/email";
 import ErrorList from "@components/ErrorList";
+import config from "@utils/config";
+
+const KEY = config.HCAP_KEY;
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
@@ -200,7 +203,7 @@ const SignupPage: React.FC = () => {
               <div className="flex justify-center items-center">
                 <HCaptcha
                   ref={captcha}
-                  sitekey="a749f12c-718e-4df9-bba3-17ed0b6b4eb0"
+                  sitekey={KEY!}
                   onVerify={setCaptchaToken}
                 />
               </div>
