@@ -12,29 +12,28 @@ import Footer from "@components/navbar/Footer";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import PrivacyPage from "@components/pages/PrivacyPage";
-import { useCookies } from "react-cookie";
-import { CookieConfig } from "@utils/cookies";
+import useLocalStorageState from "use-local-storage-state";
 
 function AppRouter() {
-  const [cookies, setCookie]: any = useCookies(["theme"]);
+  const [theme, setTheme]: any = useLocalStorageState("theme");
 
   useEffect(() => {
     if (document.body.style) document.body.removeAttribute("style");
-    if (!cookies.theme) {
+    if (!theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setCookie("theme", "dark", CookieConfig);
+        setTheme("dark")
       } else {
-        setCookie("theme", "light", CookieConfig);
+        setTheme("light")
       }
     }
-  }, [cookies, setCookie]);
+  }, [theme, setTheme]);
 
   return (
-    <div className={cookies.theme}>
+    <div className={theme}>
       <Helmet>
         <body
           className={
-            cookies.theme === "dark" ? "bg-slate-900 dark" : "bg-white"
+            theme === "dark" ? "bg-slate-900 dark" : "bg-white"
           }
         ></body>
       </Helmet>
