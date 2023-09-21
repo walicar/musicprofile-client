@@ -39,8 +39,9 @@ const HomePage: React.FC = () => {
               </h1>
               <p className="mt-auto pt-10 text-lg leading-8 text-gray-600 dark:text-neutral-400">
                 Create an account to view your top songs, artists, and genres on
-                each streaming platform!
+                supported streaming platforms!
               </p>
+              <p className="mt-3 text-gray-600 dark:text-neutral-400 text-xs">Spotify and Lastfm</p>
             </div>
           </div>
           <div className="m:max-w-lg px-4 m:px-6 lg:px-8">
