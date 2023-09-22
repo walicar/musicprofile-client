@@ -39,7 +39,7 @@ function AppRouter() {
       </Helmet>
       <BrowserRouter>
         <Header />
-        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col h-[83vh]">
+        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col min-h-[83vh]">
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />
