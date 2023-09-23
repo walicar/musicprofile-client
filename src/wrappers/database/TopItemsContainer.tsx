@@ -11,7 +11,7 @@ const TopItemsContainer: React.FC = () => {
   return (
     <>
       <div className="flex">
-        <div className="flex-none pt-9 max-w-30 col-span-1 col-start-1 flex flex-col">
+        <div className="flex-none pt-8 sm:pt-9 max-w-30 col-span-1 col-start-1 flex flex-col">
           <button
             type="button"
             className={`${
