@@ -30,7 +30,7 @@ const Header: React.FC = () => {
         <div className="flex lg:flex-1 sm">
           <button
             onClick={() => navigate("/")}
-            className="-m-1.5 p-1.5 invisible lg:visible"
+            className="-m-1.5 p-1.5 visible"
           >
             <span className="sr-only">Musicprofile</span>
             <svg
