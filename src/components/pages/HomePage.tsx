@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
             <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
             <div className="text-center">
               {/* <h1 className="text-7xl sm:text-8xl text-orange-500 font-bold pb-2">MusicProfile</h1> */}
-              <Spline className="sm:-my-[75px]" scene="https://prod.spline.design/9CqLr2SapXc27SAB/scene.splinecode" />
+              <Spline className="sm:-my-[75px]" scene="/musicprofile.spline" />
               <h2>Start tracking your listening history</h2>
               <p className="mt-auto pt-5 text-lg leading-8 text-gray-600 dark:text-neutral-400">
                 Create an account to view your top songs, artists, and genres on
