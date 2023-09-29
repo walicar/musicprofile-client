@@ -8,7 +8,6 @@ import config from "@utils/config";
 import useLocalStorageState from "use-local-storage-state";
 import LogoutButton from "@components/buttons/LogoutButton";
 import ThemeButton from "@components/buttons/ThemeButton";
-import Spline from "@splinetool/react-spline";
 const ID = config.SUPABASE_ID;
 
 const navigation = [
@@ -31,10 +30,10 @@ const Header: React.FC = () => {
         <div className="flex lg:flex-1 sm">
           <button
             onClick={() => navigate("/")}
-            className="-m-1.5 -p-1 h-8 w-8 visible"
+            className="-m-1.5 -p-1 h-[55px] w-[55px] visible"
           >
             <span className="sr-only">Musicprofile</span>
-            <Spline scene="https://prod.spline.design/RSxRD0GpibhcS1KU/scene.splinecode" />
+            <img src="M.png"/>
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">

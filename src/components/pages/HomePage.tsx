@@ -1,9 +1,7 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
-import logo from "@assets/musicprofile_small.png";
 
 const HomePage: React.FC = () => {
-
   return (
     <div className="bg-white dark:bg-slate-900 ">
       <div className="relative isolate px-6 py-1 lg:px-8">
@@ -14,8 +12,7 @@ const HomePage: React.FC = () => {
               <div className="sm:h-[359px] sm:-my-[75px]">
                 <Suspense>
                   <Spline
-                    onLoad={() => {
-                    }}
+                    onLoad={() => {}}
                     scene="https://prod.spline.design/9CqLr2SapXc27SAB/scene.splinecode"
                   />
                 </Suspense>
