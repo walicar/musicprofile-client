@@ -16,6 +16,7 @@
     "@hcaptcha/react-hcaptcha": "^1.8.1",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@splinetool/react-spline": "^2.2.6",
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/supabase-js": "^2.32.0",
     "@tailwindcss/forms": "^0.5.6",
