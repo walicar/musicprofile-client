@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
   const navigate = useNavigate();
   return (
     <footer
-      className="bg-white dark:bg-slate-900 px-1 lg:px-8 mt-2.5"
+      className="bg-white dark:bg-slate-900 px-1 lg:px-8 mt-3"
       aria-labelledby="footer-heading"
     >
       <div className="my-2 md:flex md:items-center md:justify-between">

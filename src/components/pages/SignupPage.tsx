@@ -108,7 +108,7 @@ const SignupPage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white dark:bg-slate-900 dark:border-slate-600 dark:border px-6 py-6 shadow sm:rounded-lg sm:px-12 h-[74vh]">
             <form className="space-y-6" onSubmit={handleSignup}>
               <div>
