@@ -21,9 +21,9 @@ function AppRouter() {
     if (document.body.style) document.body.removeAttribute("style");
     if (!theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark")
+        setTheme("dark");
       } else {
-        setTheme("light")
+        setTheme("light");
       }
     }
   }, [theme, setTheme]);
@@ -32,29 +32,29 @@ function AppRouter() {
     <div className={theme}>
       <Helmet>
         <body
-          className={
-            theme === "dark" ? "bg-slate-900 dark" : "bg-white"
-          }
+          className={theme === "dark" ? "bg-slate-900 dark" : "bg-white"}
         ></body>
       </Helmet>
       <BrowserRouter>
-        <Header />
-        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col h-[83vh]">
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot" element={<ForgotPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/callback/*" element={<CallbackPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </main>
+        <div className="flex flex-col -mt-2 ">
+          <Header />
+          <div className="flex-grow h-[83vh] dark:bg-slate-900 dark:text-neutral-50">
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/forgot" element={<ForgotPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/callback/*" element={<CallbackPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </BrowserRouter>
     </div>
   );
