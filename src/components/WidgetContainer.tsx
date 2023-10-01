@@ -21,7 +21,7 @@ const WidgetContainer: React.FC = () => {
   const [widget, setWidget] = useState(Widgets[0]);
 
   return (
-    <div className="h-[440px]">
+    <div className="h-[435px]">
       <div className="inline-flex py-1 justify-between items-center w-full">
         <h2 className="text-sm sm:text-md px-1 font-semibold text-gray-900 dark:text-neutral-50 ">
           Widgets
