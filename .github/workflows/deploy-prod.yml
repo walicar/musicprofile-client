@@ -35,5 +35,5 @@ jobs:
       run: npm run build
 
     - name: Deploying
-      run: npx wrangler pages deploy ./dist --project-name musicprofile --branch web-staging
+      run: npx wrangler pages deploy ./dist --project-name musicprofile --branch main
     
