@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
             <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
             <div className="text-center">
               <div className="sm:h-[359px] sm:-my-[75px]">
-                <Suspense fallback={<img src="title_logo.png"/>}>
+                <Suspense> 
                   <Spline
                     scene="https://prod.spline.design/9CqLr2SapXc27SAB/scene.splinecode"
                   />
