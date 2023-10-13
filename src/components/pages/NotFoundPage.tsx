@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="grid place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+    <div className="grid place-items-center bg-white dark:bg-slate-900 px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
         <p className="text-base font-semibold text-orange-500">404</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">

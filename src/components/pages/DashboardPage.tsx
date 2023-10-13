@@ -31,7 +31,7 @@ const DashboardPage: React.FC = () => {
   }
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-y-4 lg:grid lg:grid-rows-5 lg:grid-cols-12 lg:gap-4">
+      <div className="flex flex-col gap-y-3.5 lg:grid lg:grid-rows-5 lg:grid-cols-12 lg:gap-4">
         <div
           className={
             "order-2 lg:order-1 lg:row-span-5 lg:col-span-8 " + borderStyle

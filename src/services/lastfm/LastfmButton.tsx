@@ -60,9 +60,9 @@ const LastfmButton: React.FC = () => {
               setUsername(e.target.value);
               setIsValidUsername(true);
             }}
-            className={
+            className={`${
               isValidUsername ? InputStyles.isValid : InputStyles.notValid
-            }
+            } text-ellipsis`}
             placeholder={token ? token.access_token : "Lastfm Username"}
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

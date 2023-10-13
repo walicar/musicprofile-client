@@ -5,12 +5,14 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { clearLocalStorage } from "@utils/localStorage";
 type Prop = {
   className: string;
+  onClick?: () => void
 };
 
-const LogoutButton: React.FC<Prop> = ({ className }) => {
+const LogoutButton: React.FC<Prop> = ({ className, onClick }) => {
   const navigate = useNavigate();
   const supabase: SupabaseClient<any, "public", any> = useSupabaseClient();
   const handleLogout = async () => {
+    if (onClick) onClick();
     await supabase.auth.signOut();
     clearLocalStorage();
     navigate("/");

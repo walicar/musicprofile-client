@@ -1,14 +1,14 @@
 import React from "react";
-import useLocalStorageState from "use-local-storage-state";
 import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import useLocalStorageState from "use-local-storage-state";
 
 const ThemeButton: React.FC = () => {
-  const [theme, setTheme]: any = useLocalStorageState("theme");
+  const [theme, setTheme]:any = useLocalStorageState("theme")
   const toggle = () => {
     if (theme === "dark") {
-      setTheme("light");
+      setTheme("light")
     } else {
-      setTheme("dark");
+      setTheme("dark")
     }
   };
   return (

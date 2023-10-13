@@ -9,15 +9,16 @@ import SignupPage from "@components/pages/SignupPage";
 import ForgotPage from "@components/pages/ForgotPage";
 import Header from "@components/navbar/Header";
 import Footer from "@components/navbar/Footer";
-import useLocalStorageState from "use-local-storage-state";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import PrivacyPage from "@components/pages/PrivacyPage";
+import useLocalStorageState from "use-local-storage-state";
 
 function AppRouter() {
   const [theme, setTheme]: any = useLocalStorageState("theme");
 
   useEffect(() => {
+    if (document.body.style) document.body.removeAttribute("style");
     if (!theme) {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         setTheme("dark");
@@ -35,23 +36,25 @@ function AppRouter() {
         ></body>
       </Helmet>
       <BrowserRouter>
-        <Header />
-        <div className="dark:bg-slate-900 dark:text-neutral-50 flex flex-col min-h-[84vh]">
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot" element={<ForgotPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/callback/*" element={<CallbackPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </main>
+        <div className="flex flex-col -mt-2 ">
+          <Header />
+          <div className="flex-grow sm:h-[83vh] dark:bg-slate-900 dark:text-neutral-50">
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/forgot" element={<ForgotPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/callback/*" element={<CallbackPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </BrowserRouter>
     </div>
   );
