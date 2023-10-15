@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPage: React.FC = () => {
   return (
-    <div className="grid center-items gap-y-3 mx-auto px-6 py-4 lg:px-8 max-w-6xl">
+    <div className="grid center-items gap-y-3 mx-auto px-6 py-4 lg:px-8 max-w-6xl h-[83vh] rounded-md overflow-y-scroll">
       <h1 className="font-bold text-4xl">Privacy Policy</h1>
       <br />
       <h2 className="font-bold text-xl py-2 dark:border-slate-600 border-t">
