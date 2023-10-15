@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div className="flex text-gray-400 dark:text-gray-700 justify-center items-center space-x-6 md:order-2">
           <a
             key="contact"
-            href="contact@musicprofile.io"
+            href="mailto:contact@musicprofile.io"
             className="text-xs  hover:text-gray-300"
           >
             Contact
