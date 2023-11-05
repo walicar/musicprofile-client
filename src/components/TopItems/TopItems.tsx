@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TopItemsWrapper from "./TopItemsWrapper";
-import { TokenWrapper } from "./TokenWrapper";
+import TopItemsWrapper from "../../wrappers/database/TopItemsWrapper";
+import { TokenWrapper } from "../../wrappers/database/TokenWrapper";
 import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
 import List from "@components/List";

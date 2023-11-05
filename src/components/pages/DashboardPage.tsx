@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-import TopItemsContainer from "@database/TopItemsContainer";
+import TopItemsContainer from "@components/TopItems/TopItemsContainer";
 import Profile from "@components/Profile";
 import WidgetContainer from "@components/Widget/WidgetContainer";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";
