@@ -4,8 +4,8 @@ import useService, { makeServiceParams } from "@hooks/useService";
 import { useQuery } from "react-query";
 import TopItemsWrapper from "@database/TopItemsWrapper";
 import { getSpotifyRecommendationUrl } from "./spotify.utils";
-import WidgetError from "@components/WidgetError";
-import WidgetLoad from "@components/WidgetLoad";
+import WidgetError from "@components/Widget/WidgetError";
+import WidgetLoad from "@components/Widget/WidgetLoad";
 import config from "@utils/config";
 const ID = config.SUPABASE_ID;
 
