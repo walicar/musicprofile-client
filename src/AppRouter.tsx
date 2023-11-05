@@ -38,7 +38,7 @@ function AppRouter() {
       <BrowserRouter>
         <div className="flex flex-col -mt-2 ">
           <Header />
-          <div className="flex-grow sm:h-[83vh] dark:bg-slate-900 dark:text-neutral-50">
+          <div className="flex-grow lg:h-[83vh] dark:bg-slate-900 dark:text-neutral-50">
             <main>
               <Routes>
                 <Route path="/" element={<HomePage />} />

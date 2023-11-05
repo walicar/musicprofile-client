@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import TopItemsWrapper from "./TopItemsWrapper";
-import { TokenWrapper } from "./TokenWrapper";
+import TopItemsWrapper from "../../wrappers/database/TopItemsWrapper";
+import { TokenWrapper } from "../../wrappers/database/TokenWrapper";
 import ServerWrapper from "@server/ServerWrapper";
 import { useQuery } from "react-query";
 import List from "@components/List";
 import { validate } from "@utils/util";
 import useLocalStorageState from "use-local-storage-state";
-import WidgetError from "@components/WidgetError";
-import WidgetLoad from "@components/WidgetLoad";
+import WidgetError from "@components/Widget/WidgetError";
+import WidgetLoad from "@components/Widget/WidgetLoad";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { useSupabaseClient } from "@components/contexts/SupabaseContext";

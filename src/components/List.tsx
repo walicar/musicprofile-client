@@ -1,6 +1,6 @@
 import React from "react";
 import statusIcons from "@utils/statusIcons";
-import WidgetError from "./WidgetError";
+import WidgetError from "./Widget/WidgetError";
 
 type Prop = {
   // items: string[] | { [key: string]: any }[]
