@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { getSpotifyToken } from "./spotify.service";
 import useLocalStorageState from "use-local-storage-state";
 import { TokenWrapper } from "@database/TokenWrapper";
-import WidgetLoad from "@components/WidgetLoad";
+import WidgetLoad from "@components/Widget/WidgetLoad";
 import config from "@utils/config";
 const ID = config.SUPABASE_ID;
 
