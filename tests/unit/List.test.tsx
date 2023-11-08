@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, test } from "vitest";
-import List from "../../components/List";
+import List from "@components/List";
 
 describe("Testing List component", () => {
   test("when items are an array of strings, string[]", async () => {
