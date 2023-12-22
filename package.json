@@ -10,7 +10,7 @@
     "format": "npx prettier . --write",
     "preview": "vite preview",
     "test": "vitest",
-    "test:auto": "npx playwright"
+    "test:auto": "npx playwright test"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.8.1",

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import SpotifyButton from "../../services/spotify/SpotifyButton";
+import SpotifyButton from "@services/spotify/SpotifyButton";
 import { describe, test } from "vitest";
 
 describe("testing spotify button", () => {
